@@ -114,6 +114,16 @@ public class StoreChipModel : MonoBehaviour
             OnOpenChip?.Invoke(chip);
         }
     }
+
+    public bool IsAvailableChip()
+    {
+        return chipGroup.Chips.FirstOrDefault(data => data.ChipData.IsOpen == false) != null;
+    }
+
+    public Chip GetRandomCloseChip()
+    {
+        return chipGroup.Chips.FirstOrDefault(data => data.ChipData.IsOpen == false);
+    }
 }
 
 [Serializable]
