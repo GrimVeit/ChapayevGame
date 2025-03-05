@@ -72,26 +72,40 @@ public class StoreStrategyModel
         File.WriteAllText(FilePath, json);
     }
 
-    public void SelectChip(int number)
-    {
-        var chip = strategyGroup.GetStrategyById(number);
 
-        if (chip == null)
+
+    public void SelectStrategy(int id)
+    {
+        var strategy = strategyGroup.GetStrategyById(id);
+
+        if (strategy == null)
         {
-            Debug.LogError($"Not found strategy by id - {number}");
+            Debug.LogError($"Not found strategy by id - {id}");
             return;
         }
 
-        if (chip.StrategyData.IsSelect)
+        if (strategy.StrategyData.IsSelect)
         {
-            chip.StrategyData.IsSelect = false;
-            OnDeselectStrategy?.Invoke(chip);
+            strategy.StrategyData.IsSelect = false;
+            OnDeselectStrategy?.Invoke(strategy);
         }
         else
         {
-            chip.StrategyData.IsSelect = true;
-            OnSelectStrategy?.Invoke(chip);
+            strategy.StrategyData.IsSelect = true;
+            OnSelectStrategy?.Invoke(strategy);
         }
+    }
+
+    public void UnselectAllStrategies()
+    {
+        strategyGroup.Strategies.ForEach(data =>
+        {
+            if (data.StrategyData.IsSelect)
+            {
+                data.StrategyData.IsSelect = false;
+                OnDeselectStrategy?.Invoke(data);
+            }
+        });
     }
 
     public void OpenStrategy(int number)
@@ -117,12 +131,12 @@ public class StoreStrategyModel
 
     public bool IsAvailableStrategy()
     {
-        return strategyGroup.Strategies.FirstOrDefault(data => data.StrategyData.IsOpen == false) != null;
+        return strategyGroup.IsAvailableStrategy();
     }
 
     public Strategy GetRandomCloseStrategy()
     {
-        return strategyGroup.Strategies.FirstOrDefault(data => data.StrategyData.IsOpen == false);
+        return strategyGroup.GetRandomCloseStrategy();
     }
 }
 

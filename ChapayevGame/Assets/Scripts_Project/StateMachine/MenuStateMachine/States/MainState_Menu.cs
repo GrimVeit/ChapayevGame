@@ -16,10 +16,31 @@ public class MainState_Menu : IState
 
     public void EnterState()
     {
+        sceneRoot.OnClickToOpenBuyStrategy += ChangeStateToBuyStrategy;
+        sceneRoot.OnClickToOpenBuyChip += ChangeStateToBuyChip;
+        sceneRoot.OnClickToOpenChooseStrategy += ChangeStateToChooseStrategy;
+
         sceneRoot.OpenMainPanel();
     }
 
     public void ExitState()
+    {
+        sceneRoot.OnClickToOpenBuyStrategy -= ChangeStateToBuyStrategy;
+        sceneRoot.OnClickToOpenBuyChip -= ChangeStateToBuyChip;
+        sceneRoot.OnClickToOpenChooseStrategy -= ChangeStateToChooseStrategy;
+    }
+
+    private void ChangeStateToBuyStrategy()
+    {
+        stateMachine.SetState(stateMachine.GetState<BuyStrategy_Menu>());
+    }
+
+    private void ChangeStateToBuyChip()
+    {
+
+    }
+
+    private void ChangeStateToChooseStrategy()
     {
 
     }

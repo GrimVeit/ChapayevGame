@@ -12,4 +12,15 @@ public class StrategyGroup : ScriptableObject
     {
         return Strategies.FirstOrDefault(data => data.ID == id);
     }
+
+    public bool IsAvailableStrategy()
+    {
+        return Strategies.FirstOrDefault(data => data.StrategyData.IsOpen == false) != null;
+    }
+
+    public Strategy GetRandomCloseStrategy()
+    {
+        var strategies = Strategies.Where(data => !data.StrategyData.IsOpen).ToList();
+        return strategies[Random.Range(0, strategies.Count)];
+    }
 }

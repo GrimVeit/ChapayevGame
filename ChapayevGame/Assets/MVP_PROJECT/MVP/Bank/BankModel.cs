@@ -12,7 +12,7 @@ public class BankModel
 
     public void Initialize()
     {
-        Money = PlayerPrefs.GetFloat(BANK_MONEY, 300);
+        Money = PlayerPrefs.GetFloat(BANK_MONEY, 10000000);
     }
 
     public void Destroy()
@@ -32,6 +32,8 @@ public class BankModel
         }
         Money += money;
         OnChangeMoney?.Invoke(Money);
+
+        Debug.Log(Money);
     }
 
     public bool CanAfford(int bet)

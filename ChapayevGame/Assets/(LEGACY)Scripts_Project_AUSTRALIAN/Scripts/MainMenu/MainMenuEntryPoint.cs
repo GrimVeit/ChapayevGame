@@ -4,12 +4,7 @@ using UnityEngine;
 public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
-    [SerializeField] private DailyTaskDescriptionComments descriptionComments;
-    [SerializeField] private BuyDesignPrices buyDesignPrices;
-    [SerializeField] private FaceCardDesignGroup faceCardDesignGroup;
-    [SerializeField] private CoverCardDesignGroup coverCardDesignGroup;
-    [SerializeField] private GameDesignGroup gameDesignGroup;
-    [SerializeField] private GameTypeGroup gameTypeGroup;
+    [SerializeField] private StrategyGroup strategyGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -19,28 +14,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
-    private StoreFaceCardDesignPresenter storeFaceCardDesignPresenter;
-    private SelectFaceCardDesignPresenter selectFaceCardDesignPresenter;
-    private FaceCardDesignVisualizePresenter faceCardDesignVisualizePresenter;
-    private BuyFaceCardDesignPresenter buyFaceCardDesignPresenter;
+    private StoreStrategyPresenter storeStrategyPresenter;
+    private StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
+    private StrategyBuyPresenter strategyBuyPresenter;
 
-    private StoreCoverCardDesignPresenter storeCoverCardDesignPresenter;
-    private SelectCoverCardDesignPresenter selectCoverCardDesignPresenter;
-    private CoverCardDesignVisualizePresenter coverCardDesignVisualizePresenter;
-    private BuyCoverCardDesignPresenter buyCoverCardDesignPresenter;
-
-    private StoreGameDesignPresenter storeGameDesignPresenter;
-    private SelectGameDesignPresenter selectGameDesignPresenter;
-    private GameDesignVisualizePresenter gameDesignVisualizePresenter;
-    private BuyGameDesignPresenter buyGameDesignPresenter;
-
-    private StoreGameTypePresenter storeGameTypePresenter;
-    private SelectGameTypePresenter selectGameTypePresenter;
-
-    private StoreDailyTaskPresenter storeDailyTaskPresenter;
-    private SelectDailyTaskPresenter selectDailyTaskPresenter;
-
-    private DailyTaskDescriptionPresenter dailyTaskDescriptionPresenter;
+    private MenuStateMachine stateMachine;
 
     public void Run(UIRootView uIRootView)
     {
@@ -61,31 +39,14 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        storeFaceCardDesignPresenter = new StoreFaceCardDesignPresenter(new StoreFaceCardDesignModel(faceCardDesignGroup));
-        selectFaceCardDesignPresenter = new SelectFaceCardDesignPresenter(new SelectFaceCardDesignModel(), viewContainer.GetView<SelectFaceCardDesignView>());
-        faceCardDesignVisualizePresenter = new FaceCardDesignVisualizePresenter(new FaceCardDesignVisualizeModel(), viewContainer.GetView<FaceCardDesignVisualizeView>());
-        buyFaceCardDesignPresenter = new BuyFaceCardDesignPresenter(new BuyFaceCardDesignModel(PlayerPrefsKeys.BUY_LEVEL_FACE_CARD, buyDesignPrices, bankPresenter), viewContainer.GetView<BuyFaceCardDesignView>());
-
-        storeCoverCardDesignPresenter = new StoreCoverCardDesignPresenter(new StoreCoverCardDesignModel(coverCardDesignGroup));
-        selectCoverCardDesignPresenter = new SelectCoverCardDesignPresenter(new SelectCoverCardDesignModel(), viewContainer.GetView<SelectCoverCardDesignView>());
-        coverCardDesignVisualizePresenter = new CoverCardDesignVisualizePresenter(new CoverCardDesignVisualizeModel(), viewContainer.GetView<CoverCardDesignVisualizeView>());
-        buyCoverCardDesignPresenter = new BuyCoverCardDesignPresenter(new BuyCoverCardDesignModel(PlayerPrefsKeys.BUY_LEVEL_COVER_CARD, buyDesignPrices, bankPresenter), viewContainer.GetView<BuyCoverCardDesignView>());
-
-        storeGameDesignPresenter = new StoreGameDesignPresenter(new StoreGameDesignModel(gameDesignGroup));
-        selectGameDesignPresenter = new SelectGameDesignPresenter(new SelectGameDesignModel(), viewContainer.GetView<SelectGameDesignView>());
-        gameDesignVisualizePresenter = new GameDesignVisualizePresenter(new GameDesignVisualizeModel(), viewContainer.GetView<GameDesignVisualizeView>());
-        buyGameDesignPresenter = new BuyGameDesignPresenter(new BuyGameDesignModel(PlayerPrefsKeys.BUY_LEVEL_BACKGROUND, buyDesignPrices, bankPresenter), viewContainer.GetView<BuyGameDesignView>());
-
-        storeGameTypePresenter = new StoreGameTypePresenter(new StoreGameTypeModel(gameTypeGroup));
-        selectGameTypePresenter = new SelectGameTypePresenter(new SelectGameTypeModel(), viewContainer.GetView<SelectGameTypeView>());
-
-        storeDailyTaskPresenter = new StoreDailyTaskPresenter(new StoreDailyTaskModel());
-        selectDailyTaskPresenter = new SelectDailyTaskPresenter(new SelectDailyTaskModel(), viewContainer.GetView<SelectDailyTaskView>());
-
-        dailyTaskDescriptionPresenter = new DailyTaskDescriptionPresenter(new DailyTaskDescriptionModel(descriptionComments), viewContainer.GetView<DailyTaskDescriptionView>());
-
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
+
+        storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
+        strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
+        strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
+
+        stateMachine = new MenuStateMachine(sceneRoot, storeStrategyPresenter, strategyBuyPresenter, strategyBuyVisualizePresenter);
 
         ActivateEvents();
 
@@ -94,165 +55,39 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.Initialize();
         bankPresenter.Initialize();
 
-        dailyTaskDescriptionPresenter.Initialize();
+        strategyBuyVisualizePresenter.Initialize();
+        strategyBuyPresenter.Initialize();
+        storeStrategyPresenter.Initialize();
+        storeStrategyPresenter.UnselectAllStrategies();
 
-        selectDailyTaskPresenter.Initialize();
+        stateMachine.Initialize();
 
-        selectGameTypePresenter.Initialize();
-
-        buyGameDesignPresenter.Initialize();
-        gameDesignVisualizePresenter.Initialize();
-        selectGameDesignPresenter.Initialize();
-
-        buyCoverCardDesignPresenter.Initialize();
-        coverCardDesignVisualizePresenter.Initialize();
-        selectCoverCardDesignPresenter.Initialize();
-
-        buyFaceCardDesignPresenter.Initialize();
-        faceCardDesignVisualizePresenter.Initialize();
-        selectFaceCardDesignPresenter.Initialize();
-
-        storeDailyTaskPresenter.Initalize();
-        storeGameTypePresenter.Initialize();
-        storeGameDesignPresenter.Initialize();
-        storeCoverCardDesignPresenter.Initialize();
-        storeFaceCardDesignPresenter.Initialize();
     }
 
     private void ActivateEvents()
     {
         ActivateTransitionsSceneEvents();
 
-        Debug.Log("KKK");
-
-        storeFaceCardDesignPresenter.OnOpenFaceCardDesign += selectFaceCardDesignPresenter.SetOpenFaceCardDesign;
-        storeFaceCardDesignPresenter.OnCloseFaceCardDesign += selectFaceCardDesignPresenter.SetCloseFaceCardDesign;
-        selectFaceCardDesignPresenter.OnChooseFaceCardDesign += storeFaceCardDesignPresenter.SelectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnSelectFaceCardDesign += selectFaceCardDesignPresenter.SelectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnDeselectFaceCardDesign += selectFaceCardDesignPresenter.DeselectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnSelectFaceCardDesign += faceCardDesignVisualizePresenter.SetFaceCardDesign;
-
-        storeFaceCardDesignPresenter.OnOpenFaceCardDesign += buyFaceCardDesignPresenter.SetOpenCoverCardDesign;
-        storeFaceCardDesignPresenter.OnCloseFaceCardDesign += buyFaceCardDesignPresenter.SetCloseCoverCardDesign;
-        buyFaceCardDesignPresenter.OnBuyFaceCardDesign += storeFaceCardDesignPresenter.BuyFaceCardDesign;
-
-
-
-
-
-        storeCoverCardDesignPresenter.OnOpenCoverCardDesign += selectCoverCardDesignPresenter.SetOpenCoverCardDesign;
-        storeCoverCardDesignPresenter.OnCloseCoverCardDesign += selectCoverCardDesignPresenter.SetCloseCoverCardDesign;
-        selectCoverCardDesignPresenter.OnChooseCoverCardDesign += storeCoverCardDesignPresenter.SelectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnSelectCoverCardDesign += selectCoverCardDesignPresenter.SelectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnDeselectCoverCardDesign += selectCoverCardDesignPresenter.DeselectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnSelectCoverCardDesign += coverCardDesignVisualizePresenter.SetCoverCardDesign;
-
-        storeCoverCardDesignPresenter.OnOpenCoverCardDesign += buyCoverCardDesignPresenter.SetOpenCoverCardDesign;
-        storeCoverCardDesignPresenter.OnCloseCoverCardDesign += buyCoverCardDesignPresenter.SetCloseCoverCardDesign;
-        buyCoverCardDesignPresenter.OnBuyCoverCardDesign += storeCoverCardDesignPresenter.BuyCoverCardDesign;
-
-
-
-
-
-        storeGameDesignPresenter.OnOpenGameDesign += selectGameDesignPresenter.SetOpenGameDesign;
-        storeGameDesignPresenter.OnCloseGameDesign += selectGameDesignPresenter.SetCloseGameDesign;
-        selectGameDesignPresenter.OnChooseGameDesign += storeGameDesignPresenter.SelectGameDesign;
-        storeGameDesignPresenter.OnSelectGameDesign += selectGameDesignPresenter.SelectGameDesign;
-        storeGameDesignPresenter.OnDeselectGameDesign += selectGameDesignPresenter.DeselectGameDesign;
-        storeGameDesignPresenter.OnSelectGameDesign += gameDesignVisualizePresenter.SetGameDesign;
-
-        storeGameDesignPresenter.OnOpenGameDesign += buyGameDesignPresenter.SetOpenGameDesign;
-        storeGameDesignPresenter.OnCloseGameDesign += buyGameDesignPresenter.SetCloseGameDesign;
-        buyGameDesignPresenter.OnBuyFaceCardDesign += storeGameDesignPresenter.BuyGameDesign;
-
-
-
-
-
-        selectGameTypePresenter.OnChooseGameType += storeGameTypePresenter.SelectGameType;
-        storeGameTypePresenter.OnSelectGameType += selectGameTypePresenter.SelectGameType;
-        storeGameTypePresenter.OnDeselectGameType += selectGameTypePresenter.DeselectGameType;
-
-
-
-
-        selectDailyTaskPresenter.OnChooseDailyTask += storeDailyTaskPresenter.SelectDailyTask;
-        storeDailyTaskPresenter.OnGetDayOfWeekFirstDayMonth += selectDailyTaskPresenter.SetDayOfWeakFirstDayMonth;
-        storeDailyTaskPresenter.OnGetYearAndMonth += dailyTaskDescriptionPresenter.SetYearAndMonth;
-        storeDailyTaskPresenter.OnChangeStatusDailyTask += selectDailyTaskPresenter.SetDailyTaskData;
-        storeDailyTaskPresenter.OnSelectDailyTask += selectDailyTaskPresenter.SelectDailyTask;
-        storeDailyTaskPresenter.OnDeselectDailyTask += selectDailyTaskPresenter.DeselectDailyTask;
-
-        storeDailyTaskPresenter.OnSelectDailyTask += dailyTaskDescriptionPresenter.SetDailyTaskData;
+        storeStrategyPresenter.OnOpenStrategy += strategyBuyVisualizePresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnCloseStrategy += strategyBuyVisualizePresenter.SetCloseStrategy;
     }
 
     private void DeactivateEvents()
     {
         DeactivateTransitionsSceneEvents();
 
-        storeFaceCardDesignPresenter.OnOpenFaceCardDesign -= selectFaceCardDesignPresenter.SetOpenFaceCardDesign;
-        storeFaceCardDesignPresenter.OnCloseFaceCardDesign -= selectFaceCardDesignPresenter.SetCloseFaceCardDesign;
-        selectFaceCardDesignPresenter.OnChooseFaceCardDesign -= storeFaceCardDesignPresenter.SelectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnSelectFaceCardDesign -= selectFaceCardDesignPresenter.SelectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnDeselectFaceCardDesign -= selectFaceCardDesignPresenter.DeselectFaceCardDesign;
-        storeFaceCardDesignPresenter.OnSelectFaceCardDesign -= faceCardDesignVisualizePresenter.SetFaceCardDesign;
-
-        storeFaceCardDesignPresenter.OnOpenFaceCardDesign -= buyFaceCardDesignPresenter.SetOpenCoverCardDesign;
-        storeFaceCardDesignPresenter.OnCloseFaceCardDesign -= buyFaceCardDesignPresenter.SetCloseCoverCardDesign;
-        buyFaceCardDesignPresenter.OnBuyFaceCardDesign -= storeFaceCardDesignPresenter.BuyFaceCardDesign;
-
-
-        storeCoverCardDesignPresenter.OnOpenCoverCardDesign -= selectCoverCardDesignPresenter.SetOpenCoverCardDesign;
-        storeCoverCardDesignPresenter.OnCloseCoverCardDesign -= selectCoverCardDesignPresenter.SetCloseCoverCardDesign;
-        selectCoverCardDesignPresenter.OnChooseCoverCardDesign -= storeCoverCardDesignPresenter.SelectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnSelectCoverCardDesign -= selectCoverCardDesignPresenter.SelectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnDeselectCoverCardDesign -= selectCoverCardDesignPresenter.DeselectCoverCardDesign;
-        storeCoverCardDesignPresenter.OnSelectCoverCardDesign -= coverCardDesignVisualizePresenter.SetCoverCardDesign;
-
-        storeCoverCardDesignPresenter.OnOpenCoverCardDesign -= buyCoverCardDesignPresenter.SetOpenCoverCardDesign;
-        storeCoverCardDesignPresenter.OnCloseCoverCardDesign -= buyCoverCardDesignPresenter.SetCloseCoverCardDesign;
-        buyCoverCardDesignPresenter.OnBuyCoverCardDesign -= storeCoverCardDesignPresenter.BuyCoverCardDesign;
-
-
-        storeGameDesignPresenter.OnOpenGameDesign -= selectGameDesignPresenter.SetOpenGameDesign;
-        storeGameDesignPresenter.OnCloseGameDesign -= selectGameDesignPresenter.SetCloseGameDesign;
-        selectGameDesignPresenter.OnChooseGameDesign -= storeGameDesignPresenter.SelectGameDesign;
-        storeGameDesignPresenter.OnSelectGameDesign -= selectGameDesignPresenter.SelectGameDesign;
-        storeGameDesignPresenter.OnDeselectGameDesign -= selectGameDesignPresenter.DeselectGameDesign;
-        storeGameDesignPresenter.OnSelectGameDesign -= gameDesignVisualizePresenter.SetGameDesign;
-
-        storeGameDesignPresenter.OnOpenGameDesign -= buyGameDesignPresenter.SetOpenGameDesign;
-        storeGameDesignPresenter.OnCloseGameDesign -= buyGameDesignPresenter.SetCloseGameDesign;
-        buyGameDesignPresenter.OnBuyFaceCardDesign -= storeGameDesignPresenter.BuyGameDesign;
-
-
-
-
-
-        selectGameTypePresenter.OnChooseGameType -= storeGameTypePresenter.SelectGameType;
-        storeGameTypePresenter.OnSelectGameType -= selectGameTypePresenter.SelectGameType;
-        storeGameTypePresenter.OnDeselectGameType -= selectGameTypePresenter.DeselectGameType;
-
-
-        selectDailyTaskPresenter.OnChooseDailyTask -= storeDailyTaskPresenter.SelectDailyTask;
-        storeDailyTaskPresenter.OnGetDayOfWeekFirstDayMonth -= selectDailyTaskPresenter.SetDayOfWeakFirstDayMonth;
-        storeDailyTaskPresenter.OnGetYearAndMonth -= dailyTaskDescriptionPresenter.SetYearAndMonth;
-        storeDailyTaskPresenter.OnChangeStatusDailyTask -= selectDailyTaskPresenter.SetDailyTaskData;
-        storeDailyTaskPresenter.OnSelectDailyTask -= selectDailyTaskPresenter.SelectDailyTask;
-        storeDailyTaskPresenter.OnDeselectDailyTask -= selectDailyTaskPresenter.DeselectDailyTask;
-
-        storeDailyTaskPresenter.OnSelectDailyTask -= dailyTaskDescriptionPresenter.SetDailyTaskData;
+        storeStrategyPresenter.OnOpenStrategy -= strategyBuyVisualizePresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnCloseStrategy -= strategyBuyVisualizePresenter.SetCloseStrategy;
     }
 
     private void ActivateTransitionsSceneEvents()
     {
-        dailyTaskDescriptionPresenter.OnPlayDailyTask += HandleGoToDailyTaskGame;
+
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-        dailyTaskDescriptionPresenter.OnPlayDailyTask -= HandleGoToDailyTaskGame;
+
     }
 
     private void Deactivate()
@@ -270,30 +105,12 @@ public class MainMenuEntryPoint : MonoBehaviour
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
 
-        dailyTaskDescriptionPresenter?.Dispose();
 
-        selectDailyTaskPresenter?.Dispose();
+        strategyBuyVisualizePresenter.Dispose();
+        strategyBuyPresenter.Dispose();
+        storeStrategyPresenter.Dispose();
 
-        selectGameTypePresenter?.Dispose();
-
-        buyGameDesignPresenter?.Dispose();
-        gameDesignVisualizePresenter?.Dispose();
-        selectGameDesignPresenter?.Dispose();
-
-        buyCoverCardDesignPresenter?.Dispose();
-        coverCardDesignVisualizePresenter?.Dispose();
-        selectCoverCardDesignPresenter?.Dispose();
-
-        buyFaceCardDesignPresenter?.Dispose();
-        faceCardDesignVisualizePresenter?.Dispose();
-        selectFaceCardDesignPresenter?.Dispose();
-
-
-        storeDailyTaskPresenter?.Dispose();
-        storeGameTypePresenter?.Dispose();
-        storeGameDesignPresenter?.Dispose();
-        storeCoverCardDesignPresenter?.Dispose();
-        storeFaceCardDesignPresenter.Dispose();
+        stateMachine?.Dispose();
     }
 
     private void OnDestroy()

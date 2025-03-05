@@ -138,4 +138,52 @@ public class UIMainMenuRoot : MonoBehaviour
 
     #endregion
 
+    #region Input
+
+
+
+    #region MainPanel
+
+    public event Action OnClickToOpenBuyStrategy
+    {
+        add => mainPanel.OnClickToStrategy += value;
+        remove => mainPanel.OnClickToStrategy -= value;
+    }
+
+    public event Action OnClickToOpenBuyChip
+    {
+        add => mainPanel.OnClickToCollection += value;
+        remove => mainPanel.OnClickToCollection -= value;
+    }
+
+    public event Action OnClickToOpenChooseStrategy
+    {
+        add => mainPanel.OnClickToBattle += value;
+        remove => mainPanel.OnClickToBattle -= value;
+    }
+
+    #endregion
+
+    #region BuyStrategyPanel
+
+    public event Action OnClickToBackFromBuyStrategy
+    {
+        add => storeStrategyPanel.OnClickToCancel += value;
+        remove => storeStrategyPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region BuyStrategyPanel
+
+    public event Action OnClickToBackFromBuyChip
+    {
+        add => storeChipPanel.OnClickToCancel += value;
+        remove => storeChipPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #endregion
+
 }

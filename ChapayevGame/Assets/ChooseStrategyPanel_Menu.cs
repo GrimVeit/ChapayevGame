@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreStrategyPanel_Menu : MovePanel
+public class ChooseStrategyPanel_Menu : MovePanel
 {
     [SerializeField] private Button buttonCancel;
 

@@ -9,14 +9,19 @@ public class MenuStateMachine : IGlobalStateMachine
 
     private IState currentState;
 
-    public MenuStateMachine(UIMainMenuRoot sceneRoot)
+    public MenuStateMachine(
+        UIMainMenuRoot sceneRoot,
+        StoreStrategyPresenter storeStrategyPresenter,
+        StrategyBuyPresenter strategyBuyPresenter,
+        StrategyBuyVisualizePresenter strategyBuyVisualizePresenter)
     {
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
+        states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
     }
 
     public void Initialize()
     {
-
+        SetState(GetState<MainState_Menu>());
     }
 
     public void Dispose()
