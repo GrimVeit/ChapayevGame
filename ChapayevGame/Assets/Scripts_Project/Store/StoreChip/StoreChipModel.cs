@@ -14,7 +14,7 @@ public class StoreChipModel
     public event Action<Chip> OnSelectChip;
 
 
-    private ChipGroup chipGroup;
+    private readonly ChipGroup chipGroup;
 
     private List<ChipData> chipDatas = new List<ChipData>();
 

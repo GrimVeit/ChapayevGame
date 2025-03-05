@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3585029577097970786}
   - component: {fileID: 2788473889986011141}
   - component: {fileID: 3156940932652545666}
-  - component: {fileID: 6923661804817194229}
+  - component: {fileID: 5983353423699763369}
   m_Layer: 5
   m_Name: StrategySelect
   m_TagString: Untagged
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6923661804817194229
+--- !u!114 &5983353423699763369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5435291133308093326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd8f7dfd9e88e64bbdfc53e0c8c53ba, type: 3}
+  m_Script: {fileID: 11500000, guid: b3dbd0699ae37db4391d95bbc774883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSelect: {fileID: 3156940932652545666}

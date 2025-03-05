@@ -9,7 +9,9 @@ public class UIMainMenuRoot : MonoBehaviour
     [SerializeField] private LoadBuyPanel_Menu loadBuyPanel;
     [SerializeField] private ChipPresentationPanel_Menu chipPresentationPanel;
     [SerializeField] private StrategyPresentationPanel_Menu strategyPresentationPanel;
+
     [SerializeField] private ChooseStrategyPanel_Menu chooseStrategyPanel;
+    [SerializeField] private ChooseChipPanel_Menu chooseChipPanel;
 
     private ISoundProvider soundProvider;
 
@@ -28,7 +30,9 @@ public class UIMainMenuRoot : MonoBehaviour
         loadBuyPanel.Initialize();
         chipPresentationPanel.Initialize();
         strategyPresentationPanel.Initialize();
+
         chooseStrategyPanel.Initialize();
+        chooseChipPanel.Initialize();
     }
 
     public void Activate()
@@ -49,7 +53,9 @@ public class UIMainMenuRoot : MonoBehaviour
         storeStrategyPanel.Dispose();
         loadBuyPanel.Dispose();
         chipPresentationPanel.Dispose();
+
         chooseStrategyPanel.Dispose();
+        chooseChipPanel.Dispose();
     }
 
 
@@ -74,6 +80,11 @@ public class UIMainMenuRoot : MonoBehaviour
     public void OpenChooseStrategyPanel()
     {
         OpenPanel(chooseStrategyPanel);
+    }
+
+    public void OpenChooseChipPanel()
+    {
+        OpenPanel(chooseChipPanel);
     }
 
 
@@ -146,8 +157,6 @@ public class UIMainMenuRoot : MonoBehaviour
 
     #region Input
 
-
-
     #region MainPanel
 
     public event Action OnClickToOpenBuyStrategy
@@ -202,6 +211,22 @@ public class UIMainMenuRoot : MonoBehaviour
     {
         add => chooseStrategyPanel.OnClickToCancel += value;
         remove => chooseStrategyPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region ChooseChipPanel
+
+    public event Action OnClickToOpenChooseStrategyFromChooseChip
+    {
+        add => chooseChipPanel.OnClickToCancel += value;
+        remove => chooseChipPanel.OnClickToCancel -= value;
+    }
+
+    public event Action OnClickToPlay
+    {
+        add => chooseChipPanel.OnClickToPlay += value;
+        remove => chooseChipPanel.OnClickToPlay -= value;
     }
 
     #endregion

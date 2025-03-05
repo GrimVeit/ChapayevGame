@@ -23,6 +23,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyVisualizePresenter chipBuyVisualizePresenter;
     private ChipBuyPresenter chipBuyPresenter;
+    private ChipSelectPresenter chipSelectPresenter;
 
     private MenuStateMachine stateMachine;
 
@@ -56,6 +57,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
+        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(), viewContainer.GetView<ChipSelectView>());
 
         stateMachine = new MenuStateMachine(
             sceneRoot, 
@@ -65,7 +67,8 @@ public class MainMenuEntryPoint : MonoBehaviour
             strategySelectPresenter,
             storeChipPresenter,
             chipBuyPresenter,
-            chipBuyVisualizePresenter);
+            chipBuyVisualizePresenter,
+            chipSelectPresenter);
 
         ActivateEvents();
 
@@ -80,6 +83,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeStrategyPresenter.Initialize();
         storeStrategyPresenter.UnselectAllStrategies();
 
+        chipSelectPresenter.Initialize();
         chipBuyVisualizePresenter.Initialize();
         chipBuyPresenter.Initialize();
         storeChipPresenter.Initialize();
@@ -101,6 +105,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
         storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
+        storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
+        storeChipPresenter.OnSelectChip += chipSelectPresenter.SelectChip;
+        storeChipPresenter.OnDeselectChip += chipSelectPresenter.DeselectChip;
     }
 
     private void DeactivateEvents()
@@ -115,6 +122,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeChipPresenter.OnOpenChip -= chipBuyVisualizePresenter.SetOpenChip;
         storeChipPresenter.OnCloseChip -= chipBuyVisualizePresenter.SetCloseChip;
+        storeChipPresenter.OnOpenChip -= chipSelectPresenter.SetOpenChip;
+        storeChipPresenter.OnSelectChip -= chipSelectPresenter.SelectChip;
+        storeChipPresenter.OnDeselectChip -= chipSelectPresenter.DeselectChip;
     }
 
     private void ActivateTransitionsSceneEvents()
@@ -147,6 +157,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         strategyBuyPresenter.Dispose();
         storeStrategyPresenter.Dispose();
 
+        chipSelectPresenter.Dispose();
         chipBuyVisualizePresenter?.Dispose();
         chipBuyPresenter?.Dispose();
         storeChipPresenter?.Dispose();

@@ -38,7 +38,7 @@ public class ChooseStrategy_Menu : IState
 
     private void ChangeStateToChooseChip()
     {
-
+        stateMachine.SetState(stateMachine.GetState<ChooseChip_Menu>());
     }
 
     private void ChangeStateToMain()
