@@ -13,10 +13,18 @@ public class MenuStateMachine : IGlobalStateMachine
         UIMainMenuRoot sceneRoot,
         StoreStrategyPresenter storeStrategyPresenter,
         StrategyBuyPresenter strategyBuyPresenter,
-        StrategyBuyVisualizePresenter strategyBuyVisualizePresenter)
+        StrategyBuyVisualizePresenter strategyBuyVisualizePresenter,
+        StrategySelectPresenter strategySelectPresenter,
+        
+        StoreChipPresenter storeChipPresenter,
+        ChipBuyPresenter chipBuyPresenter,
+        ChipBuyVisualizePresenter chipBuyVisualizePresenter)
     {
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
+        states[typeof(BuyChip_Menu)] = new BuyChip_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
+
+        states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter);
     }
 
     public void Initialize()

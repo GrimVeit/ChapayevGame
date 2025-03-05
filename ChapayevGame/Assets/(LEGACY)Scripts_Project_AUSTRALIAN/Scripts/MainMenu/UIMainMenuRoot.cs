@@ -9,6 +9,7 @@ public class UIMainMenuRoot : MonoBehaviour
     [SerializeField] private LoadBuyPanel_Menu loadBuyPanel;
     [SerializeField] private ChipPresentationPanel_Menu chipPresentationPanel;
     [SerializeField] private StrategyPresentationPanel_Menu strategyPresentationPanel;
+    [SerializeField] private ChooseStrategyPanel_Menu chooseStrategyPanel;
 
     private ISoundProvider soundProvider;
 
@@ -27,6 +28,7 @@ public class UIMainMenuRoot : MonoBehaviour
         loadBuyPanel.Initialize();
         chipPresentationPanel.Initialize();
         strategyPresentationPanel.Initialize();
+        chooseStrategyPanel.Initialize();
     }
 
     public void Activate()
@@ -47,6 +49,7 @@ public class UIMainMenuRoot : MonoBehaviour
         storeStrategyPanel.Dispose();
         loadBuyPanel.Dispose();
         chipPresentationPanel.Dispose();
+        chooseStrategyPanel.Dispose();
     }
 
 
@@ -66,6 +69,11 @@ public class UIMainMenuRoot : MonoBehaviour
     public void OpenStoreStrategyPanel()
     {
         OpenPanel(storeStrategyPanel);
+    }
+
+    public void OpenChooseStrategyPanel()
+    {
+        OpenPanel(chooseStrategyPanel);
     }
 
 
@@ -107,8 +115,6 @@ public class UIMainMenuRoot : MonoBehaviour
     {
         CloseOtherPanel(strategyPresentationPanel);
     }
-
-
 
 
 
@@ -174,12 +180,28 @@ public class UIMainMenuRoot : MonoBehaviour
 
     #endregion
 
-    #region BuyStrategyPanel
+    #region BuyChipPanel
 
     public event Action OnClickToBackFromBuyChip
     {
         add => storeChipPanel.OnClickToCancel += value;
         remove => storeChipPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region ChooseStrategyPanel
+
+    public event Action OnClickToOpenChooseChipFromChooseStrategy
+    {
+        add => chooseStrategyPanel.OnClickToContinue += value;
+        remove => chooseStrategyPanel.OnClickToContinue -= value;
+    }
+
+    public event Action OnClickToCancelFromChooseStrategy
+    {
+        add => chooseStrategyPanel.OnClickToCancel += value;
+        remove => chooseStrategyPanel.OnClickToCancel -= value;
     }
 
     #endregion

@@ -5,6 +5,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private StrategyGroup strategyGroup;
+    [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -17,6 +18,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     private StoreStrategyPresenter storeStrategyPresenter;
     private StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
     private StrategyBuyPresenter strategyBuyPresenter;
+    private StrategySelectPresenter strategySelectPresenter;
+
+    private StoreChipPresenter storeChipPresenter;
+    private ChipBuyVisualizePresenter chipBuyVisualizePresenter;
+    private ChipBuyPresenter chipBuyPresenter;
 
     private MenuStateMachine stateMachine;
 
@@ -45,8 +51,21 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
+        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(), viewContainer.GetView<StrategySelectView>());
 
-        stateMachine = new MenuStateMachine(sceneRoot, storeStrategyPresenter, strategyBuyPresenter, strategyBuyVisualizePresenter);
+        storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
+        chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
+        chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
+
+        stateMachine = new MenuStateMachine(
+            sceneRoot, 
+            storeStrategyPresenter, 
+            strategyBuyPresenter, 
+            strategyBuyVisualizePresenter, 
+            strategySelectPresenter,
+            storeChipPresenter,
+            chipBuyPresenter,
+            chipBuyVisualizePresenter);
 
         ActivateEvents();
 
@@ -55,10 +74,16 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.Initialize();
         bankPresenter.Initialize();
 
+        strategySelectPresenter.Initialize();
         strategyBuyVisualizePresenter.Initialize();
         strategyBuyPresenter.Initialize();
         storeStrategyPresenter.Initialize();
         storeStrategyPresenter.UnselectAllStrategies();
+
+        chipBuyVisualizePresenter.Initialize();
+        chipBuyPresenter.Initialize();
+        storeChipPresenter.Initialize();
+        storeChipPresenter.UnselectAllChips();
 
         stateMachine.Initialize();
 
@@ -70,6 +95,12 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeStrategyPresenter.OnOpenStrategy += strategyBuyVisualizePresenter.SetOpenStrategy;
         storeStrategyPresenter.OnCloseStrategy += strategyBuyVisualizePresenter.SetCloseStrategy;
+        storeStrategyPresenter.OnOpenStrategy += strategySelectPresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnSelectStrategy += strategySelectPresenter.SelectStrategy;
+        storeStrategyPresenter.OnDeselectStrategy += strategySelectPresenter.DeselectStrategy;
+
+        storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
+        storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
     }
 
     private void DeactivateEvents()
@@ -78,6 +109,12 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeStrategyPresenter.OnOpenStrategy -= strategyBuyVisualizePresenter.SetOpenStrategy;
         storeStrategyPresenter.OnCloseStrategy -= strategyBuyVisualizePresenter.SetCloseStrategy;
+        storeStrategyPresenter.OnOpenStrategy -= strategySelectPresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnSelectStrategy -= strategySelectPresenter.SelectStrategy;
+        storeStrategyPresenter.OnDeselectStrategy -= strategySelectPresenter.DeselectStrategy;
+
+        storeChipPresenter.OnOpenChip -= chipBuyVisualizePresenter.SetOpenChip;
+        storeChipPresenter.OnCloseChip -= chipBuyVisualizePresenter.SetCloseChip;
     }
 
     private void ActivateTransitionsSceneEvents()
@@ -105,10 +142,14 @@ public class MainMenuEntryPoint : MonoBehaviour
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
 
-
+        strategySelectPresenter?.Dispose();
         strategyBuyVisualizePresenter.Dispose();
         strategyBuyPresenter.Dispose();
         storeStrategyPresenter.Dispose();
+
+        chipBuyVisualizePresenter?.Dispose();
+        chipBuyPresenter?.Dispose();
+        storeChipPresenter?.Dispose();
 
         stateMachine?.Dispose();
     }

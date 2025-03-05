@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,7 +28,7 @@ public class StrategySelectView : View
         strategySelects.Clear();
     }
 
-    public void SetOpenChipBuyVisualize(Strategy strategy)
+    public void SetOpenStrategy(Strategy strategy)
     {
         var strategySelect = strategySelects.FirstOrDefault(data => data.Id == strategy.ID);
 

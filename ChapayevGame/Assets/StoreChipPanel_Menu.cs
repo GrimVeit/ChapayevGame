@@ -11,11 +11,15 @@ public class StoreChipPanel_Menu : MovePanel
     public override void Initialize()
     {
         base.Initialize();
+
+        buttonCancel.onClick.AddListener(()=> OnClickToCancel?.Invoke());
     }
 
     public override void Dispose()
     {
         base.Dispose();
+
+        buttonCancel.onClick.RemoveListener(() => OnClickToCancel?.Invoke());
     }
 
     #region Input

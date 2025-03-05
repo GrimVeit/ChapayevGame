@@ -15,6 +15,7 @@ public class StoreStrategyModel
 
 
     private StrategyGroup strategyGroup;
+    private Strategy currentStrategy;
 
     private List<StrategyData> chipDatas = new List<StrategyData>();
 
@@ -84,15 +85,26 @@ public class StoreStrategyModel
             return;
         }
 
-        if (strategy.StrategyData.IsSelect)
+        if(currentStrategy != null)
         {
-            strategy.StrategyData.IsSelect = false;
-            OnDeselectStrategy?.Invoke(strategy);
+            if(currentStrategy == strategy)
+            {
+                OnDeselectStrategy?.Invoke(currentStrategy);
+                currentStrategy = null;
+                return;
+            }
+            else
+            {
+                OnDeselectStrategy?.Invoke(currentStrategy);
+                currentStrategy = strategy;
+                OnSelectStrategy?.Invoke(currentStrategy);
+                return;
+            }
         }
         else
         {
-            strategy.StrategyData.IsSelect = true;
-            OnSelectStrategy?.Invoke(strategy);
+            currentStrategy = strategy;
+            OnSelectStrategy?.Invoke(currentStrategy);
         }
     }
 

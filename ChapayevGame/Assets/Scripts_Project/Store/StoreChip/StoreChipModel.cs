@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class StoreChipModel : MonoBehaviour
+public class StoreChipModel
 {
     public event Action<Chip> OnOpenChip;
     public event Action<Chip> OnCloseChip;
@@ -94,6 +94,18 @@ public class StoreChipModel : MonoBehaviour
         }
     }
 
+    public void UnselectAllChips()
+    {
+        chipGroup.Chips.ForEach(data =>
+        {
+            if (data.ChipData.IsSelect)
+            {
+                data.ChipData.IsSelect = false;
+                OnDeselectChip?.Invoke(data);
+            }
+        });
+    }
+
     public void OpenChip(int number)
     {
         var chip = chipGroup.GetChipById(number);
@@ -117,12 +129,12 @@ public class StoreChipModel : MonoBehaviour
 
     public bool IsAvailableChip()
     {
-        return chipGroup.Chips.FirstOrDefault(data => data.ChipData.IsOpen == false) != null;
+        return chipGroup.IsAvailableChip();
     }
 
     public Chip GetRandomCloseChip()
     {
-        return chipGroup.Chips.FirstOrDefault(data => data.ChipData.IsOpen == false);
+        return chipGroup.GetRandomCloseChip();
     }
 }
 

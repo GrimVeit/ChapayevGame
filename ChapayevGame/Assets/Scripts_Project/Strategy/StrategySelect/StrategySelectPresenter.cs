@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class StrategySelectPresenter
 {
-    private StrategySelectModel model;
-    private StrategySelectView view;
+    private readonly StrategySelectModel model;
+    private readonly StrategySelectView view;
 
     public StrategySelectPresenter(StrategySelectModel model, StrategySelectView view)
     {
@@ -17,29 +14,33 @@ public class StrategySelectPresenter
     public void Initialize()
     {
         ActivateEvents();
+
+        view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        view.Dispose();
     }
 
     private void ActivateEvents()
     {
         view.OnChooseStrategy += model.ChooseStrategy;
 
-        model.OnSetOpenStrategy += model.SetOpenStrategy;
-        model.OnSelectStrategy += model.SelectStrategy;
-        model.OnDeselectStrategy += model.DeselectStrategy;
+        model.OnSetOpenStrategy += view.SetOpenStrategy;
+        model.OnSelectStrategy += view.SelectStrategy;
+        model.OnDeselectStrategy += view.DeselectStrategy;
     }
 
     private void DeactivateEvents()
     {
         view.OnChooseStrategy -= model.ChooseStrategy;
 
-        model.OnSetOpenStrategy -= model.SetOpenStrategy;
-        model.OnSelectStrategy -= model.SelectStrategy;
-        model.OnDeselectStrategy -= model.DeselectStrategy;
+        model.OnSetOpenStrategy -= view.SetOpenStrategy;
+        model.OnSelectStrategy -= view.SelectStrategy;
+        model.OnDeselectStrategy -= view.DeselectStrategy;
     }
 
     #region Input

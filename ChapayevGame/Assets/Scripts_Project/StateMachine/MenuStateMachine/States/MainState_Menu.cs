@@ -37,11 +37,11 @@ public class MainState_Menu : IState
 
     private void ChangeStateToBuyChip()
     {
-
+        stateMachine.SetState(stateMachine.GetState<BuyChip_Menu>());
     }
 
     private void ChangeStateToChooseStrategy()
     {
-
+        stateMachine.SetState(stateMachine.GetState<ChooseStrategy_Menu>());
     }
 }

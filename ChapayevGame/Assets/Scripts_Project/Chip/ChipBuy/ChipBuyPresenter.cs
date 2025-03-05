@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,20 +17,33 @@ public class ChipBuyPresenter
     public void Initialize()
     {
         ActivateEvents();
+
+        view.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
+        DeactivatEvents();
+
+        view.Dispose();
     }
 
     private void ActivateEvents()
     {
-
+        view.OnClickToBuy += model.Buy;
     }
 
-    private void DeactivateEvents()
+    private void DeactivatEvents()
     {
-
+        view.OnClickToBuy -= model.Buy;
     }
+
+    #region Input
+
+    public event Action<int> OnBuyChip
+    {
+        add => model.OnBuyChip += value;
+        remove => model.OnBuyChip -= value;
+    }
+    #endregion
 }
