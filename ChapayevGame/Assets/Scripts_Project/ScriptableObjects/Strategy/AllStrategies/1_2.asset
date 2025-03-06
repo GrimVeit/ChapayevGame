@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 1
   sprite: {fileID: 21300000, guid: ec46ce16dfcd2ab41bf1aa2d5115e87d, type: 3}
   chipCount: 1
+  indexPositions: 07000000

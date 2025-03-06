@@ -35,6 +35,9 @@ public class ChipSelectPresenter
         model.OnSetOpenChip += view.SetOpenChip;
         model.OnSelectChip += view.SelectChip;
         model.OnDeselectChip += view.DeselectChip;
+        model.OnActivate += view.Activate;
+        model.OnDeactivate += view.Deactivate;
+        model.OnSetChipCount += view.SetChipCount;
     }
 
     private void DeactivateEvents()
@@ -44,6 +47,9 @@ public class ChipSelectPresenter
         model.OnSetOpenChip -= view.SetOpenChip;
         model.OnSelectChip -= view.SelectChip;
         model.OnDeselectChip -= view.DeselectChip;
+        model.OnActivate -= view.Activate;
+        model.OnDeactivate -= view.Deactivate;
+        model.OnSetChipCount -= view.SetChipCount;
     }
 
     #region Input
@@ -52,6 +58,11 @@ public class ChipSelectPresenter
     {
         add => model.OnChooseChip += value;
         remove => model.OnChooseChip -= value;
+    }
+
+    public void SetStrategy(Strategy strategy)
+    {
+        model.SetCountChip(strategy.ChipCount);
     }
 
     public void SelectChip(Chip chip)

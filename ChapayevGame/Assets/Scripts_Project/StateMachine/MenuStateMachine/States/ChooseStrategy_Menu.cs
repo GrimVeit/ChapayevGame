@@ -6,16 +6,18 @@ public class ChooseStrategy_Menu : IState
 {
     private UIMainMenuRoot sceneRoot;
     private StoreStrategyPresenter storeStrategyPresenter;
+    private StoreChipPresenter storeChipPresenter;
     private StrategySelectPresenter strategySelectPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter)
+    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter)
     {
         this.sceneRoot = sceneRoot;
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.strategySelectPresenter = strategySelectPresenter;
         this.stateMachine = stateMachine;
+        this.storeChipPresenter = storeChipPresenter;
     }
 
     public void EnterState()
@@ -25,6 +27,7 @@ public class ChooseStrategy_Menu : IState
 
         strategySelectPresenter.OnChooseStrategy += storeStrategyPresenter.SelectStrategy;
 
+        storeChipPresenter.UnselectAllChips();
         sceneRoot.OpenChooseStrategyPanel();
     }
 

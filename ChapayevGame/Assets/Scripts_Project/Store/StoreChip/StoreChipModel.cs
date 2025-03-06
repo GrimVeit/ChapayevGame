@@ -46,7 +46,7 @@ public class StoreChipModel
             {
                 if (i == 0)
                 {
-                    chipDatas.Add(new ChipData(true, true));
+                    chipDatas.Add(new ChipData(false, true));
                 }
                 else
                 {

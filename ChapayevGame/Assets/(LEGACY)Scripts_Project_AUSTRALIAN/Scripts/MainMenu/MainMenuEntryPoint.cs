@@ -103,6 +103,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeStrategyPresenter.OnSelectStrategy += strategySelectPresenter.SelectStrategy;
         storeStrategyPresenter.OnDeselectStrategy += strategySelectPresenter.DeselectStrategy;
 
+        storeStrategyPresenter.OnSelectStrategy += chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
         storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
@@ -120,6 +121,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeStrategyPresenter.OnSelectStrategy -= strategySelectPresenter.SelectStrategy;
         storeStrategyPresenter.OnDeselectStrategy -= strategySelectPresenter.DeselectStrategy;
 
+        storeStrategyPresenter.OnSelectStrategy -= chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip -= chipBuyVisualizePresenter.SetOpenChip;
         storeChipPresenter.OnCloseChip -= chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip -= chipSelectPresenter.SetOpenChip;

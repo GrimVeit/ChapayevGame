@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class ChipSelectView : View
     [SerializeField] private ChipSelect chipSelectPrefab;
     [SerializeField] private Transform transformContent;
     [SerializeField] private Button buttonSelect;
+    [SerializeField] private TextMeshProUGUI textChipCount;
 
     private readonly List<ChipSelect> chipSelects = new List<ChipSelect>();
 
@@ -27,6 +29,32 @@ public class ChipSelectView : View
         });
 
         chipSelects.Clear();
+    }
+
+    public void Activate()
+    {
+        buttonSelect.gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        buttonSelect.gameObject.SetActive(false);
+    }
+
+    public void SetChipCount(int count)
+    {
+        switch (count)
+        {
+            case 1:
+                textChipCount.text = "Choose 1 chip";
+                break;
+            case 2:
+                textChipCount.text = "Choose 2 chips";
+                break;
+            case 3:
+                textChipCount.text = "Choose 3 chips";
+                break;
+        }
     }
 
     public void SetOpenChip(Chip chip)
@@ -47,13 +75,11 @@ public class ChipSelectView : View
     public void SelectChip(int id)
     {
         chipSelects.FirstOrDefault(s => s.Id == id).Select();
-        buttonSelect.gameObject.SetActive(true);
     }
 
     public void DeselectChip(int id)
     {
         chipSelects.FirstOrDefault(s => s.Id == id).Deselect();
-        buttonSelect.gameObject.SetActive(false);
     }
 
     #region Input
