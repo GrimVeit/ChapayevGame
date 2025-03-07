@@ -42,11 +42,11 @@ public class ChipMoveView : View
     {
         while (isDragging)
         {
-            Vector2 screenPosition = Input.mousePosition;
+            Vector2 screenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            float distance = Vector2.Distance(currentChipMove.transform.position, screenPosition);
+            float distance = Vector2.Distance(currentChipMove.RectTransform.position, screenPosition);
 
-            Vector3 direction = screenPosition - (Vector2)currentChipMove.transform.position;
+            Vector3 direction = screenPosition - (Vector2)currentChipMove.RectTransform.position;
             direction.Normalize();
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
@@ -72,9 +72,9 @@ public class ChipMoveView : View
 
     private void AdjustCrocchairScale(float distance)
     {
-        float minDistance = currentChipMove.RectTransform.sizeDelta.x/2;
+        float minDistance = 0.25f;
 
-        float maxDistance = 300;
+        float maxDistance = 2;
 
         float t = Mathf.InverseLerp(minDistance, maxDistance, distance);
 
