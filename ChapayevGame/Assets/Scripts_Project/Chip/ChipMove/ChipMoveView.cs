@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +16,27 @@ public class ChipMoveView : View
     private bool isDragging;
 
     private Vector2 startDragPosition;
+
+    public void AddChip(ChipMove chipMove)
+    {
+        chipMove.OnDown += HandleDownChip;
+        chipMove.OnUp += HandleUpChip;
+
+        chipMoves.Add(chipMove);
+    }
+
+    public void RemoveChip(ChipMove chipMove)
+    {
+        var chip = chipMoves.FirstOrDefault(data => data.ID == chipMove.ID);
+
+        if(chip != null)
+        {
+            chip.OnDown -= HandleDownChip;
+            chip.OnUp -= HandleUpChip;
+
+            chipMoves.Remove(chipMove);
+        }
+    }
 
     private void ActivateMove()
     {
@@ -112,22 +134,12 @@ public class ChipMoveView : View
     }
 
     #region I
-
-    public void Awake()
-    {
-        chipMoves.ForEach(chip =>
-        {
-            chip.OnDown += HandleDownChip;
-            chip.OnUp += HandleUpChip;
-        });
-    }
-
     private void OnDestroy()
     {
         chipMoves.ForEach(chip =>
         {
-            chip.OnDown += HandleDownChip;
-            chip.OnUp += HandleUpChip;
+            chip.OnDown -= HandleDownChip;
+            chip.OnUp -= HandleUpChip;
         });
     }
 

@@ -3,14 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ChipMove : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Rigidbody2D rb;
 
+    public int ID => currentChipData.ID;
     public RectTransform RectTransform;
 
     [SerializeField] private Transform transformAim;
+    [SerializeField] private Image imageChip;
+    [SerializeField] private Image imageChip_2;
+
+    private Chip currentChipData;
+
+    public void SetData(Chip chip)
+    {
+        currentChipData = chip;
+        imageChip.sprite = currentChipData.Sprite;
+        imageChip_2.sprite = currentChipData.Sprite;
+    }
 
     public void ActivateAim()
     {

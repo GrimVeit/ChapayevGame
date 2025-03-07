@@ -18,7 +18,7 @@ public class GameEntryPoint
 
     }
 
-    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Autorun()
     {
         GlobalGameSettings();
@@ -51,42 +51,7 @@ public class GameEntryPoint
         var sceneEntryPoint = Object.FindObjectOfType<MainMenuEntryPoint>();
         sceneEntryPoint.Run(rootView);
 
-        sceneEntryPoint.OnGoToGame += () => coroutines.StartCoroutine(LoadAndStartFromMenuToGame());
-        sceneEntryPoint.OnGoToDailyTaskGame += () => coroutines.StartCoroutine(LoadAndStartFromMenuToDailyTaskGame());
-
-        yield return rootView.HideLoadingScreen();
-    }
-
-    private IEnumerator LoadAndStartFromMenuToGame()
-    {
-        rootView.SetLoadScreen(2);
-
-        yield return rootView.ShowLoadingScreen();
-
-        yield return LoadScene(Scenes.BOOT);
-        yield return LoadScene(Scenes.PORTRAIT_TO_LANDSCAPE);
-
-        var sceneEntryPoint = Object.FindObjectOfType<PortraitToLandscapeSceneEntryPoint>();
-        sceneEntryPoint.Run(rootView);
-
-        sceneEntryPoint.OnGoToLandscapeScene += () => coroutines.StartCoroutine(LoadAndStartMiniGameScene());
-
-        yield return rootView.HideLoadingScreen();
-    }
-
-    private IEnumerator LoadAndStartFromMenuToDailyTaskGame()
-    {
-        rootView.SetLoadScreen(2);
-
-        yield return rootView.ShowLoadingScreen();
-
-        yield return LoadScene(Scenes.BOOT);
-        yield return LoadScene(Scenes.PORTRAIT_TO_LANDSCAPE);
-
-        var sceneEntryPoint = Object.FindObjectOfType<PortraitToLandscapeSceneEntryPoint>();
-        sceneEntryPoint.Run(rootView);
-
-        sceneEntryPoint.OnGoToLandscapeScene += () => coroutines.StartCoroutine(LoadAndStartDailyTaskMiniGameScene());
+        sceneEntryPoint.OnGoToGame += () => coroutines.StartCoroutine(LoadAndStartMiniGameScene());
 
         yield return rootView.HideLoadingScreen();
     }
@@ -107,48 +72,9 @@ public class GameEntryPoint
         var sceneEntryPoint = Object.FindObjectOfType<MiniGameSceneEntryPoint>();
         sceneEntryPoint.Run(rootView);
 
-        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartFromGameToMenu());
+        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
         sceneEntryPoint.OnGoToGame += () => coroutines.StartCoroutine(LoadAndStartMiniGameScene());
 
-
-        yield return rootView.HideLoadingScreen();
-    }
-
-    private IEnumerator LoadAndStartDailyTaskMiniGameScene()
-    {
-        rootView.SetLoadScreen(1);
-
-        yield return rootView.ShowLoadingScreen();
-
-        yield return new WaitForSeconds(0.3f);
-
-        yield return LoadScene(Scenes.BOOT);
-        yield return LoadScene(Scenes.DAILY_TASK_MINI_GAME);
-
-        yield return new WaitForSeconds(0.1f);
-
-        var sceneEntryPoint = Object.FindObjectOfType<DailyTaskGameSceneEntryPoint>();
-        sceneEntryPoint.Run(rootView);
-
-        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartFromGameToMenu());
-
-
-        yield return rootView.HideLoadingScreen();
-    }
-
-    private IEnumerator LoadAndStartFromGameToMenu()
-    {
-        rootView.SetLoadScreen(2);
-
-        yield return rootView.ShowLoadingScreen();
-
-        yield return LoadScene(Scenes.BOOT);
-        yield return LoadScene(Scenes.LANDSCAPE_TO_PORTRAIT);
-
-        var sceneEntryPoint = Object.FindObjectOfType<LandscapeToPortraitSceneEntryPoint>();
-        sceneEntryPoint.Run(rootView);
-
-        sceneEntryPoint.OnGoToPortraitSceneScene += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
         yield return rootView.HideLoadingScreen();
     }

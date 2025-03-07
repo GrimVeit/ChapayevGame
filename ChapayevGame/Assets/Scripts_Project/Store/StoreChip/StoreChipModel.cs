@@ -23,10 +23,7 @@ public class StoreChipModel
     public StoreChipModel(ChipGroup chipGroup)
     {
         this.chipGroup = chipGroup;
-    }
 
-    public void Initialize()
-    {
         if (File.Exists(FilePath))
         {
             string loadedJson = File.ReadAllText(FilePath);
@@ -58,11 +55,22 @@ public class StoreChipModel
         for (int i = 0; i < chipGroup.Chips.Count; i++)
         {
             chipGroup.Chips[i].SetData(chipDatas[i]);
+        }
+    }
 
+    public void Initialize()
+    {
+        for (int i = 0; i < chipGroup.Chips.Count; i++)
+        {
             if (chipGroup.Chips[i].ChipData.IsOpen)
                 OnOpenChip?.Invoke(chipGroup.Chips[i]);
             else
                 OnCloseChip?.Invoke(chipGroup.Chips[i]);
+
+            if (chipGroup.Chips[i].ChipData.IsSelect)
+                OnSelectChip?.Invoke(chipGroup.Chips[i]);
+            else
+                OnDeselectChip?.Invoke(chipGroup.Chips[i]);
         }
     }
 

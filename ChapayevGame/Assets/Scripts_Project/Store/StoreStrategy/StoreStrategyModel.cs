@@ -24,10 +24,7 @@ public class StoreStrategyModel
     public StoreStrategyModel(StrategyGroup strategyGroup)
     {
         this.strategyGroup = strategyGroup;
-    }
 
-    public void Initialize()
-    {
         if (File.Exists(FilePath))
         {
             string loadedJson = File.ReadAllText(FilePath);
@@ -59,11 +56,22 @@ public class StoreStrategyModel
         for (int i = 0; i < strategyGroup.Strategies.Count; i++)
         {
             strategyGroup.Strategies[i].SetData(chipDatas[i]);
+        }
+    }
 
+    public void Initialize()
+    {
+        for (int i = 0; i < strategyGroup.Strategies.Count; i++)
+        {
             if (strategyGroup.Strategies[i].StrategyData.IsOpen)
                 OnOpenStrategy?.Invoke(strategyGroup.Strategies[i]);
             else
                 OnCloseStrategy?.Invoke(strategyGroup.Strategies[i]);
+
+            if(strategyGroup.Strategies[i].StrategyData.IsSelect)
+                OnSelectStrategy?.Invoke(strategyGroup.Strategies[i]);
+            else
+                OnDeselectStrategy?.Invoke(strategyGroup.Strategies[i]);
         }
     }
 
@@ -90,14 +98,17 @@ public class StoreStrategyModel
             if(currentStrategy == strategy)
             {
                 OnDeselectStrategy?.Invoke(currentStrategy);
+                currentStrategy.StrategyData.IsSelect = false;
                 currentStrategy = null;
                 return;
             }
             else
             {
                 OnDeselectStrategy?.Invoke(currentStrategy);
+                currentStrategy.StrategyData.IsSelect = false;
                 currentStrategy = strategy;
                 OnSelectStrategy?.Invoke(currentStrategy);
+                currentStrategy.StrategyData.IsSelect = true;
                 return;
             }
         }
@@ -105,6 +116,7 @@ public class StoreStrategyModel
         {
             currentStrategy = strategy;
             OnSelectStrategy?.Invoke(currentStrategy);
+            currentStrategy.StrategyData.IsSelect = true;
         }
     }
 

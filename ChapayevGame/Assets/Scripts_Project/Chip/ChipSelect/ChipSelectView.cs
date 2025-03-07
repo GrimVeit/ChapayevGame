@@ -74,12 +74,22 @@ public class ChipSelectView : View
 
     public void SelectChip(int id)
     {
-        chipSelects.FirstOrDefault(s => s.Id == id).Select();
+        var chip = chipSelects.FirstOrDefault(s => s.Id == id);
+
+        if (chip != null)
+        {
+            chip.Select();
+        }
     }
 
     public void DeselectChip(int id)
     {
-        chipSelects.FirstOrDefault(s => s.Id == id).Deselect();
+        var chip = chipSelects.FirstOrDefault(s => s.Id == id);
+
+        if(chip != null)
+        {
+            chip.Deselect();
+        }
     }
 
     #region Input

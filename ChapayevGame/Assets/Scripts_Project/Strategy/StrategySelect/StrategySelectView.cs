@@ -45,13 +45,26 @@ public class StrategySelectView : View
 
     public void SelectStrategy(int id)
     {
-        strategySelects.FirstOrDefault(s => s.Id == id).Select();
+        var strategy = strategySelects.FirstOrDefault(s => s.Id == id);
+
+        if (strategy != null)
+        {
+            strategy.Select();
+        }
+
         buttonSelect.gameObject.SetActive(true);
     }
 
     public void DeselectStrategy(int id)
     {
-        strategySelects.FirstOrDefault(s => s.Id == id).Deselect();
+
+        var strategy = strategySelects.FirstOrDefault(s => s.Id == id);
+
+        if (strategy != null)
+        {
+            strategy.Deselect();
+        }
+
         buttonSelect.gameObject.SetActive(false);
     }
 

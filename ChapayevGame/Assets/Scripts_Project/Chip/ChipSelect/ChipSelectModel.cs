@@ -16,6 +16,8 @@ public class ChipSelectModel
     private int countChip;
     private int currentCountChip = 0;
 
+    private bool isActivate = false;
+
     public void SetOpenChip(Chip chip)
     {
         OnSetOpenChip?.Invoke(chip);
@@ -23,6 +25,8 @@ public class ChipSelectModel
 
     public void SelectChip(int id)
     {
+        if (!isActivate) return;
+
         OnSelectChip?.Invoke(id);
 
         currentCountChip += 1;
@@ -31,6 +35,8 @@ public class ChipSelectModel
 
     public void DeselectChip(int id)
     {
+        if(!isActivate) return;
+
         OnDeselectChip?.Invoke(id);
 
         currentCountChip -= 1;
@@ -41,6 +47,7 @@ public class ChipSelectModel
     {
         countChip = count;
         OnSetChipCount?.Invoke(count);
+        isActivate = true;
     }
 
 

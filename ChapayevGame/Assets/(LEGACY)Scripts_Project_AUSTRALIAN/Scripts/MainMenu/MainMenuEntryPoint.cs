@@ -70,6 +70,9 @@ public class MainMenuEntryPoint : MonoBehaviour
             chipBuyVisualizePresenter,
             chipSelectPresenter);
 
+        storeStrategyPresenter.UnselectAllStrategies();
+        storeChipPresenter.UnselectAllChips();
+
         ActivateEvents();
 
         soundPresenter.Initialize();
@@ -81,13 +84,11 @@ public class MainMenuEntryPoint : MonoBehaviour
         strategyBuyVisualizePresenter.Initialize();
         strategyBuyPresenter.Initialize();
         storeStrategyPresenter.Initialize();
-        storeStrategyPresenter.UnselectAllStrategies();
 
         chipSelectPresenter.Initialize();
         chipBuyVisualizePresenter.Initialize();
         chipBuyPresenter.Initialize();
         storeChipPresenter.Initialize();
-        storeChipPresenter.UnselectAllChips();
 
         stateMachine.Initialize();
 
@@ -131,12 +132,12 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void ActivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToPlay += HandleGoToGame;
     }
 
     private void DeactivateTransitionsSceneEvents()
     {
-
+        sceneRoot.OnClickToPlay -= HandleGoToGame;
     }
 
     private void Deactivate()
@@ -155,9 +156,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         bankPresenter?.Dispose();
 
         strategySelectPresenter?.Dispose();
-        strategyBuyVisualizePresenter.Dispose();
-        strategyBuyPresenter.Dispose();
-        storeStrategyPresenter.Dispose();
+        strategyBuyVisualizePresenter?.Dispose();
+        strategyBuyPresenter?.Dispose();
+        storeStrategyPresenter?.Dispose();
 
         chipSelectPresenter.Dispose();
         chipBuyVisualizePresenter?.Dispose();
@@ -175,18 +176,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     #region Input actions
 
     public event Action OnGoToGame;
-    public event Action OnGoToDailyTaskGame;
 
     private void HandleGoToGame()
     {
         Deactivate();
         OnGoToGame?.Invoke();
-    }
-
-    private void HandleGoToDailyTaskGame()
-    {
-        Deactivate();
-        OnGoToDailyTaskGame?.Invoke();
     }
 
     #endregion

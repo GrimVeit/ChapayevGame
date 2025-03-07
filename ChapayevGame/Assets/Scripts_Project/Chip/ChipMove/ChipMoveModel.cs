@@ -1,18 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipMoveModel : MonoBehaviour
+public class ChipMoveModel
 {
-    // Start is called before the first frame update
-    void Start()
+    public event Action<ChipMove> OnAddChip;
+    public event Action<ChipMove> OnRemoveChip;
+
+    public void AddChip(ChipMove chipMove)
     {
-        
+        OnAddChip?.Invoke(chipMove);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveChip(ChipMove chipMove)
     {
-        
+        OnRemoveChip?.Invoke(chipMove);
     }
 }
