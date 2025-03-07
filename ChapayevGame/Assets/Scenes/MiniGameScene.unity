@@ -185,6 +185,8 @@ GameObject:
   m_Component:
   - component: {fileID: 23224170}
   - component: {fileID: 23224172}
+  - component: {fileID: 23224174}
+  - component: {fileID: 23224173}
   m_Layer: 5
   m_Name: SpinChoosePanel
   m_TagString: Untagged
@@ -205,12 +207,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 981677120}
-  - {fileID: 998239457}
   m_Father: {fileID: 767340471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &23224172
@@ -221,6 +222,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23224169}
   m_CullTransparentMesh: 1
+--- !u!114 &23224173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23224169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fdca2e4720ee84a8ef7a72ef6ea428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 23224169}
+  from: {x: 0, y: 150, z: 0}
+  to: {x: 0, y: 0, z: 0}
+  time: 0.1
+  canvasGroup: {fileID: 23224174}
+--- !u!225 &23224174
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23224169}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &85409208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1139,8 @@ GameObject:
   - component: {fileID: 286925703}
   - component: {fileID: 286925707}
   - component: {fileID: 286925706}
-  - component: {fileID: 286925704}
+  - component: {fileID: 286925709}
+  - component: {fileID: 286925708}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
@@ -1138,28 +1169,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &286925704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286925702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349bc7b1b83e44e48b2c7ed0c683740b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 286925702}
-  from: {x: 0, y: 0, z: 0}
-  to: {x: 0, y: 0, z: 0}
-  time: 0.2
-  canvasGroup: {fileID: 0}
-  buttonExit: {fileID: 0}
-  buttonRestart: {fileID: 0}
 --- !u!114 &286925706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,6 +1210,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286925702}
   m_CullTransparentMesh: 1
+--- !u!114 &286925708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286925702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5667797428ad046acdd1d9d0cc6e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 286925702}
+  from: {x: 0, y: 150, z: 0}
+  to: {x: 0, y: 0, z: 0}
+  time: 0.1
+  canvasGroup: {fileID: 286925709}
+--- !u!225 &286925709
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286925702}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &336658646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2263,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1319376963}
+  - {fileID: 1317583619}
   - {fileID: 23224170}
   - {fileID: 871370365}
   - {fileID: 286925703}
@@ -2740,7 +2782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &871370367
@@ -2776,7 +2818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 871370364}
-  from: {x: 0, y: 0, z: 0}
+  from: {x: 0, y: 150, z: 0}
   to: {x: 0, y: 0, z: 0}
   time: 0.2
   canvasGroup: {fileID: 871370367}
@@ -3168,13 +3210,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998239456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1371424939}
-  m_Father: {fileID: 23224170}
+  m_Father: {fileID: 1317583619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -4725,6 +4767,82 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!1 &1317583618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317583619}
+  - component: {fileID: 1317583622}
+  - component: {fileID: 1317583621}
+  - component: {fileID: 1317583620}
+  m_Layer: 5
+  m_Name: SpinStartPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1317583619
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317583618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 998239457}
+  m_Father: {fileID: 767340471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 150}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1317583620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317583618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caeff5b3279dfd469f650c56e2afcd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 1317583618}
+  from: {x: 0, y: 150, z: 0}
+  to: {x: 0, y: 0, z: 0}
+  time: 0.1
+  canvasGroup: {fileID: 1317583621}
+--- !u!225 &1317583621
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317583618}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!222 &1317583622
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317583618}
+  m_CullTransparentMesh: 1
 --- !u!1 &1319376962
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,12 +6417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1745467654}
   RectTransform: {fileID: 1745467649}
-  force: 1
   transformAim: {fileID: 1160560582}
-  minDistanceScale: 0
-  maxDistanceScale: 0
-  minScale: 0
-  maxScale: 0
 --- !u!50 &1745467654
 Rigidbody2D:
   serializedVersion: 4
@@ -6977,10 +7090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c59fdd33b541784c8df8f33c772f3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerPanel: {fileID: 0}
   mainPanel: {fileID: 1319376964}
-  restartPanel: {fileID: 0}
-  exitPanel: {fileID: 0}
+  spinStartPanel: {fileID: 1317583620}
+  spinPanel: {fileID: 23224173}
+  losePanel: {fileID: 286925708}
   winPanel: {fileID: 871370369}
 --- !u!114 &4997780278797794298
 MonoBehaviour:

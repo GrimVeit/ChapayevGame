@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class UIMiniGameSceneRoot : MonoBehaviour
 {
-    [SerializeField] private HeaderPanel_Game headerPanel;
     [SerializeField] private MainPanel_Game mainPanel;
-    [SerializeField] private RestartPanel_Game restartPanel;
-    [SerializeField] private ExitPanel_Game exitPanel;
+    [SerializeField] private SpinStartPanel_Game spinStartPanel;
+    [SerializeField] private SpinPanel_Game spinPanel;
+    [SerializeField] private LosePanel_Game losePanel;
     [SerializeField] private WinPanel_Game winPanel;
 
     private ISoundProvider soundProvider;
@@ -22,19 +22,19 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     public void Initialize()
     {
-        headerPanel.Initialize();
         mainPanel.Initialize();
-        restartPanel.Initialize();
-        exitPanel.Initialize();
+        spinStartPanel.Initialize();
+        spinPanel.Initialize();
+        losePanel.Initialize();
         winPanel.Initialize();
     }
 
     public void Dispose()
     {
-        headerPanel.Dispose();
         mainPanel.Dispose();
-        restartPanel.Dispose();
-        exitPanel.Dispose();
+        spinStartPanel.Dispose();
+        spinPanel.Dispose();
+        losePanel.Dispose();
         winPanel.Dispose();
     }
 
@@ -50,37 +50,29 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
 
 
-    public void OpenHeaderPanel()
-    {
-        if(headerPanel.IsActive) return;
 
-        OpenOtherPanel(headerPanel);
+    public void OpenSpinStartPanel()
+    {
+        OpenOtherPanel(spinStartPanel);
     }
 
-    public void CloseHeaderPanel()
+    public void CloseSpinStartPanel()
     {
-        if(!headerPanel.IsActive) return;
-
-        CloseOtherPanel(headerPanel);
+        CloseOtherPanel(spinStartPanel);
     }
 
 
 
 
 
-
-    public void OpenRestartPanel()
+    public void OpenSpinPanel()
     {
-        if(restartPanel.IsActive) return;
-
-        OpenOtherPanel(restartPanel);
+        OpenOtherPanel(spinPanel);
     }
 
-    public void CloseRestartPanel()
+    public void CloseSpinPanel()
     {
-        if(!restartPanel.IsActive) return;
-
-        CloseOtherPanel(restartPanel);
+        CloseOtherPanel(spinPanel);
     }
 
 
@@ -89,16 +81,16 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     public void OpenExitPanel()
     {
-        if(exitPanel.IsActive) return;
+        if(losePanel.IsActive) return;
 
-        OpenOtherPanel(exitPanel);
+        OpenOtherPanel(losePanel);
     }
 
     public void CloseExitPanel()
     {
-        if (!exitPanel.IsActive) return;
+        if (!losePanel.IsActive) return;
 
-        CloseOtherPanel(exitPanel);
+        CloseOtherPanel(losePanel);
     }
 
 
@@ -125,22 +117,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     public void Activate()
     {
-        restartPanel.OnClickToRestart += HandleClickToRestart;
-        exitPanel.OnClickToExit += HandleClickToExit;
-        winPanel.OnClickToRestart += HandleClickToRestart;
-        winPanel.OnClickToExit += HandleClickToExit;
-
         OpenMainPanel();
-        OpenHeaderPanel();
     }
 
     public void Deactivate()
     {
-        restartPanel.OnClickToRestart -= HandleClickToRestart;
-        exitPanel.OnClickToExit -= HandleClickToExit;
-        winPanel.OnClickToRestart -= HandleClickToRestart;
-        winPanel.OnClickToExit -= HandleClickToExit;
-
         if (currentPanel != null)
            CloseOtherPanel(currentPanel);
 
@@ -170,47 +151,6 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     }
 
     #region Input
-
-    public event Action OnClickToRestart_Header
-    {
-        add { headerPanel.OnClickToRestart += value; }
-        remove { headerPanel.OnClickToRestart -= value; }
-    }
-
-    public event Action OnClickToExit_Header
-    {
-        add { headerPanel.OnClickToExit += value; }
-        remove { headerPanel.OnClickToExit -= value; }
-    }
-
-    public event Action OnClickToCancel_Exit
-    {
-        add { exitPanel.OnClickToCancel += value; }
-        remove { exitPanel.OnClickToCancel -= value; }
-    }
-
-    public event Action OnClickToCancel_Restart
-    {
-        add { restartPanel.OnClickToCancel += value; }
-        remove { restartPanel.OnClickToCancel -= value; }
-    }
-
-
-
-
-
-    public event Action OnClickToRestart;
-    public event Action OnClickToExit;
-
-    private void HandleClickToRestart()
-    {
-        OnClickToRestart?.Invoke();
-    }
-
-    private void HandleClickToExit()
-    {
-        OnClickToExit?.Invoke();
-    }
 
 
     #endregion
