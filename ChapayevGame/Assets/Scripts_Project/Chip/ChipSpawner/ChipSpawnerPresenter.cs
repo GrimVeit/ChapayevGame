@@ -42,6 +42,12 @@ public class ChipSpawnerPresenter
         remove => view.OnSpawnChip -= value;
     }
 
+    public event Action<ChipMove> OnDestroyChip
+    {
+        add => view.OnDestroyChip += value;
+        remove => view.OnDestroyChip -= value;
+    }
+
     public void SetStrategy(Strategy strategy)
     {
         model.SetStrategy(strategy);

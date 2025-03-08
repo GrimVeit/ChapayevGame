@@ -14,7 +14,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private StoreStrategyPresenter storeStrategyPresenter;
 
     private StoreChipPresenter storeChipPresenter;
-    private ChipSpawnerPresenter chipSpawnerPresenter;
+    private ChipSpawnerPresenter chipSpawnerPresenter_Player;
+    private ChipSpawnerPresenter chipSpawnerPresenter_Bot;
     private ChipMovePresenter chipMovePresenter;
 
     private GameStateMachine stateMachine;
@@ -33,7 +34,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
-        chipSpawnerPresenter = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>());
+        chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
+        chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(), viewContainer.GetView<ChipMoveView>());
 
         stateMachine = new GameStateMachine();
@@ -43,7 +45,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeStrategyPresenter.Initialize();
 
         chipMovePresenter.Initialize();
-        chipSpawnerPresenter.Initialize();
+        chipSpawnerPresenter_Player.Initialize();
+        chipSpawnerPresenter_Bot.Initialize();
         storeChipPresenter.Initialize();
 
         stateMachine.Initialize();
@@ -53,16 +56,28 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     {
         ActivateTransitionEvents();
 
-        storeStrategyPresenter.OnSelectStrategy += chipSpawnerPresenter.SetStrategy;
-        storeChipPresenter.OnSelectChip += chipSpawnerPresenter.SetChip;
+        storeStrategyPresenter.OnSelectStrategy += chipSpawnerPresenter_Player.SetStrategy;
+        storeChipPresenter.OnSelectChip += chipSpawnerPresenter_Player.SetChip;
+
+        storeStrategyPresenter.OnSelectStrategy += chipSpawnerPresenter_Bot.SetStrategy;
+        storeChipPresenter.OnSelectChip += chipSpawnerPresenter_Bot.SetChip;
+
+        chipSpawnerPresenter_Player.OnSpawnChip += chipMovePresenter.AddChip;
+        chipSpawnerPresenter_Player.OnDestroyChip += chipMovePresenter.RemoveChip;
     }
 
     private void DeactivateEvents()
     {
         DeactivateTransitionEvents();
 
-        storeStrategyPresenter.OnSelectStrategy -= chipSpawnerPresenter.SetStrategy;
-        storeChipPresenter.OnSelectChip -= chipSpawnerPresenter.SetChip;
+        storeStrategyPresenter.OnSelectStrategy -= chipSpawnerPresenter_Player.SetStrategy;
+        storeChipPresenter.OnSelectChip -= chipSpawnerPresenter_Player.SetChip;
+
+        storeStrategyPresenter.OnSelectStrategy -= chipSpawnerPresenter_Bot.SetStrategy;
+        storeChipPresenter.OnSelectChip -= chipSpawnerPresenter_Bot.SetChip;
+
+        chipSpawnerPresenter_Player.OnSpawnChip -= chipMovePresenter.AddChip;
+        chipSpawnerPresenter_Player.OnDestroyChip -= chipMovePresenter.RemoveChip;
     }
 
     private void ActivateTransitionEvents()
@@ -84,7 +99,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         //storeStrategyPresenter.Dispose();
 
         chipMovePresenter?.Dispose();
-        chipSpawnerPresenter?.Dispose();
+        chipSpawnerPresenter_Player?.Dispose();
+        chipSpawnerPresenter_Bot?.Dispose();
         //storeChipPresenter.Dispose();
 
         stateMachine?.Dispose();

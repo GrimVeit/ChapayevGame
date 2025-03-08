@@ -5,18 +5,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChipMove : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ChipMove : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private protected Rigidbody2D rb;
 
     public int ID => currentChipData.ID;
     public RectTransform RectTransform;
 
-    [SerializeField] private Transform transformAim;
-    [SerializeField] private Image imageChip;
-    [SerializeField] private Image imageChip_2;
+    [SerializeField] private protected Transform transformAim;
+    [SerializeField] private protected Image imageChip;
+    [SerializeField] private protected Image imageChip_2;
 
-    private Chip currentChipData;
+    private protected Chip currentChipData;
 
     public void SetData(Chip chip)
     {
@@ -55,21 +55,19 @@ public class ChipMove : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         rb.AddForce(vector, ForceMode2D.Impulse);
     }
 
-
-    public void OnPointerDown(PointerEventData eventData)
+    public void Destroy()
     {
-        OnDown?.Invoke(this, eventData);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        OnUp?.Invoke(this, eventData);
+        Destroy(gameObject);
     }
 
     #region Input
 
-    public event Action<ChipMove, PointerEventData> OnDown;
-    public event Action<ChipMove, PointerEventData> OnUp;
+    public event Action<ChipMove> OnDead;
+
+    public void DeadTrigger()
+    {
+        OnDead?.Invoke(this);
+    }
 
     #endregion
 }

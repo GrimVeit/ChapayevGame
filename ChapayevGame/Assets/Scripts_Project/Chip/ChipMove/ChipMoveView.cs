@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ChipMoveView : View
 {
-    [SerializeField] private List<ChipMove> chipMoves = new List<ChipMove>();
+    [SerializeField] private List<ChipMove_Player> chipMoves = new List<ChipMove_Player>();
     [SerializeField] private float force = 1000;
 
     private ChipMove currentChipMove;
@@ -17,7 +17,7 @@ public class ChipMoveView : View
 
     private Vector2 startDragPosition;
 
-    public void AddChip(ChipMove chipMove)
+    public void AddChip(ChipMove_Player chipMove)
     {
         chipMove.OnDown += HandleDownChip;
         chipMove.OnUp += HandleUpChip;
@@ -25,7 +25,7 @@ public class ChipMoveView : View
         chipMoves.Add(chipMove);
     }
 
-    public void RemoveChip(ChipMove chipMove)
+    public void RemoveChip(ChipMove_Player chipMove)
     {
         var chip = chipMoves.FirstOrDefault(data => data.ID == chipMove.ID);
 
@@ -35,6 +35,8 @@ public class ChipMoveView : View
             chip.OnUp -= HandleUpChip;
 
             chipMoves.Remove(chipMove);
+
+            Debug.Log("DESTROY");
         }
     }
 

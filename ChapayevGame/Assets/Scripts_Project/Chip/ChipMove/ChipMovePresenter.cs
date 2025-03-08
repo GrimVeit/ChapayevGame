@@ -39,12 +39,12 @@ public class ChipMovePresenter
 
     public void AddChip(ChipMove chip)
     {
-        model.AddChip(chip);
+        model.AddChip((ChipMove_Player)chip);
     }
 
     public void RemoveChip(ChipMove chip)
     {
-        model.RemoveChip(chip);
+        model.RemoveChip((ChipMove_Player)chip);
     }
 
     #endregion
