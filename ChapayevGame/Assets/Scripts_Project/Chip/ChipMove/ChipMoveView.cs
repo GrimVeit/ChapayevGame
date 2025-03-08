@@ -73,7 +73,7 @@ public class ChipMoveView : View
             Vector3 direction = screenPosition - (Vector2)currentChipMove.RectTransform.position;
             direction.Normalize();
 
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 270;
             currentChipMove.RotateAim(angle);
 
             Debug.Log(distance);

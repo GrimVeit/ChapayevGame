@@ -18,6 +18,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private ChipSpawnerPresenter chipSpawnerPresenter_Bot;
     private ChipMovePresenter chipMovePresenter;
 
+    private FencePresenter fencePresenter;
+
     private GameStateMachine stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -38,9 +40,13 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(), viewContainer.GetView<ChipMoveView>());
 
+        fencePresenter = new FencePresenter(new FenceModel(), viewContainer.GetView<FenceView>());
+
         stateMachine = new GameStateMachine();
 
         ActivateEvents();
+
+        fencePresenter.Initialize();
 
         storeStrategyPresenter.Initialize();
 
@@ -50,6 +56,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeChipPresenter.Initialize();
 
         stateMachine.Initialize();
+
+        fencePresenter.RandomFence();
     }
 
     private void ActivateEvents()
@@ -97,6 +105,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
 
         //storeStrategyPresenter.Dispose();
+
+        fencePresenter?.Dispose();
 
         chipMovePresenter?.Dispose();
         chipSpawnerPresenter_Player?.Dispose();
