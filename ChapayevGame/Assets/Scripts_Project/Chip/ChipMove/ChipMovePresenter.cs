@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,21 @@ public class ChipMovePresenter
     public void Initialize()
     {
         ActivateEvents();
+
+        view.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        view.Dispose();
     }
 
     private void ActivateEvents()
     {
+        view.OnDoMotion += model.DoMotion;
+
         model.OnAddChip += view.AddChip;
         model.OnRemoveChip += view.RemoveChip;
 
@@ -34,6 +41,8 @@ public class ChipMovePresenter
 
     private void DeactivateEvents()
     {
+        view.OnDoMotion -= model.DoMotion;
+
         model.OnAddChip -= view.AddChip;
         model.OnRemoveChip -= view.RemoveChip;
 
@@ -42,6 +51,12 @@ public class ChipMovePresenter
     }
 
     #region Input
+
+    public event Action OnDoMotion
+    {
+        add => model.OnDoMotion += value;
+        remove => model.OnDoMotion -= value;
+    }
 
     public void AddChip(ChipMove chip)
     {

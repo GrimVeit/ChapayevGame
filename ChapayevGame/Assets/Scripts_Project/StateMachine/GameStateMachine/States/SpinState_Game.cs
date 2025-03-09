@@ -9,14 +9,17 @@ public class SpinState_Game : IState
     private readonly IGlobalStateMachine stateMachine;
     private SpinMotionPresenter spinMotionPresenter;
 
-    public SpinState_Game(IGlobalStateMachine stateMachine, SpinMotionPresenter motionPresenter)
+    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter)
     {
         this.stateMachine = stateMachine;
+        this.sceneRoot = sceneRoot;
         this.spinMotionPresenter = motionPresenter;
     }
 
     public void EnterState()
     {
+        Debug.Log("ACTIVATE STATE - SPIN");
+
         spinMotionPresenter.OnBotMotion += ChangeStateToBotMotionState;
         spinMotionPresenter.OnPlayerMotion += ChangeStateToPlayerMotionState;
 
@@ -25,6 +28,8 @@ public class SpinState_Game : IState
 
     public void ExitState()
     {
+        Debug.Log("DEACTIVATE STATE - SPIN");
+
         spinMotionPresenter.OnBotMotion -= ChangeStateToBotMotionState;
         spinMotionPresenter.OnPlayerMotion -= ChangeStateToPlayerMotionState;
 

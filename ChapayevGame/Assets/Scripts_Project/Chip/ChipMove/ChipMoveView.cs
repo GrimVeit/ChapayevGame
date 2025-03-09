@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ public class ChipMoveView : View
     [SerializeField] private List<ChipMove_Player> chipMoves = new List<ChipMove_Player>();
     [SerializeField] private float force = 1000;
 
+    [SerializeField] private float minimalForce;
+
     private ChipMove currentChipMove;
 
     private IEnumerator enumeratorMove;
@@ -16,6 +19,22 @@ public class ChipMoveView : View
     private bool isDragging;
 
     private Vector2 startDragPosition;
+
+    public void Initialize()
+    {
+
+    }
+
+    public void Dispose()
+    {
+        chipMoves.ForEach(chip =>
+        {
+            chip.OnDown -= HandleDownChip;
+            chip.OnUp -= HandleUpChip;
+        });
+
+        chipMoves.Clear();
+    }
 
     public void AddChip(ChipMove_Player chipMove)
     {
@@ -92,18 +111,6 @@ public class ChipMoveView : View
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 270;
             currentChipMove.RotateAim(angle);
 
-            //Debug.Log(distance);
-
-            //Touch touch = Input.GetTouch(0);
-
-            //Vector2 screenPosition = touch.position;
-
-            //Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-
-
-            //float distance = Vector2.Distance(worldPosition, startDragPosition);    
-
             AdjustCrocchairScale(distance);
 
             yield return null;
@@ -147,19 +154,19 @@ public class ChipMoveView : View
 
             float forceMagnitude = (startDragPosition - releasePosition).magnitude * force;
 
+            Debug.Log(forceMagnitude);
+
+            if (forceMagnitude < minimalForce) return;
+
             currentChipMove.AddForce(direction * forceMagnitude);
+
+            OnDoMotion?.Invoke();
         }
     }
 
-    #region I
-    private void OnDestroy()
-    {
-        chipMoves.ForEach(chip =>
-        {
-            chip.OnDown -= HandleDownChip;
-            chip.OnUp -= HandleUpChip;
-        });
-    }
+    #region Input
+
+    public event Action OnDoMotion;
 
     #endregion
 }

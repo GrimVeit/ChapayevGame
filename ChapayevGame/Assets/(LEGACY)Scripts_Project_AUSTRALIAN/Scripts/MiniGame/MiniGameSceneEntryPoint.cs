@@ -51,7 +51,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         gameResultPresenter = new GameResultPresenter(new GameResultModel(winPrices), viewContainer.GetView<GameResultView>());
 
-        stateMachine = new GameStateMachine(sceneRoot, spinMotionPresenter);
+        stateMachine = new GameStateMachine(sceneRoot, spinMotionPresenter, chipMovePresenter, gameResultPresenter);
 
         ActivateEvents();
 

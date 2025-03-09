@@ -6,17 +6,22 @@ public class SpinStartState_Game : IState
 {
     private UIMiniGameSceneRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
+    private ChipMovePresenter chipMovePresenter;
 
     private IEnumerator coroutineTimer;
 
-    public SpinStartState_Game(IGlobalStateMachine stateMachine)
+    public SpinStartState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipMovePresenter chipMovePresenter)
     {
         this.stateMachine = stateMachine;
+        this.sceneRoot = sceneRoot;
+        this.chipMovePresenter = chipMovePresenter;
     }
 
     public void EnterState()
     {
-        if(coroutineTimer == null)
+        Debug.Log("ACTIVATE STATE - SPIN START");
+
+        if(coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);
 
         coroutineTimer = CoroutineTimer();
@@ -25,11 +30,15 @@ public class SpinStartState_Game : IState
         sceneRoot.OpenMainPanel();
         sceneRoot.OpenSpinStartPanel();
         sceneRoot.OpenSpinPanel();
+
+        chipMovePresenter.DeactivateChips();
     }
 
     public void ExitState()
     {
-        if (coroutineTimer == null)
+        Debug.Log("DEACTIVATE STATE - SPIN START");
+
+        if (coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);
 
         sceneRoot.CloseSpinStartPanel();

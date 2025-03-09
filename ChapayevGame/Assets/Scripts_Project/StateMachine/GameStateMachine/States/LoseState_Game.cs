@@ -13,6 +13,8 @@ public class LoseState_Game : IState
 
     public void EnterState()
     {
+        Debug.Log("ACTIVATE STATE - LOSE");
+
         sceneRoot.OpenLosePanel();
     }
 

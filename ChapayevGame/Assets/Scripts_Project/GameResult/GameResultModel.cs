@@ -51,9 +51,12 @@ public class GameResultModel
 
         if(countChipsBot == 0)
         {
-            OnWin_Value?.Invoke(winPrices.GetWinPriceByChipCount(countChipsPlayer).Win);
-            OnWin?.Invoke();
-            Debug.Log("WIN GAME - " + countChipsPlayer);
+            if(countChipsPlayer >= 1)
+            {
+                OnWin_Value?.Invoke(winPrices.GetWinPriceByChipCount(countChipsPlayer).Win);
+                OnWin?.Invoke();
+                Debug.Log("WIN GAME - " + countChipsPlayer);
+            }
         }
     }
 }

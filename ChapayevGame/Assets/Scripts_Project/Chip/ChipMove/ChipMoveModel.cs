@@ -8,6 +8,8 @@ public class ChipMoveModel
     public event Action OnActivateChips;
     public event Action OnDeactivateChips;
 
+    public event Action OnDoMotion;
+
     public void AddChip(ChipMove_Player chipMove)
     {
         OnAddChip?.Invoke(chipMove);
@@ -26,5 +28,10 @@ public class ChipMoveModel
     public void DeactivateChips()
     {
         OnDeactivateChips?.Invoke();
+    }
+
+    public void DoMotion()
+    {
+        OnDoMotion?.Invoke();
     }
 }

@@ -13,6 +13,8 @@ public class WinState_Game : IState
 
     public void EnterState()
     {
+        Debug.Log("ACTIVATE STATE - WIN");
+
         sceneRoot.OpenWinPanel();
     }
 
