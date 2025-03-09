@@ -79,14 +79,14 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
 
 
-    public void OpenExitPanel()
+    public void OpenLosePanel()
     {
         if(losePanel.IsActive) return;
 
         OpenOtherPanel(losePanel);
     }
 
-    public void CloseExitPanel()
+    public void CloseLosePanel()
     {
         if (!losePanel.IsActive) return;
 

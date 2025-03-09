@@ -40,6 +40,22 @@ public class ChipMoveView : View
         }
     }
 
+    public void ActivateChips()
+    {
+        chipMoves.ForEach(data => 
+        {
+            data.ActivateChip();
+        });
+    }
+
+    public void DeactivateChips()
+    {
+        chipMoves.ForEach(data =>
+        {
+            data.DeactivateChip();
+        });
+    }
+
     private void ActivateMove()
     {
         if (enumeratorMove != null)
@@ -76,7 +92,7 @@ public class ChipMoveView : View
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 270;
             currentChipMove.RotateAim(angle);
 
-            Debug.Log(distance);
+            //Debug.Log(distance);
 
             //Touch touch = Input.GetTouch(0);
 

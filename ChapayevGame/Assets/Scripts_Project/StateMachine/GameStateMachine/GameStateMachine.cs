@@ -7,14 +7,14 @@ public class GameStateMachine : IGlobalStateMachine
 
     private IState currentState;
 
-    public GameStateMachine()
+    public GameStateMachine(UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter spinMotionPresenter)
     {
-        states[typeof(SpinStartState_Game)] = new SpinStartState_Game();
-        states[typeof(SpinState_Game)] = new SpinState_Game();
-        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game();
-        states[typeof(BotMotionState_Game)] = new BotMotionState_Game();
-        states[typeof(WinState_Game)] = new WinState_Game();
-        states[typeof(LoseState_Game)] = new LoseState_Game();
+        states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this);
+        states[typeof(SpinState_Game)] = new SpinState_Game(this, spinMotionPresenter);
+        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this);
+        states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this);
+        states[typeof(WinState_Game)] = new WinState_Game(sceneRoot);
+        states[typeof(LoseState_Game)] = new LoseState_Game(sceneRoot);
     }
 
     public void Initialize()

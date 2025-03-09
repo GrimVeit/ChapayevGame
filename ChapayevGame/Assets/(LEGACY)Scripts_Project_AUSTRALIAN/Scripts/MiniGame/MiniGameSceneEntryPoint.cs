@@ -6,6 +6,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     [SerializeField] private Sounds sounds;
     [SerializeField] private StrategyGroup strategyGroup;
     [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private WinPrices winPrices;
     [SerializeField] private UIMiniGameSceneRoot sceneRootPrefab;
 
     private UIMiniGameSceneRoot sceneRoot;
@@ -18,7 +19,11 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private ChipSpawnerPresenter chipSpawnerPresenter_Bot;
     private ChipMovePresenter chipMovePresenter;
 
+    private SpinMotionPresenter spinMotionPresenter;
+
     private FencePresenter fencePresenter;
+
+    private GameResultPresenter gameResultPresenter;
 
     private GameStateMachine stateMachine;
 
@@ -40,13 +45,19 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(), viewContainer.GetView<ChipMoveView>());
 
+        spinMotionPresenter = new SpinMotionPresenter(new SpinMotionModel(), viewContainer.GetView<SpinMotionView>()); 
+
         fencePresenter = new FencePresenter(new FenceModel(), viewContainer.GetView<FenceView>());
 
-        stateMachine = new GameStateMachine();
+        gameResultPresenter = new GameResultPresenter(new GameResultModel(winPrices), viewContainer.GetView<GameResultView>());
+
+        stateMachine = new GameStateMachine(sceneRoot, spinMotionPresenter);
 
         ActivateEvents();
 
+        spinMotionPresenter.Initialize();
         fencePresenter.Initialize();
+        gameResultPresenter.Initialize();
 
         storeStrategyPresenter.Initialize();
 
@@ -72,6 +83,11 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         chipSpawnerPresenter_Player.OnSpawnChip += chipMovePresenter.AddChip;
         chipSpawnerPresenter_Player.OnDestroyChip += chipMovePresenter.RemoveChip;
+
+        chipSpawnerPresenter_Bot.OnSpawnChip += gameResultPresenter.AddBotChip;
+        chipSpawnerPresenter_Player.OnSpawnChip += gameResultPresenter.AddPlayerChip;
+        chipSpawnerPresenter_Bot.OnDestroyChip += gameResultPresenter.RemoveBotChip;
+        chipSpawnerPresenter_Player.OnDestroyChip += gameResultPresenter.RemovePlayerChip;
     }
 
     private void DeactivateEvents()
@@ -86,6 +102,11 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         chipSpawnerPresenter_Player.OnSpawnChip -= chipMovePresenter.AddChip;
         chipSpawnerPresenter_Player.OnDestroyChip -= chipMovePresenter.RemoveChip;
+
+        chipSpawnerPresenter_Bot.OnSpawnChip -= gameResultPresenter.AddBotChip;
+        chipSpawnerPresenter_Player.OnSpawnChip -= gameResultPresenter.AddPlayerChip;
+        chipSpawnerPresenter_Bot.OnDestroyChip -= gameResultPresenter.RemoveBotChip;
+        chipSpawnerPresenter_Player.OnDestroyChip -= gameResultPresenter.RemovePlayerChip;
     }
 
     private void ActivateTransitionEvents()
@@ -106,6 +127,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         //storeStrategyPresenter.Dispose();
 
+        spinMotionPresenter?.Dispose();
         fencePresenter?.Dispose();
 
         chipMovePresenter?.Dispose();

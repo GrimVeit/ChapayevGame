@@ -27,12 +27,18 @@ public class ChipMovePresenter
     {
         model.OnAddChip += view.AddChip;
         model.OnRemoveChip += view.RemoveChip;
+
+        model.OnActivateChips += view.ActivateChips;
+        model.OnDeactivateChips += view.DeactivateChips;
     }
 
     private void DeactivateEvents()
     {
         model.OnAddChip -= view.AddChip;
         model.OnRemoveChip -= view.RemoveChip;
+
+        model.OnActivateChips -= view.ActivateChips;
+        model.OnDeactivateChips -= view.DeactivateChips;
     }
 
     #region Input
@@ -45,6 +51,16 @@ public class ChipMovePresenter
     public void RemoveChip(ChipMove chip)
     {
         model.RemoveChip((ChipMove_Player)chip);
+    }
+
+    public void ActivateChips()
+    {
+        model.ActivateChips();
+    }
+
+    public void DeactivateChips()
+    {
+        model.DeactivateChips();
     }
 
     #endregion

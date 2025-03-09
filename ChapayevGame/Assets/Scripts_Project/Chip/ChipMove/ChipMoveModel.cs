@@ -1,12 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ChipMoveModel
 {
     public event Action<ChipMove_Player> OnAddChip;
     public event Action<ChipMove_Player> OnRemoveChip;
+
+    public event Action OnActivateChips;
+    public event Action OnDeactivateChips;
 
     public void AddChip(ChipMove_Player chipMove)
     {
@@ -16,5 +16,15 @@ public class ChipMoveModel
     public void RemoveChip(ChipMove_Player chipMove)
     {
         OnRemoveChip?.Invoke(chipMove);
+    }
+
+    public void ActivateChips()
+    {
+        OnActivateChips?.Invoke();
+    }
+
+    public void DeactivateChips()
+    {
+        OnDeactivateChips?.Invoke();
     }
 }
