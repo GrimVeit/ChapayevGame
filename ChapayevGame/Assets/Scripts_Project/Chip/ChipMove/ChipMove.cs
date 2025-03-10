@@ -60,6 +60,15 @@ public class ChipMove : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision != null)
+        {
+            //Debug.Log(collision.relativeVelocity.magnitude + "//" + collision.transform.gameObject.name);
+            Debug.Log(rb.velocity.magnitude + "//" + transform.gameObject.name);
+        }
+    }
+
     #region Input
 
     public event Action<ChipMove> OnDead;

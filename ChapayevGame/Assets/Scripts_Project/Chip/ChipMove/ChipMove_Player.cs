@@ -28,6 +28,15 @@ public class ChipMove_Player : ChipMove, IPointerDownHandler, IPointerUpHandler
         OnDown?.Invoke(this, eventData);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision != null)
+        {
+            Debug.Log(collision.relativeVelocity.magnitude + "//" + collision.transform.gameObject.name);
+            Debug.Log(rb.velocity.magnitude + "//" + transform.gameObject.name);
+        }
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!isActive) return;
