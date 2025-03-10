@@ -48,6 +48,16 @@ public class ChipSpawnerPresenter
         remove => view.OnDestroyChip -= value;
     }
 
+    public void Activate()
+    {
+        model.Activate();
+    }
+
+    public void Deactivate()
+    {
+        model.Deactivate();
+    }
+
     public void SetStrategy(Strategy strategy)
     {
         model.SetStrategy(strategy);

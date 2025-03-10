@@ -46,6 +46,7 @@ public class ChipSelectModel
     public void SetCountChip(int count)
     {
         countChip = count;
+        currentCountChip = 0;
         OnSetChipCount?.Invoke(count);
         isActivate = true;
     }
@@ -68,6 +69,6 @@ public class ChipSelectModel
             OnDeactivate?.Invoke();
         }
 
-        Debug.Log(currentCountChip);
+        //Debug.Log(currentCountChip);
     }
 }

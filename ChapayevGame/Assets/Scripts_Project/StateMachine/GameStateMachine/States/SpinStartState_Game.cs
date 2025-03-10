@@ -7,7 +7,6 @@ public class SpinStartState_Game : IState
     private UIMiniGameSceneRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private ChipMovePresenter chipMovePresenter;
-
     private IEnumerator coroutineTimer;
 
     public SpinStartState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipMovePresenter chipMovePresenter)

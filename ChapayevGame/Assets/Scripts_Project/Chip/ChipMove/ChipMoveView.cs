@@ -154,7 +154,7 @@ public class ChipMoveView : View
 
             float forceMagnitude = (startDragPosition - releasePosition).magnitude * force;
 
-            Debug.Log(forceMagnitude);
+            //Debug.Log(forceMagnitude);
 
             if (forceMagnitude < minimalForce) return;
 

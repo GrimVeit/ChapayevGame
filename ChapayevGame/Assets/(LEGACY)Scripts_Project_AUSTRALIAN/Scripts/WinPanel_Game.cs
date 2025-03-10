@@ -6,29 +6,33 @@ using UnityEngine.UI;
 
 public class WinPanel_Game : MovePanel
 {
-    [SerializeField] private Button buttonExit;
-    [SerializeField] private Button buttonRestart;
+    [SerializeField] private Button buttonChipStore;
+    [SerializeField] private Button buttonStrategyStore;
+    [SerializeField] private Button buttonChooseStrategy;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        buttonExit.onClick.AddListener(() => OnClickToExit?.Invoke());
-        buttonRestart.onClick.AddListener(() => OnClickToRestart?.Invoke());
+        buttonChipStore.onClick.AddListener(() => OnClickToOpenChipStore?.Invoke());
+        buttonStrategyStore.onClick.AddListener(() => OnClickToOpenStrategyStore?.Invoke());
+        buttonChooseStrategy.onClick.AddListener(() => OnClickToChooseStrategy?.Invoke());
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        buttonExit.onClick.RemoveListener(() => OnClickToExit?.Invoke());
-        buttonRestart.onClick.RemoveListener(() => OnClickToRestart?.Invoke());
+        buttonChipStore.onClick.RemoveListener(() => OnClickToOpenChipStore?.Invoke());
+        buttonStrategyStore.onClick.RemoveListener(() => OnClickToOpenStrategyStore?.Invoke());
+        buttonChooseStrategy.onClick.RemoveListener(() => OnClickToChooseStrategy?.Invoke());
     }
 
     #region Input
 
-    public event Action OnClickToExit;
-    public event Action OnClickToRestart;
+    public event Action OnClickToOpenChipStore;
+    public event Action OnClickToOpenStrategyStore;
+    public event Action OnClickToChooseStrategy;
 
     #endregion
 }

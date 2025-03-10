@@ -11,6 +11,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     [SerializeField] private LosePanel_Game losePanel;
     [SerializeField] private WinPanel_Game winPanel;
 
+    [SerializeField] private StoreChipPanel_Game storeChipPanel;
+    [SerializeField] private StoreStrategyPanel_Game storeStrategyPanel;
+    [SerializeField] private ChooseStrategyPanel_Game chooseStrategyPanel;
+    [SerializeField] private ChooseChipPanel_Game chooseChipPanel;
+
     private ISoundProvider soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -27,6 +32,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         spinPanel.Initialize();
         losePanel.Initialize();
         winPanel.Initialize();
+
+        storeChipPanel.Initialize();
+        storeStrategyPanel.Initialize();
+        chooseStrategyPanel.Initialize();
+        chooseChipPanel.Initialize();
     }
 
     public void Dispose()
@@ -36,6 +46,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         spinPanel.Dispose();
         losePanel.Dispose();
         winPanel.Dispose();
+
+        storeChipPanel.Dispose();
+        storeStrategyPanel.Dispose();
+        chooseStrategyPanel.Dispose();
+        chooseChipPanel.Dispose();
     }
 
 
@@ -45,6 +60,40 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         if(mainPanel.IsActive) return;
 
         OpenPanel(mainPanel);
+    }
+
+    public void OpenWinPanel()
+    {
+        if (winPanel.IsActive) return;
+
+        OpenPanel(winPanel);
+    }
+
+    public void OpenLosePanel()
+    {
+        if (losePanel.IsActive) return;
+
+        OpenPanel(losePanel);
+    }
+
+    public void OpenStoreChipPanel()
+    {
+        OpenPanel(storeChipPanel);
+    }
+
+    public void OpenStoreStrategyPanel()
+    {
+        OpenPanel(storeStrategyPanel);
+    }
+
+    public void OpenChooseStrategyPanel()
+    {
+        OpenPanel(chooseStrategyPanel);
+    }
+
+    public void OpenChooseChipPanel()
+    {
+        OpenPanel(chooseChipPanel);
     }
 
 
@@ -79,42 +128,6 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
 
 
-    public void OpenLosePanel()
-    {
-        if(losePanel.IsActive) return;
-
-        OpenOtherPanel(losePanel);
-    }
-
-    public void CloseLosePanel()
-    {
-        if (!losePanel.IsActive) return;
-
-        CloseOtherPanel(losePanel);
-    }
-
-
-
-
-
-    public void OpenWinPanel()
-    {
-        if(winPanel.IsActive) return;
-
-        OpenOtherPanel(winPanel);
-    }
-
-    public void CloseWinPanel()
-    {
-        if(!winPanel.IsActive) return;
-
-        CloseOtherPanel(winPanel);
-    }
-
-
-
-
-
     public void Activate()
     {
         OpenMainPanel();
@@ -124,8 +137,6 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     {
         if (currentPanel != null)
            CloseOtherPanel(currentPanel);
-
-        CloseWinPanel();
     }
 
 
@@ -152,6 +163,104 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     #region Input
 
+
+    #region WinPanel
+
+    public event Action OnClickToOpenBuyStrategy_WinPanel
+    {
+        add => winPanel.OnClickToOpenStrategyStore += value;
+        remove => winPanel.OnClickToOpenStrategyStore -= value;
+    }
+
+    public event Action OnClickToOpenBuyChip_WinPanel
+    {
+        add => winPanel.OnClickToOpenChipStore += value;
+        remove => winPanel.OnClickToOpenChipStore -= value;
+    }
+
+    public event Action OnClickToOpenChooseStrategy_WinPanel
+    {
+        add => winPanel.OnClickToChooseStrategy += value;
+        remove => winPanel.OnClickToChooseStrategy -= value;
+    }
+
+    #endregion
+
+    #region LosePanel
+
+    public event Action OnClickToOpenBuyStrategy_LosePanel
+    {
+        add => losePanel.OnClickToOpenStrategyStore += value;
+        remove => losePanel.OnClickToOpenStrategyStore -= value;
+    }
+
+    public event Action OnClickToOpenBuyChip_LosePanel
+    {
+        add => losePanel.OnClickToOpenChipStore += value;
+        remove => losePanel.OnClickToOpenChipStore -= value;
+    }
+
+    public event Action OnClickToOpenChooseStrategy_LosePanel
+    {
+        add => losePanel.OnClickToChooseStrategy += value;
+        remove => losePanel.OnClickToChooseStrategy -= value;
+    }
+
+    #endregion
+
+
+
+    #region BuyStrategyPanel
+
+    public event Action OnClickToBackFromBuyStrategy
+    {
+        add => storeStrategyPanel.OnClickToCancel += value;
+        remove => storeStrategyPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region BuyChipPanel
+
+    public event Action OnClickToBackFromBuyChip
+    {
+        add => storeChipPanel.OnClickToCancel += value;
+        remove => storeChipPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region ChooseStrategyPanel
+
+    public event Action OnClickToOpenChooseChipFromChooseStrategy
+    {
+        add => chooseStrategyPanel.OnClickToContinue += value;
+        remove => chooseStrategyPanel.OnClickToContinue -= value;
+    }
+
+    public event Action OnClickToCancelFromChooseStrategy
+    {
+        add => chooseStrategyPanel.OnClickToCancel += value;
+        remove => chooseStrategyPanel.OnClickToCancel -= value;
+    }
+
+    #endregion
+
+    #region ChooseChipPanel
+
+    public event Action OnClickToOpenChooseStrategyFromChooseChip
+    {
+        add => chooseChipPanel.OnClickToCancel += value;
+        remove => chooseChipPanel.OnClickToCancel -= value;
+    }
+
+    public event Action OnClickToPlay
+    {
+        add => chooseChipPanel.OnClickToPlay += value;
+        remove => chooseChipPanel.OnClickToPlay -= value;
+    }
+
+    #endregion
 
     #endregion
 }

@@ -72,7 +72,6 @@ public class GameEntryPoint
         var sceneEntryPoint = Object.FindObjectOfType<MiniGameSceneEntryPoint>();
         sceneEntryPoint.Run(rootView);
 
-        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
         sceneEntryPoint.OnGoToGame += () => coroutines.StartCoroutine(LoadAndStartMiniGameScene());
 
 

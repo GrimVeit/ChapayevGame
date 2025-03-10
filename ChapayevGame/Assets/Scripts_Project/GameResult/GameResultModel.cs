@@ -12,6 +12,8 @@ public class GameResultModel
 
     private WinPrices winPrices;
 
+    private bool isEndGame;
+
     public GameResultModel(WinPrices winPrices)
     {
         this.winPrices = winPrices;
@@ -43,9 +45,12 @@ public class GameResultModel
 
     private void CheckGameResult()
     {
+        if(isEndGame) return;
+
         if(countChipsPlayer == 0)
         {
             OnLose?.Invoke();
+            isEndGame = true;
             Debug.Log("LOSE GAME");
         }
 
@@ -55,6 +60,7 @@ public class GameResultModel
             {
                 OnWin_Value?.Invoke(winPrices.GetWinPriceByChipCount(countChipsPlayer).Win);
                 OnWin?.Invoke();
+                isEndGame = true;
                 Debug.Log("WIN GAME - " + countChipsPlayer);
             }
         }
