@@ -23,6 +23,17 @@ public class ChipPunchView : View
         Debug.Log(punch.transform.position);
         punch.transform.SetParent(transformParent);
 
+        if(force < 1f)
+        {
+            force = 1f;
+        }
+        else if(force > 10)
+        {
+            force = 10;
+        }
+
+        punch.SetData(force/5);
+
         punch.Initialize();
     }
 }
