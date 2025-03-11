@@ -68,5 +68,10 @@ public class GameResultPresenter
         model.RemoveBotChip();
     }
 
+    public bool IsPlayerWin()
+    {
+        return model.IsPlayerWin();
+    }
+
     #endregion
 }

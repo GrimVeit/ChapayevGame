@@ -5,6 +5,7 @@ public class ChipMoveModel
     public event Action<ChipMove_Player> OnAddChip;
     public event Action<ChipMove_Player> OnRemoveChip;
 
+
     public event Action OnActivateChips;
     public event Action OnDeactivateChips;
 

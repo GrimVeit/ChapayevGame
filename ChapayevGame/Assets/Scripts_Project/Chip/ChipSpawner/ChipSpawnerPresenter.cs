@@ -48,6 +48,12 @@ public class ChipSpawnerPresenter
         remove => view.OnDestroyChip -= value;
     }
 
+    public event Action<Transform, Transform, Vector2, float> OnPunch
+    {
+        add => view.OnPunch += value;
+        remove => view.OnPunch -= value;
+    }
+
     public void Activate()
     {
         model.Activate();

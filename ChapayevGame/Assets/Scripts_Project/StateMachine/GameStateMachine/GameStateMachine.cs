@@ -33,10 +33,10 @@ public class GameStateMachine : IGlobalStateMachine
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
 
-        states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
-        states[typeof(BuyStrategy_Game)] = new BuyStrategy_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
+        states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter, gameResultPresenter);
+        states[typeof(BuyStrategy_Game)] = new BuyStrategy_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter, gameResultPresenter);
         states[typeof(ChooseChip_Game)] = new ChooseChip_Game(this, sceneRoot, storeChipPresenter, chipSelectPresenter);
-        states[typeof(ChooseStrategy_Game)] = new ChooseStrategy_Game(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter);
+        states[typeof(ChooseStrategy_Game)] = new ChooseStrategy_Game(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, gameResultPresenter);
     }
 
     public void Initialize()

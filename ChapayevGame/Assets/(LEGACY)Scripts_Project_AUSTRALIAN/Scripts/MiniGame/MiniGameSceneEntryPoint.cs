@@ -33,6 +33,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private SpinMotionPresenter spinMotionPresenter;
     private FencePresenter fencePresenter;
     private GameResultPresenter gameResultPresenter;
+    private ChipPunchPresenter chipPunchPresenter;
 
     private GameStateMachine stateMachine;
 
@@ -62,6 +63,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(), viewContainer.GetView<ChipMoveView>());
+
+        chipPunchPresenter = new ChipPunchPresenter(new ChipPunchModel(), viewContainer.GetView<ChipPunchView>());
 
         spinMotionPresenter = new SpinMotionPresenter(new SpinMotionModel(), viewContainer.GetView<SpinMotionView>()); 
 
@@ -93,6 +96,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot.Activate();
         chipSpawnerPresenter_Player.Activate();
 
+        chipPunchPresenter.Initialize();
         spinMotionPresenter.Initialize();
         fencePresenter.Initialize();
         gameResultPresenter.Initialize();
@@ -151,6 +155,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
         storeChipPresenter.OnSelectChip += chipSelectPresenter.SelectChip;
         storeChipPresenter.OnDeselectChip += chipSelectPresenter.DeselectChip;
+
+        chipSpawnerPresenter_Bot.OnPunch += chipPunchPresenter.AddPunchChip;
+        chipSpawnerPresenter_Player.OnPunch += chipPunchPresenter.AddPunchChip;
     }
 
     private void DeactivateEvents()
@@ -183,6 +190,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeChipPresenter.OnOpenChip -= chipSelectPresenter.SetOpenChip;
         storeChipPresenter.OnSelectChip -= chipSelectPresenter.SelectChip;
         storeChipPresenter.OnDeselectChip -= chipSelectPresenter.DeselectChip;
+
+        chipSpawnerPresenter_Bot.OnPunch -= chipPunchPresenter.AddPunchChip;
+        chipSpawnerPresenter_Player.OnPunch -= chipPunchPresenter.AddPunchChip;
     }
 
     private void ActivateTransitionsSceneEvents()

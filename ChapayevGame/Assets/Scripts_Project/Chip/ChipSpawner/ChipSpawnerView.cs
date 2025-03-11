@@ -11,12 +11,16 @@ public class ChipSpawnerView : View, IIdentify
     [SerializeField] private Transform transformParent;
     [SerializeField] private List<Transform> transformsSpawns = new List<Transform>();
 
+    private List<ChipMove> chipMoves = new List<ChipMove>();
+
     public void SetChip(int indexPosition, Chip chip)
     {
         var chipMove = Instantiate(chipMovePrefab, transformParent);
         chipMove.SetData(chip);
+        chipMove.OnPunch += HandlePunch;
         chipMove.OnDead += HandleDestroyChip;
         chipMove.transform.SetPositionAndRotation(transformsSpawns[indexPosition].position, chipMovePrefab.transform.rotation);
+        chipMoves.Add(chipMove);
 
         OnSpawnChip?.Invoke(chipMove);
     }
@@ -25,14 +29,22 @@ public class ChipSpawnerView : View, IIdentify
 
     public event Action<ChipMove> OnSpawnChip;
     public event Action<ChipMove> OnDestroyChip;
+    public event Action<Transform, Transform, Vector2, float> OnPunch;
 
     private void HandleDestroyChip(ChipMove chipMove)
     {
+        chipMove.OnPunch -= HandlePunch;
         chipMove.OnDead -= HandleDestroyChip;
 
         OnDestroyChip?.Invoke(chipMove);
+        chipMoves.Remove(chipMove);
 
         chipMove.Destroy();
+    }
+
+    private void HandlePunch(Transform first, Transform second, Vector2 point, float force)
+    {
+        OnPunch?.Invoke(first, second, point, force);
     }
 
     #endregion

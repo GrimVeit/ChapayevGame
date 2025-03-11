@@ -21,11 +21,15 @@ public class GameResultModel
 
     public void AddPlayerChip()
     {
+        if (isEndGame) return;
+
         countChipsPlayer += 1;
     }
 
     public void RemovePlayerChip()
     {
+        if (isEndGame) return;
+
         countChipsPlayer -= 1;
 
         CheckGameResult();
@@ -33,11 +37,15 @@ public class GameResultModel
 
     public void AddBotChip()
     {
+        if (isEndGame) return;
+
         countChipsBot += 1;
     }
 
     public void RemoveBotChip()
     {
+        if (isEndGame) return;
+
         countChipsBot -= 1;
 
         CheckGameResult();
@@ -45,8 +53,6 @@ public class GameResultModel
 
     private void CheckGameResult()
     {
-        if(isEndGame) return;
-
         if(countChipsPlayer == 0)
         {
             OnLose?.Invoke();
@@ -64,5 +70,20 @@ public class GameResultModel
                 Debug.Log("WIN GAME - " + countChipsPlayer);
             }
         }
+    }
+
+    public bool IsPlayerWin()
+    {
+        if(countChipsPlayer == 0)
+        {
+            return false;
+        }
+
+        if(countChipsBot == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

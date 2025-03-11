@@ -92,7 +92,7 @@ public class ChipMoveView : View
         if (enumeratorMove != null)
             Coroutines.Stop(enumeratorMove);
 
-        currentChipMove.DeactivateAim();
+        currentChipMove?.DeactivateAim();
 
         isDragging = false;
     }
@@ -161,12 +161,15 @@ public class ChipMoveView : View
             currentChipMove.AddForce(direction * forceMagnitude);
 
             OnDoMotion?.Invoke();
+
+            currentChipMove = null;
         }
     }
 
     #region Input
 
     public event Action OnDoMotion;
+
 
     #endregion
 }

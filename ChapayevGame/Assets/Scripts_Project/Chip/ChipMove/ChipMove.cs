@@ -60,18 +60,30 @@ public class ChipMove : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private protected void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision != null)
         {
-            //Debug.Log(collision.relativeVelocity.magnitude + "//" + collision.transform.gameObject.name);
-            Debug.Log(rb.velocity.magnitude + "//" + transform.gameObject.name);
+            if (collision.gameObject.TryGetComponent(out ChipMove chip))
+            {
+                if (transform.GetSiblingIndex() > chip.transform.GetSiblingIndex())
+                {
+                    //Debug.Log(collision.relativeVelocity.magnitude + "//" + collision.transform.gameObject.name);
+                    //Debug.Log(rb.velocity.magnitude + "//" + transform.gameObject.name);
+
+                    var force = Mathf.Max(collision.relativeVelocity.magnitude, rb.velocity.magnitude);
+
+                    OnPunch?.Invoke(transform, chip.transform, collision.GetContact(0).point, force);
+                }
+
+            }
         }
     }
 
     #region Input
 
     public event Action<ChipMove> OnDead;
+    public event Action<Transform, Transform, Vector2, float> OnPunch;
 
     public void DeadTrigger()
     {

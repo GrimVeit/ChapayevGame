@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipPunchView : MonoBehaviour
+public class ChipPunchView : View
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private ChipPunch chipPunchPrefab;
+    [SerializeField] private Transform transformParent;
 
-    // Update is called once per frame
-    void Update()
+    public void AddPunch(Transform first, Transform second, Vector2 point, float force)
     {
-        
+        Debug.Log(force);
+
+        Vector2 direction = (first.position - second.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+
+        var punch = Instantiate(chipPunchPrefab);
+        punch.transform.SetParent(first);
+        punch.transform.localScale = Vector3.one;
+        punch.transform.position = point;
+        punch.transform.rotation = Quaternion.Euler(0, 0, angle);
+        Debug.Log(punch.transform.position);
+        punch.transform.SetParent(transformParent);
+
+        punch.Initialize();
     }
 }

@@ -8,21 +8,23 @@ public class BuyStrategy_Game : IState
     private StrategyBuyPresenter strategyBuyPresenter;
     private StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
     private StoreStrategyPresenter storeStrategyPresenter;
+    private GameResultPresenter gameResultPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public BuyStrategy_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, StrategyBuyVisualizePresenter strategyBuyVisualizePresenter)
+    public BuyStrategy_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, StrategyBuyVisualizePresenter strategyBuyVisualizePresenter, GameResultPresenter gameResultPresenter)
     {
         this.sceneRoot = sceneRoot;
         this.strategyBuyPresenter = strategyBuyPresenter;
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.stateMachine = stateMachine;
         this.strategyBuyVisualizePresenter = strategyBuyVisualizePresenter;
+        this.gameResultPresenter = gameResultPresenter;
     }
 
     public void EnterState()
     {
-        sceneRoot.OnClickToBackFromBuyStrategy += ChangeStateToWin;
+        sceneRoot.OnClickToBackFromBuyStrategy += CheckGameResult;
         strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
 
         sceneRoot.OpenStoreStrategyPanel();
@@ -30,8 +32,20 @@ public class BuyStrategy_Game : IState
 
     public void ExitState()
     {
-        sceneRoot.OnClickToBackFromBuyStrategy -= ChangeStateToWin;
+        sceneRoot.OnClickToBackFromBuyStrategy -= CheckGameResult;
         strategyBuyPresenter.OnBuyStrategy -= storeStrategyPresenter.OpenStrategy;
+    }
+
+    private void CheckGameResult()
+    {
+        if (gameResultPresenter.IsPlayerWin())
+        {
+            ChangeStateToWin();
+        }
+        else
+        {
+            ChangeStateToLose();
+        }
     }
 
     private void ChangeStateToWin()
