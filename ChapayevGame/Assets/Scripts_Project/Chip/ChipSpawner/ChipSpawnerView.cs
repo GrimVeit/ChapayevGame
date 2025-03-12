@@ -11,7 +11,7 @@ public class ChipSpawnerView : View, IIdentify
     [SerializeField] private Transform transformParent;
     [SerializeField] private List<Transform> transformsSpawns = new List<Transform>();
 
-    private List<ChipMove> chipMoves = new List<ChipMove>();
+    public List<ChipMove> chipMoves = new List<ChipMove>();
 
     public void SetChip(int indexPosition, Chip chip)
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipSpawnerPresenter
+public class ChipSpawnerPresenter : IChipBank
 {
     private readonly ChipSpawnerModel model;
     private readonly ChipSpawnerView view;
@@ -74,5 +74,15 @@ public class ChipSpawnerPresenter
         model.SetChip(chip);
     }
 
+    public List<ChipMove> GetChipMoves()
+    {
+       return view.chipMoves;
+    }
+
     #endregion
+}
+
+public interface IChipBank
+{
+    List<ChipMove> GetChipMoves();
 }

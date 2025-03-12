@@ -17,6 +17,7 @@ public class ChipMoveView : View
     private IEnumerator enumeratorMove;
 
     private bool isDragging;
+    private bool isActive = false;
 
     private Vector2 startDragPosition;
 
@@ -31,6 +32,7 @@ public class ChipMoveView : View
         {
             chip.OnDown -= HandleDownChip;
             chip.OnUp -= HandleUpChip;
+            chip.OnStopped -= HandleStopped;
         });
 
         chipMoves.Clear();
@@ -40,6 +42,7 @@ public class ChipMoveView : View
     {
         chipMove.OnDown += HandleDownChip;
         chipMove.OnUp += HandleUpChip;
+        chipMove.OnStopped += HandleStopped;
 
         chipMoves.Add(chipMove);
     }
@@ -52,6 +55,7 @@ public class ChipMoveView : View
         {
             chip.OnDown -= HandleDownChip;
             chip.OnUp -= HandleUpChip;
+            chipMove.OnStopped -= HandleStopped;
 
             chipMoves.Remove(chipMove);
 
@@ -65,6 +69,8 @@ public class ChipMoveView : View
         {
             data.ActivateChip();
         });
+
+        isActive = true;
     }
 
     public void DeactivateChips()
@@ -73,6 +79,8 @@ public class ChipMoveView : View
         {
             data.DeactivateChip();
         });
+
+        isActive = false;
     }
 
     private void ActivateMove()
@@ -132,6 +140,8 @@ public class ChipMoveView : View
 
     private void HandleDownChip(ChipMove chipMove, PointerEventData pointerEventData)
     {
+        if(!isActive) return;
+
         if(isDragging) return;
 
         startDragPosition = Camera.main.ScreenToWorldPoint(pointerEventData.position);
@@ -144,6 +154,8 @@ public class ChipMoveView : View
 
     private void HandleUpChip(ChipMove chipMove, PointerEventData pointerEventData)
     {
+        if (!isActive) return;
+
         DeactivateMove();
 
         if(currentChipMove != null)
@@ -168,7 +180,15 @@ public class ChipMoveView : View
 
     #region Input
 
+    public event Action OnStopped;
     public event Action OnDoMotion;
+
+    private void HandleStopped(ChipMove chipMove)
+    {
+        OnStopped?.Invoke();
+
+        Debug.Log("STOPPED CHIP!!!");
+    }
 
 
     #endregion

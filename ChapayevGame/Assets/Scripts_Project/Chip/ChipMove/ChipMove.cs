@@ -18,6 +18,8 @@ public class ChipMove : MonoBehaviour
 
     private protected Chip currentChipData;
 
+    private IEnumerator coroutineMove;
+
     public void SetData(Chip chip)
     {
         currentChipData = chip;
@@ -53,11 +55,32 @@ public class ChipMove : MonoBehaviour
     public void AddForce(Vector2 vector)
     {
         rb.AddForce(vector, ForceMode2D.Impulse);
+
+        if(coroutineMove != null)
+            Coroutines.Stop(coroutineMove);
+
+        coroutineMove = CoroutineCheckStopped();
+        Coroutines.Start(coroutineMove);
     }
 
     public void Destroy()
     {
+        if (coroutineMove != null)
+            Coroutines.Stop(coroutineMove);
+
         Destroy(gameObject);
+    }
+
+    private IEnumerator CoroutineCheckStopped()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        while(rb.velocity.magnitude > 0.1)
+        {
+            yield return null;
+        }
+
+        OnStopped?.Invoke(this);
     }
 
     private protected void OnCollisionEnter2D(Collision2D collision)
@@ -83,6 +106,7 @@ public class ChipMove : MonoBehaviour
     #region Input
 
     public event Action<ChipMove> OnDead;
+    public event Action<ChipMove> OnStopped;
     public event Action<Transform, Transform, Vector2, float> OnPunch;
 
     public void DeadTrigger()

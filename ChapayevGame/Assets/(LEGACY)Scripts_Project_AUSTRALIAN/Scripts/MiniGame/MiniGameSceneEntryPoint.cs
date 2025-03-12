@@ -28,7 +28,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
     private ChipSpawnerPresenter chipSpawnerPresenter_Player;
     private ChipSpawnerPresenter chipSpawnerPresenter_Bot;
+
     private ChipMovePresenter chipMovePresenter;
+    private ChipBotMovePresenter chipBotMovePresenter;
 
     private SpinMotionPresenter spinMotionPresenter;
     private FencePresenter fencePresenter;
@@ -62,7 +64,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
+
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(), viewContainer.GetView<ChipMoveView>());
+        chipBotMovePresenter = new ChipBotMovePresenter(new ChipBotMoveModel(chipSpawnerPresenter_Bot, chipSpawnerPresenter_Player));
 
         chipPunchPresenter = new ChipPunchPresenter(new ChipPunchModel(), viewContainer.GetView<ChipPunchView>());
 
@@ -75,6 +79,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         stateMachine = new GameStateMachine(
             sceneRoot, 
             spinMotionPresenter, 
+            chipBotMovePresenter,
             chipMovePresenter, 
             gameResultPresenter,
             storeChipPresenter,
@@ -103,6 +108,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         storeStrategyPresenter.Initialize();
 
+        chipBotMovePresenter.Initialize();
         chipMovePresenter.Initialize();
         chipSpawnerPresenter_Player.Initialize();
         chipSpawnerPresenter_Bot.Initialize();
@@ -216,6 +222,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         spinMotionPresenter?.Dispose();
         fencePresenter?.Dispose();
 
+        chipBotMovePresenter?.Dispose();
         chipMovePresenter?.Dispose();
         chipSpawnerPresenter_Player?.Dispose();
         chipSpawnerPresenter_Bot?.Dispose();

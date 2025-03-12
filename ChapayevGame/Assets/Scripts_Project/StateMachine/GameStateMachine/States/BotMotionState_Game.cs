@@ -6,13 +6,15 @@ public class BotMotionState_Game : IState
 {
     private readonly IGlobalStateMachine stateMachine;
     private GameResultPresenter gameResultPresenter;
+    private ChipBotMovePresenter chipBotMovePresenter;
 
     private IEnumerator enumeratorTimer;
 
-    public BotMotionState_Game(IGlobalStateMachine stateMachine, GameResultPresenter gameResultPresenter)
+    public BotMotionState_Game(IGlobalStateMachine stateMachine, GameResultPresenter gameResultPresenter, ChipBotMovePresenter chipBotMovePresenter)
     {
         this.stateMachine = stateMachine;
         this.gameResultPresenter = gameResultPresenter;
+        this.chipBotMovePresenter = chipBotMovePresenter;
     }
 
     public void EnterState()
@@ -21,12 +23,9 @@ public class BotMotionState_Game : IState
 
         gameResultPresenter.OnWin += ChangeStateToWin;
         gameResultPresenter.OnLose += ChangeStateToLose;
+        chipBotMovePresenter.OnDoMotion += ChangeStateToTransitionState;
 
-        if(enumeratorTimer != null)
-            Coroutines.Stop(enumeratorTimer);
-
-        enumeratorTimer = Timer();
-        Coroutines.Start(enumeratorTimer);
+        chipBotMovePresenter.ActivateMove();
     }
 
     public void ExitState()
@@ -35,21 +34,15 @@ public class BotMotionState_Game : IState
 
         gameResultPresenter.OnWin -= ChangeStateToWin;
         gameResultPresenter.OnLose -= ChangeStateToLose;
+        chipBotMovePresenter.OnDoMotion -= ChangeStateToTransitionState;
 
         if (enumeratorTimer != null)
             Coroutines.Stop(enumeratorTimer);
     }
 
-    private IEnumerator Timer()
+    public void ChangeStateToTransitionState()
     {
-        yield return new WaitForSeconds(3);
-
-        ChangeStateToPlayerState();
-    }
-
-    public void ChangeStateToPlayerState()
-    {
-        stateMachine.SetState(stateMachine.GetState<PlayerMotionState_Game>());
+        stateMachine.SetState(stateMachine.GetState<FromBotMotionToPlayerMotion_Game>());
     }
 
     public void ChangeStateToWin()

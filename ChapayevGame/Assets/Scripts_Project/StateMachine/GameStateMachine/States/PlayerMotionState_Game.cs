@@ -21,7 +21,7 @@ public class PlayerMotionState_Game : IState
 
         gameResultPresenter.OnWin += ChangeStateToWin;
         gameResultPresenter.OnLose += ChangeStateToLose;
-        chipMovePresenter.OnDoMotion += ChangeStateToBotState;
+        chipMovePresenter.OnDoMotion += ChangeStateToTransitionState;
 
         chipMovePresenter.ActivateChips();
     }
@@ -32,14 +32,14 @@ public class PlayerMotionState_Game : IState
 
         gameResultPresenter.OnWin -= ChangeStateToWin;
         gameResultPresenter.OnLose -= ChangeStateToLose;
-        chipMovePresenter.OnDoMotion -= ChangeStateToBotState;
+        chipMovePresenter.OnDoMotion -= ChangeStateToTransitionState;
 
         chipMovePresenter.DeactivateChips();
     }
 
-    public void ChangeStateToBotState()
+    public void ChangeStateToTransitionState()
     {
-        stateMachine.SetState(stateMachine.GetState<BotMotionState_Game>());
+        stateMachine.SetState(stateMachine.GetState<FromPlayerMotionToBotMotion_Game>());
     }
 
     public void ChangeStateToWin()

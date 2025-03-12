@@ -10,6 +10,7 @@ public class GameStateMachine : IGlobalStateMachine
     public GameStateMachine(
         UIMiniGameSceneRoot sceneRoot, 
         SpinMotionPresenter spinMotionPresenter, 
+        ChipBotMovePresenter chipBotMovePresenter,
         ChipMovePresenter chipMovePresenter, 
         GameResultPresenter gameResultPresenter,
         
@@ -29,7 +30,9 @@ public class GameStateMachine : IGlobalStateMachine
         states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this, sceneRoot, chipMovePresenter);
         states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter);
         states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter);
-        states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter);
+        states[typeof(FromPlayerMotionToBotMotion_Game)] = new FromPlayerMotionToBotMotion_Game(this, gameResultPresenter, chipMovePresenter);
+        states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter);
+        states[typeof(FromBotMotionToPlayerMotion_Game)] = new FromBotMotionToPlayerMotion_Game(this, gameResultPresenter, chipBotMovePresenter);
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
 
