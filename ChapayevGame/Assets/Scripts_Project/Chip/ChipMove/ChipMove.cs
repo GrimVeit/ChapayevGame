@@ -18,7 +18,8 @@ public class ChipMove : MonoBehaviour
 
     private protected Chip currentChipData;
 
-    private IEnumerator coroutineMove;
+    private protected IEnumerator coroutineMove;
+    private protected bool isMoving;
 
     public void SetData(Chip chip)
     {
@@ -73,6 +74,8 @@ public class ChipMove : MonoBehaviour
 
     private IEnumerator CoroutineCheckStopped()
     {
+        isMoving = true;
+
         yield return new WaitForSeconds(0.1f);
 
         while(rb.velocity.magnitude > 0.1)
@@ -80,7 +83,9 @@ public class ChipMove : MonoBehaviour
             yield return null;
         }
 
-        OnStopped?.Invoke(this);
+        isMoving = false;
+
+        OnStoppedCurrent?.Invoke(this);
     }
 
     private protected void OnCollisionEnter2D(Collision2D collision)
@@ -106,11 +111,17 @@ public class ChipMove : MonoBehaviour
     #region Input
 
     public event Action<ChipMove> OnDead;
-    public event Action<ChipMove> OnStopped;
+    public event Action<ChipMove> OnStoppedCurrent;
+    public event Action<ChipMove> OnDeadCurrent;
     public event Action<Transform, Transform, Vector2, float> OnPunch;
 
     public void DeadTrigger()
     {
+        if (isMoving)
+        {
+            OnDeadCurrent?.Invoke(this);
+        }
+
         OnDead?.Invoke(this);
     }
 

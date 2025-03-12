@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 public class ChipBotMoveModel
 {
     public event Action OnDoMotion;
-    public event Action OnStoppedChip;
+    public event Action OnStoppedCurrentChip;
+    public event Action OnDestroyedCurrentChip;
 
     private readonly IChipBank chipBankBot;
     private readonly IChipBank chipBankPlayer;
@@ -15,9 +16,8 @@ public class ChipBotMoveModel
     private Transform transformPlayer;
 
     private const float aimDuration = 1;
-    private const float minForce = 2;
-    private const float maxForce = 10;
-    private const float maxAngle = 45;
+    private const float minForce = 5;
+    private const float maxForce = 20;
 
     private IEnumerator coroutineAimShoot;
 
@@ -31,13 +31,9 @@ public class ChipBotMoveModel
     {
         if(currentChip != null)
         {
-            currentChip.OnStopped -= HandleStoppedChip;
+            currentChip.OnStoppedCurrent -= HandleStoppedCurrentChip;
+            currentChip.OnDeadCurrent -= HandleDestroyedCurrentChip;
         }
-
-        currentChip = chipBankBot.GetChipMoves()[Random.Range(0, chipBankBot.GetChipMoves().Count)];
-        currentChip.OnStopped += HandleStoppedChip;
-
-        transformPlayer = GetClosestTransformPlayer(currentChip.transform);
 
         if(coroutineAimShoot != null)
             Coroutines.Stop(coroutineAimShoot);
@@ -48,6 +44,16 @@ public class ChipBotMoveModel
 
     private IEnumerator AimShootTarget()
     {
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log(chipBankPlayer.GetChipMoves().Count);
+
+        currentChip = chipBankBot.GetChipMoves()[Random.Range(0, chipBankBot.GetChipMoves().Count)];
+        currentChip.OnStoppedCurrent += HandleStoppedCurrentChip;
+        currentChip.OnDeadCurrent += HandleDestroyedCurrentChip;
+
+        transformPlayer = GetClosestTransformPlayer(currentChip.transform);
+
         currentChip.ActivateAim();
 
         Vector2 startPosition = currentChip.transform.position;
@@ -57,7 +63,9 @@ public class ChipBotMoveModel
 
         Vector2 directionToTarget = (targetPosition - startPosition).normalized;
 
-        while(elapsedTime < aimDuration)
+        Vector2 direction = (targetPosition - startPosition).normalized;
+
+        while (elapsedTime < aimDuration)
         {
             elapsedTime += Time.deltaTime;
             float progress = elapsedTime / aimDuration;
@@ -65,13 +73,12 @@ public class ChipBotMoveModel
             float scale = Mathf.Lerp(0.1f, 1, progress);
             currentChip.ScaleAim(scale);
 
-            float angle = Mathf.Lerp(0, maxAngle, progress);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 270;
             currentChip.RotateAim(angle);
 
             yield return null;
         }
 
-        Vector2 direction = (targetPosition - startPosition).normalized;
         float force = Random.Range(minForce, maxForce);
 
         currentChip.AddForce(direction * force);
@@ -100,8 +107,13 @@ public class ChipBotMoveModel
         return transform;
     }
 
-    private void HandleStoppedChip(ChipMove chipMove)
+    private void HandleStoppedCurrentChip(ChipMove chipMove)
     {
-        OnStoppedChip?.Invoke();
+        OnStoppedCurrentChip?.Invoke();
+    }
+
+    private void HandleDestroyedCurrentChip(ChipMove chipMove)
+    {
+        OnDestroyedCurrentChip?.Invoke();
     }
 }

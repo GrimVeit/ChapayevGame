@@ -32,7 +32,8 @@ public class ChipMoveView : View
         {
             chip.OnDown -= HandleDownChip;
             chip.OnUp -= HandleUpChip;
-            chip.OnStopped -= HandleStopped;
+            chip.OnDeadCurrent -= HandleDestroyedCurrent;
+            chip.OnStoppedCurrent -= HandleStoppedCurrent;
         });
 
         chipMoves.Clear();
@@ -42,7 +43,8 @@ public class ChipMoveView : View
     {
         chipMove.OnDown += HandleDownChip;
         chipMove.OnUp += HandleUpChip;
-        chipMove.OnStopped += HandleStopped;
+        chipMove.OnDeadCurrent += HandleDestroyedCurrent;
+        chipMove.OnStoppedCurrent += HandleStoppedCurrent;
 
         chipMoves.Add(chipMove);
     }
@@ -55,7 +57,8 @@ public class ChipMoveView : View
         {
             chip.OnDown -= HandleDownChip;
             chip.OnUp -= HandleUpChip;
-            chipMove.OnStopped -= HandleStopped;
+            chipMove.OnDeadCurrent -= HandleDestroyedCurrent;
+            chipMove.OnStoppedCurrent -= HandleStoppedCurrent;
 
             chipMoves.Remove(chipMove);
 
@@ -180,12 +183,21 @@ public class ChipMoveView : View
 
     #region Input
 
-    public event Action OnStopped;
+    public event Action OnStoppedCurrentChip;
+    public event Action OnDestroyedCurrentChip;
+
     public event Action OnDoMotion;
 
-    private void HandleStopped(ChipMove chipMove)
+    private void HandleStoppedCurrent(ChipMove chipMove)
     {
-        OnStopped?.Invoke();
+        OnStoppedCurrentChip?.Invoke();
+
+        Debug.Log("STOPPED CHIP!!!");
+    }
+
+    private void HandleDestroyedCurrent(ChipMove chipMove)
+    {
+        OnStoppedCurrentChip?.Invoke();
 
         Debug.Log("STOPPED CHIP!!!");
     }

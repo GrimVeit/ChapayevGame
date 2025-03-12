@@ -21,7 +21,9 @@ public class FromBotMotionToPlayerMotion_Game : IState
 
         gameResultPresenter.OnWin += ChangeStateToWin;
         gameResultPresenter.OnLose += ChangeStateToLose;
-        chipBotMovePresenter.OnStoppedChip += ChangeStateToPlayer;
+
+        chipBotMovePresenter.OnStoppedCurrentChip += ChangeStateToPlayer;
+        chipBotMovePresenter.OnDestroyedCurrentChip += ChangeStateToPlayer;
     }
 
     public void ExitState()
@@ -30,7 +32,9 @@ public class FromBotMotionToPlayerMotion_Game : IState
 
         gameResultPresenter.OnWin -= ChangeStateToWin;
         gameResultPresenter.OnLose -= ChangeStateToLose;
-        chipBotMovePresenter.OnStoppedChip -= ChangeStateToPlayer;
+
+        chipBotMovePresenter.OnStoppedCurrentChip -= ChangeStateToPlayer;
+        chipBotMovePresenter.OnDestroyedCurrentChip -= ChangeStateToPlayer;
     }
 
     private void ChangeStateToWin()

@@ -36,8 +36,10 @@ public class ChipSpawnerView : View, IIdentify
         chipMove.OnPunch -= HandlePunch;
         chipMove.OnDead -= HandleDestroyChip;
 
-        OnDestroyChip?.Invoke(chipMove);
         chipMoves.Remove(chipMove);
+        OnDestroyChip?.Invoke(chipMove);
+
+        Debug.Log("DESTROY CHIPPPP!");
 
         chipMove.Destroy();
     }

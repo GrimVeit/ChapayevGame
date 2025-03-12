@@ -30,10 +30,16 @@ public class ChipBotMovePresenter
         remove => model.OnDoMotion -= value;
     }
 
-    public event Action OnStoppedChip
+    public event Action OnStoppedCurrentChip
     {
-        add => model.OnStoppedChip += value;
-        remove => model.OnStoppedChip -= value;
+        add => model.OnStoppedCurrentChip += value;
+        remove => model.OnStoppedCurrentChip -= value;
+    }
+
+    public event Action OnDestroyedCurrentChip
+    {
+        add => model.OnDestroyedCurrentChip += value;
+        remove => model.OnDestroyedCurrentChip -= value;
     }
 
     public void ActivateMove()

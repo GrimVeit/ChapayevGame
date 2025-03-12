@@ -31,7 +31,7 @@ public class ChipMovePresenter
     private void ActivateEvents()
     {
         view.OnDoMotion += model.DoMotion;
-        view.OnStopped += model.StopChip;
+        view.OnStoppedCurrentChip += model.StopChip;
 
         model.OnAddChip += view.AddChip;
         model.OnRemoveChip += view.RemoveChip;
@@ -43,7 +43,7 @@ public class ChipMovePresenter
     private void DeactivateEvents()
     {
         view.OnDoMotion -= model.DoMotion;
-        view.OnStopped -= model.StopChip;
+        view.OnStoppedCurrentChip -= model.StopChip;
 
         model.OnAddChip -= view.AddChip;
         model.OnRemoveChip -= view.RemoveChip;
@@ -60,10 +60,16 @@ public class ChipMovePresenter
         remove => model.OnDoMotion -= value;
     }
 
-    public event Action OnStoppedChip
+    public event Action OnStoppedCurrentChip
     {
-        add => view.OnStopped += value;
-        remove => view.OnStopped -= value;
+        add => view.OnStoppedCurrentChip += value;
+        remove => view.OnStoppedCurrentChip -= value;
+    }
+
+    public event Action OnDestroyedCurrentChip
+    {
+        add => view.OnDestroyedCurrentChip += value;
+        remove => view.OnDestroyedCurrentChip -= value;
     }
 
     public void AddChip(ChipMove chip)
