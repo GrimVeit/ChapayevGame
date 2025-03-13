@@ -8,11 +8,14 @@ public class PlayerMotionState_Game : IState
     private ChipMovePresenter chipMovePresenter;
     private GameResultPresenter gameResultPresenter;
 
-    public PlayerMotionState_Game(IGlobalStateMachine stateMachine, ChipMovePresenter chipMovePresenter, GameResultPresenter gameResultPresenter)
+    private ITutorialDescriptionProvider tutorialDescriptionProvider;
+
+    public PlayerMotionState_Game(IGlobalStateMachine stateMachine, ChipMovePresenter chipMovePresenter, GameResultPresenter gameResultPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         this.stateMachine = stateMachine;
         this.chipMovePresenter = chipMovePresenter;
         this.gameResultPresenter = gameResultPresenter;
+        this.tutorialDescriptionProvider = tutorialDescriptionProvider;
     }
 
     public void EnterState()
@@ -24,6 +27,7 @@ public class PlayerMotionState_Game : IState
         chipMovePresenter.OnDoMotion += ChangeStateToTransitionState;
 
         chipMovePresenter.ActivateChips();
+        tutorialDescriptionProvider.ActivateTutorial("StartGrabChip");
     }
 
     public void ExitState()

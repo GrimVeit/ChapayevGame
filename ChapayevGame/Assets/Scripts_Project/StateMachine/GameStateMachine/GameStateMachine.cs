@@ -25,11 +25,13 @@ public class GameStateMachine : IGlobalStateMachine
         StrategySelectPresenter strategySelectPresenter,
         
         ChipSpawnerPresenter chipSpawnerPresenter_Player,
-        ChipSpawnerPresenter chipSpawnerPresenter_Bot)
+        ChipSpawnerPresenter chipSpawnerPresenter_Bot,
+        
+        ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this, sceneRoot, chipMovePresenter);
-        states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter);
-        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter);
+        states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter, tutorialDescriptionProvider);
+        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter, tutorialDescriptionProvider);
         states[typeof(FromPlayerMotionToBotMotion_Game)] = new FromPlayerMotionToBotMotion_Game(this, gameResultPresenter, chipMovePresenter);
         states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter);
         states[typeof(FromBotMotionToPlayerMotion_Game)] = new FromBotMotionToPlayerMotion_Game(this, gameResultPresenter, chipBotMovePresenter);

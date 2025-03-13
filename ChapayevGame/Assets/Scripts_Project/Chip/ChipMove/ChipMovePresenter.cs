@@ -32,6 +32,8 @@ public class ChipMovePresenter
     {
         view.OnDoMotion += model.DoMotion;
         view.OnStoppedCurrentChip += model.StopChip;
+        view.OnStartDrag += model.StartDrag;
+        view.OnEndDrag += model.EndDrag;
 
         model.OnAddChip += view.AddChip;
         model.OnRemoveChip += view.RemoveChip;
@@ -44,6 +46,8 @@ public class ChipMovePresenter
     {
         view.OnDoMotion -= model.DoMotion;
         view.OnStoppedCurrentChip -= model.StopChip;
+        view.OnStartDrag -= model.StartDrag;
+        view.OnEndDrag -= model.EndDrag;
 
         model.OnAddChip -= view.AddChip;
         model.OnRemoveChip -= view.RemoveChip;

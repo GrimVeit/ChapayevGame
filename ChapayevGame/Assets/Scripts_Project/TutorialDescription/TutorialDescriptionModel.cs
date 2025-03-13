@@ -19,9 +19,9 @@ public class TutorialDescriptionModel
 
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "Tutorial.json");
 
-    public TutorialDescriptionModel(TutorialDescriptionGroup tutorialDescriptionGroup)
+    public TutorialDescriptionModel(TutorialDescriptionGroup group)
     {
-        this.tutorialDescriptionGroup = tutorialDescriptionGroup;
+        this.tutorialDescriptionGroup = group;
 
         if (File.Exists(FilePath))
         {

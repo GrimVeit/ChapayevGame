@@ -23,6 +23,8 @@ public class TutorialDescriptionView : View
             tutorialDescriptionVisuals.Add(tutorialDescriptionVisual);
         }
 
+        if (tutorialDescriptionVisual.IsActive) return;
+
         tutorialDescriptionVisual.ActivatePanel();
     }
 
@@ -56,6 +58,8 @@ public class TutorialDescriptionView : View
     private void DeactivateTutorial(TutorialDescriptionVisual tutorialDescriptionVisual)
     {
         if (tutorialDescriptionVisual == null) return;
+
+        if(!tutorialDescriptionVisual.IsActive) return;
 
         tutorialDescriptionVisual.DeactivateTimerClose();
         tutorialDescriptionVisual.DeactivatePanel();

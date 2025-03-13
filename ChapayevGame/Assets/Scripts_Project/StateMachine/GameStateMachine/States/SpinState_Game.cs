@@ -9,11 +9,14 @@ public class SpinState_Game : IState
     private readonly IGlobalStateMachine stateMachine;
     private SpinMotionPresenter spinMotionPresenter;
 
-    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter)
+    private ITutorialDescriptionProvider tutorialDescriptionPresenter;
+
+    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter, ITutorialDescriptionProvider descriptionProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.spinMotionPresenter = motionPresenter;
+        this.tutorialDescriptionPresenter = descriptionProvider;
     }
 
     public void EnterState()
@@ -24,6 +27,7 @@ public class SpinState_Game : IState
         spinMotionPresenter.OnPlayerMotion += ChangeStateToPlayerMotionState;
 
         spinMotionPresenter.ActivateSpin();
+        tutorialDescriptionPresenter.ActivateTutorial("SpinWheel");
     }
 
     public void ExitState()
@@ -34,6 +38,7 @@ public class SpinState_Game : IState
         spinMotionPresenter.OnPlayerMotion -= ChangeStateToPlayerMotionState;
 
         sceneRoot.CloseSpinPanel();
+        tutorialDescriptionPresenter.LockTutorial("SpinWheel");
     }
 
     private void ChangeStateToBotMotionState()

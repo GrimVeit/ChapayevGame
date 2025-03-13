@@ -3860,7 +3860,7 @@ MonoBehaviour:
   sounds: {fileID: 2002616254}
   strategyGroup: {fileID: 11400000, guid: 9e7fd53ed94277f40b1bb08257d12d7b, type: 2}
   chipGroup: {fileID: 11400000, guid: dad2bd51d9965c340b4cc4f05eec97e7, type: 2}
-  tutorialDescriptionGroup: {fileID: 11400000, guid: 8d33992284e52dc44a8faa110e353db7, type: 2}
+  tutorialDescriptionGroup: {fileID: 11400000, guid: 1ce1fc6400b427d47873c1d8c2995bf2, type: 2}
   menuRootPrefab: {fileID: 8508999539158046858}
 --- !u!1 &931670147
 GameObject:

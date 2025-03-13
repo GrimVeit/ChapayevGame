@@ -147,6 +147,8 @@ public class ChipMoveView : View
 
         if(isDragging) return;
 
+        OnStartDrag?.Invoke();
+
         startDragPosition = Camera.main.ScreenToWorldPoint(pointerEventData.position);
 
         currentChipMove = chipMove;
@@ -171,6 +173,8 @@ public class ChipMoveView : View
 
             //Debug.Log(forceMagnitude);
 
+            OnEndDrag?.Invoke();
+
             if (forceMagnitude < minimalForce) return;
 
             currentChipMove.AddForce(direction * forceMagnitude);
@@ -182,6 +186,9 @@ public class ChipMoveView : View
     }
 
     #region Input
+
+    public event Action OnStartDrag;
+    public event Action OnEndDrag;
 
     public event Action OnStoppedCurrentChip;
     public event Action OnDestroyedCurrentChip;

@@ -15,3 +15,6 @@ MonoBehaviour:
   TutorialDescriptions:
   - {fileID: 11400000, guid: abd363b5a76aca344a8dc64af361254b, type: 2}
   - {fileID: 11400000, guid: 2b996d7bfee06ea4b94563da13b4def7, type: 2}
+  - {fileID: 11400000, guid: 7b734838e7529884dadd3b01f986e772, type: 2}
+  - {fileID: 11400000, guid: 62ac10164fb3c10448e71e468e268232, type: 2}
+  - {fileID: 11400000, guid: 8dfb6498525c96d45bd8eb8eabc17d57, type: 2}

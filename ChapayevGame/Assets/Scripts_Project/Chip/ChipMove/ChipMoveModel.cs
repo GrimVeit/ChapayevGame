@@ -12,6 +12,12 @@ public class ChipMoveModel
     public event Action OnDoMotion;
     public event Action OnStoppedChip;
 
+    private ITutorialDescriptionProvider tutorialDescriptionProvider;
+    public ChipMoveModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    {
+        this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+    }
+
     public void AddChip(ChipMove_Player chipMove)
     {
         OnAddChip?.Invoke(chipMove);
@@ -32,8 +38,22 @@ public class ChipMoveModel
         OnDeactivateChips?.Invoke();
     }
 
+    public void StartDrag()
+    {
+        tutorialDescriptionProvider.LockTutorial("StartGrabChip");
+
+        tutorialDescriptionProvider.ActivateTutorial("DragAndDropChip");
+    }
+
+    public void EndDrag()
+    {
+
+    }
+
     public void DoMotion()
     {
+        tutorialDescriptionProvider.LockTutorial("DragAndDropChip");
+
         OnDoMotion?.Invoke();
     }
 
