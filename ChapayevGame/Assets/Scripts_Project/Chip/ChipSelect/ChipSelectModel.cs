@@ -18,6 +18,13 @@ public class ChipSelectModel
 
     private bool isActivate = false;
 
+    private ITutorialDescriptionProvider tutorialDescriptionProvider;
+
+    public ChipSelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    {
+        this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+    }
+
     public void SetOpenChip(Chip chip)
     {
         OnSetOpenChip?.Invoke(chip);
@@ -62,6 +69,7 @@ public class ChipSelectModel
     {
         if(countChip == currentCountChip)
         {
+            tutorialDescriptionProvider.LockTutorial("ChooseChips");
             OnActivate?.Invoke();
         }
         else

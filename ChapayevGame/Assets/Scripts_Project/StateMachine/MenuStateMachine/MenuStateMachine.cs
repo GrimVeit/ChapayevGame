@@ -19,14 +19,16 @@ public class MenuStateMachine : IGlobalStateMachine
         StoreChipPresenter storeChipPresenter,
         ChipBuyPresenter chipBuyPresenter,
         ChipBuyVisualizePresenter chipBuyVisualizePresenter,
-        ChipSelectPresenter chipSelectPresenter)
+        ChipSelectPresenter chipSelectPresenter,
+        
+        ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
         states[typeof(BuyChip_Menu)] = new BuyChip_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
 
-        states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter);
-        states[typeof(ChooseChip_Menu)] = new ChooseChip_Menu(this, sceneRoot, storeChipPresenter, chipSelectPresenter);
+        states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, tutorialDescriptionProvider);
+        states[typeof(ChooseChip_Menu)] = new ChooseChip_Menu(this, sceneRoot, storeChipPresenter, chipSelectPresenter, tutorialDescriptionProvider);
     }
 
     public void Initialize()

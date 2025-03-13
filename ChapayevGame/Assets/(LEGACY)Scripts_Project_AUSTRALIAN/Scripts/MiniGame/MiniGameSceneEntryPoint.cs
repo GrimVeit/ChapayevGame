@@ -7,6 +7,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     [SerializeField] private StrategyGroup strategyGroup;
     [SerializeField] private ChipGroup chipGroup;
     [SerializeField] private WinPrices winPrices;
+    [SerializeField] private TutorialDescriptionGroup tutorialDescriptionGroup;
     [SerializeField] private UIMiniGameSceneRoot sceneRootPrefab;
 
     private UIMiniGameSceneRoot sceneRoot;
@@ -37,6 +38,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private GameResultPresenter gameResultPresenter;
     private ChipPunchPresenter chipPunchPresenter;
 
+    private TutorialDescriptionPresenter tutorialDescriptionPresenter;
+
     private GameStateMachine stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -52,15 +55,17 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        tutorialDescriptionPresenter = new TutorialDescriptionPresenter(new TutorialDescriptionModel(tutorialDescriptionGroup), viewContainer.GetView<TutorialDescriptionView>());
+
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
-        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(), viewContainer.GetView<StrategySelectView>());
+        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter), viewContainer.GetView<StrategySelectView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
-        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(), viewContainer.GetView<ChipSelectView>());
+        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipSelectView>());
 
         chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
@@ -100,6 +105,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         chipSpawnerPresenter_Bot.Activate();
         chipSpawnerPresenter_Player.Activate();
+
+        tutorialDescriptionPresenter.Initialize();
 
         chipPunchPresenter.Initialize();
         spinMotionPresenter.Initialize();
@@ -216,6 +223,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         DeactivateEvents();
 
         sceneRoot?.Dispose();
+
+        tutorialDescriptionPresenter.Dispose();
 
         storeStrategyPresenter.Dispose();
 

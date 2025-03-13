@@ -9,15 +9,17 @@ public class ChooseStrategy_Menu : IState
     private StoreChipPresenter storeChipPresenter;
     private StrategySelectPresenter strategySelectPresenter;
 
+    private ITutorialDescriptionProvider tutorialDescriptionProvider;
     private IGlobalStateMachine stateMachine;
 
-    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter)
+    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         this.sceneRoot = sceneRoot;
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.strategySelectPresenter = strategySelectPresenter;
         this.stateMachine = stateMachine;
         this.storeChipPresenter = storeChipPresenter;
+        this.tutorialDescriptionProvider = tutorialDescriptionProvider;
     }
 
     public void EnterState()
@@ -27,6 +29,7 @@ public class ChooseStrategy_Menu : IState
 
         strategySelectPresenter.OnChooseStrategy += storeStrategyPresenter.SelectStrategy;
 
+        tutorialDescriptionProvider.ActivateTutorial("ChooseStrategy");
         storeChipPresenter.UnselectAllChips();
         sceneRoot.OpenChooseStrategyPanel();
     }
@@ -37,6 +40,8 @@ public class ChooseStrategy_Menu : IState
         sceneRoot.OnClickToOpenChooseChipFromChooseStrategy -= ChangeStateToChooseChip;
 
         strategySelectPresenter.OnChooseStrategy -= storeStrategyPresenter.SelectStrategy;
+
+        tutorialDescriptionProvider.DeactivateTutorial("ChooseStrategy");
     }
 
     private void ChangeStateToChooseChip()

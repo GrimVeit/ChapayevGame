@@ -6,6 +6,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     [SerializeField] private Sounds sounds;
     [SerializeField] private StrategyGroup strategyGroup;
     [SerializeField] private ChipGroup chipGroup;
+    [SerializeField] private TutorialDescriptionGroup tutorialDescriptionGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -24,6 +25,8 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ChipBuyVisualizePresenter chipBuyVisualizePresenter;
     private ChipBuyPresenter chipBuyPresenter;
     private ChipSelectPresenter chipSelectPresenter;
+
+    private TutorialDescriptionPresenter tutorialDescriptionPresenter;
 
     private MenuStateMachine stateMachine;
 
@@ -49,15 +52,17 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
+        tutorialDescriptionPresenter = new TutorialDescriptionPresenter(new TutorialDescriptionModel(tutorialDescriptionGroup), viewContainer.GetView<TutorialDescriptionView>());
+
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
-        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(), viewContainer.GetView<StrategySelectView>());
+        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter), viewContainer.GetView<StrategySelectView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
-        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(), viewContainer.GetView<ChipSelectView>());
+        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipSelectView>());
 
         stateMachine = new MenuStateMachine(
             sceneRoot, 
@@ -68,12 +73,15 @@ public class MainMenuEntryPoint : MonoBehaviour
             storeChipPresenter,
             chipBuyPresenter,
             chipBuyVisualizePresenter,
-            chipSelectPresenter);
+            chipSelectPresenter,
+            tutorialDescriptionPresenter);
 
         storeStrategyPresenter.UnselectAllStrategies();
         storeChipPresenter.UnselectAllChips();
 
         ActivateEvents();
+
+        tutorialDescriptionPresenter.Initialize();
 
         soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
@@ -149,6 +157,8 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void Dispose()
     {
         DeactivateEvents();
+
+        tutorialDescriptionPresenter?.Dispose();
 
         soundPresenter?.Dispose();
         sceneRoot?.Dispose();

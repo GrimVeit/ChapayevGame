@@ -8,6 +8,13 @@ public class StrategySelectModel
 
     public event Action<int> OnChooseStrategy;
 
+    private ITutorialDescriptionProvider tutorialDescriptionProvider;
+
+    public StrategySelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    {
+        this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+    }
+
     public void SetOpenStrategy(Strategy strategy)
     {
         OnSetOpenStrategy?.Invoke(strategy);
@@ -27,6 +34,8 @@ public class StrategySelectModel
 
     public void ChooseStrategy(int id)
     {
+        tutorialDescriptionProvider.LockTutorial("ChooseStrategy");
+
         OnChooseStrategy?.Invoke(id);
     }
 }

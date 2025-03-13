@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class MovePanel : Panel
 
         panel.SetActive(true);
         isActive = true;
-        tween = panel.transform.DOLocalMove(to, time);
+        tween = panel.transform.DOLocalMove(to, time).OnComplete(() => OnActivatePanel?.Invoke(this));
         CanvasGroupAlpha(canvasGroup, 0, 1, time);
     }
 
@@ -30,7 +31,11 @@ public class MovePanel : Panel
         if (tween != null) { tween.Kill(); }
 
         isActive = false;
-        tween = panel.transform.DOLocalMove(from, time).OnComplete(() => panel.SetActive(false));
+        tween = panel.transform.DOLocalMove(from, time).OnComplete(() => 
+        {
+            panel.SetActive(false);
+            OnDeactivatePanel?.Invoke(this);
+        });
         CanvasGroupAlpha(canvasGroup, 1, 0, time);
     }
 
@@ -52,4 +57,11 @@ public class MovePanel : Panel
             yield return 0;
         }
     }
+
+    #region Input
+
+    public event Action<MovePanel> OnDeactivatePanel;
+    public event Action<MovePanel> OnActivatePanel;
+
+    #endregion
 }
