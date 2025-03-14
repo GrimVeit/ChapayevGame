@@ -91,19 +91,6 @@ public class UIMainMenuRoot : MonoBehaviour
 
 
 
-    public void OpenLoadBuyPanel()
-    {
-        OpenOtherPanel(loadBuyStrategyPanel);
-    }
-
-    public void CloseLoadBuyPanel()
-    {
-        CloseOtherPanel(loadBuyStrategyPanel);
-    }
-
-
-
-
 
     public void OpenChipPresentationPanel()
     {

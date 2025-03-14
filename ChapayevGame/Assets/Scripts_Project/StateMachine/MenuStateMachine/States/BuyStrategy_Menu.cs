@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BuyStrategy_Menu : IState
 {
     private readonly UIMainMenuRoot sceneRoot;
@@ -24,7 +20,6 @@ public class BuyStrategy_Menu : IState
     {
         sceneRoot.OnClickToBackFromBuyStrategy += ChangeStateToMain;
         strategyBuyPresenter.OnSelectRandom += ChangeStateToLoadBuyStrategy;
-        //strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
 
         sceneRoot.OpenStoreStrategyPanel();
     }
@@ -33,7 +28,6 @@ public class BuyStrategy_Menu : IState
     {
         sceneRoot.OnClickToBackFromBuyStrategy -= ChangeStateToMain;
         strategyBuyPresenter.OnSelectRandom -= ChangeStateToLoadBuyStrategy;
-        //strategyBuyPresenter.OnBuyStrategy -= storeStrategyPresenter.OpenStrategy;
     }
 
     private void ChangeStateToMain()

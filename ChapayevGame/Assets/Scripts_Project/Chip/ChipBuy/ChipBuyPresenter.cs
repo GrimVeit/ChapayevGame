@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ChipBuyPresenter
 {
-    private ChipBuyModel model;
-    private ChipBuyView view;
+    private readonly ChipBuyModel model;
+    private readonly ChipBuyView view;
 
     public ChipBuyPresenter(ChipBuyModel model, ChipBuyView view)
     {
@@ -30,20 +30,35 @@ public class ChipBuyPresenter
 
     private void ActivateEvents()
     {
-        view.OnClickToBuy += model.Buy;
+        view.OnClickToBuy += model.SelectRandomClose;
+
+        model.OnSelectRandom_Value += view.SetSelectChip;
     }
 
     private void DeactivatEvents()
     {
-        view.OnClickToBuy -= model.Buy;
+        view.OnClickToBuy -= model.SelectRandomClose;
+
+        model.OnSelectRandom_Value -= view.SetSelectChip;
     }
 
     #region Input
+
+    public event Action OnSelectRandom
+    {
+        add => model.OnSelectRandom += value;
+        remove => model.OnSelectRandom -= value;
+    }
 
     public event Action<int> OnBuyChip
     {
         add => model.OnBuyChip += value;
         remove => model.OnBuyChip -= value;
+    }
+
+    public void Buy()
+    {
+        model.Buy();
     }
 
     public bool CanBuy()

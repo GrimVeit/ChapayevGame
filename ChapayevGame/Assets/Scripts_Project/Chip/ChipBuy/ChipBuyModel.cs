@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class ChipBuyModel
 {
+    public event Action OnSelectRandom;
+    public event Action<Chip> OnSelectRandom_Value;
+
     public event Action<int> OnBuyChip;
+    public event Action OnClickToBuy;
 
     private readonly IMoneyProvider moneyProvider;
     private readonly IStoreChipData storeChipData;
+
+    private Chip currentChooseChip;
 
     public ChipBuyModel(IMoneyProvider moneyProvider, IStoreChipData storeStrategyData)
     {
@@ -16,19 +22,26 @@ public class ChipBuyModel
         this.storeChipData = storeStrategyData;
     }
 
-    public void Buy()
+    public void SelectRandomClose()
     {
         if (!storeChipData.IsAvailableChip()) return;
 
-        if (CanBuy())
-        {
-            var strategy = storeChipData.GetRandomCloseChip();
+        if (CanBuy() == false) return;
 
-            if (strategy == null) return;
+        currentChooseChip = storeChipData.GetRandomCloseChip();
 
-            moneyProvider.SendMoney(-500);
-            OnBuyChip?.Invoke(strategy.ID);
-        }
+        if (currentChooseChip == null) return;
+
+        OnSelectRandom_Value?.Invoke(currentChooseChip);
+        OnSelectRandom?.Invoke();
+    }
+
+    public void Buy()
+    {
+        if (currentChooseChip == null) return;
+
+        moneyProvider.SendMoney(-500);
+        OnBuyChip?.Invoke(currentChooseChip.ID);
     }
 
     public bool CanBuy()

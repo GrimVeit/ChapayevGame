@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ChipBuyView : View
 {
     [SerializeField] private Button buttonBuyChip;
+    [SerializeField] private Image imageChip;
 
     public void Initialize()
     {
@@ -14,6 +15,11 @@ public class ChipBuyView : View
     public void Dispose()
     {
         buttonBuyChip.onClick.RemoveListener(() => OnClickToBuy?.Invoke());
+    }
+
+    public void SetSelectChip(Chip chip)
+    {
+        imageChip.sprite = chip.Sprite;
     }
 
     #region Input

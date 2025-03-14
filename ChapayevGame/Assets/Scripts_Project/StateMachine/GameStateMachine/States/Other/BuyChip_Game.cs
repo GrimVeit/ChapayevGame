@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BuyChip_Game : IState
 {
     private readonly UIMiniGameSceneRoot sceneRoot;
@@ -25,7 +21,7 @@ public class BuyChip_Game : IState
     public void EnterState()
     {
         sceneRoot.OnClickToBackFromBuyChip += CheckGameResult;
-        chipBuyPresenter.OnBuyChip += storeChipPresenter.OpenChip;
+        chipBuyPresenter.OnSelectRandom += ChangeStateToLoadBuyChip;
 
         sceneRoot.OpenStoreChipPanel();
     }
@@ -33,7 +29,7 @@ public class BuyChip_Game : IState
     public void ExitState()
     {
         sceneRoot.OnClickToBackFromBuyChip -= CheckGameResult;
-        chipBuyPresenter.OnBuyChip -= storeChipPresenter.OpenChip;
+        chipBuyPresenter.OnSelectRandom -= ChangeStateToLoadBuyChip;
     }
 
     private void CheckGameResult()
@@ -56,5 +52,10 @@ public class BuyChip_Game : IState
     private void ChangeStateToLose()
     {
         stateMachine.SetState(stateMachine.GetState<LoseState_Game>());
+    }
+
+    private void ChangeStateToLoadBuyChip()
+    {
+        stateMachine.SetState(stateMachine.GetState<LoadBuyChip_Game>());
     }
 }

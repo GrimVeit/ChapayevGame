@@ -25,7 +25,7 @@ public class BuyStrategy_Game : IState
     public void EnterState()
     {
         sceneRoot.OnClickToBackFromBuyStrategy += CheckGameResult;
-        strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
+        strategyBuyPresenter.OnSelectRandom += ChangeStateToLoadBuyStrategy;
 
         sceneRoot.OpenStoreStrategyPanel();
     }
@@ -33,7 +33,7 @@ public class BuyStrategy_Game : IState
     public void ExitState()
     {
         sceneRoot.OnClickToBackFromBuyStrategy -= CheckGameResult;
-        strategyBuyPresenter.OnBuyStrategy -= storeStrategyPresenter.OpenStrategy;
+        strategyBuyPresenter.OnSelectRandom -= ChangeStateToLoadBuyStrategy;
     }
 
     private void CheckGameResult()
@@ -56,5 +56,10 @@ public class BuyStrategy_Game : IState
     private void ChangeStateToLose()
     {
         stateMachine.SetState(stateMachine.GetState<LoseState_Game>());
+    }
+
+    private void ChangeStateToLoadBuyStrategy()
+    {
+        stateMachine.SetState(stateMachine.GetState<LoadBuyStrategy_Game>());
     }
 }

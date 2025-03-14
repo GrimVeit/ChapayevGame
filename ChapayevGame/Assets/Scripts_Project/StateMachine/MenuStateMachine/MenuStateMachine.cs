@@ -30,6 +30,8 @@ public class MenuStateMachine : IGlobalStateMachine
         states[typeof(StrategyPresentation_Menu)] = new StrategyPresentation_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter);
 
         states[typeof(BuyChip_Menu)] = new BuyChip_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
+        states[typeof(LoadBuyChip_Menu)] = new LoadBuyChip_Menu(this, sceneRoot);
+        states[typeof(ChipPresentation_Menu)] = new ChipPresentation_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter);
 
         states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, tutorialDescriptionProvider);
         states[typeof(ChooseChip_Menu)] = new ChooseChip_Menu(this, sceneRoot, storeChipPresenter, chipSelectPresenter, tutorialDescriptionProvider);

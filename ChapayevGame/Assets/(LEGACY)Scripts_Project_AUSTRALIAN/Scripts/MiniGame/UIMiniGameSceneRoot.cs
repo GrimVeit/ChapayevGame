@@ -13,8 +13,14 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     [SerializeField] private StoreChipPanel_Game storeChipPanel;
     [SerializeField] private StoreStrategyPanel_Game storeStrategyPanel;
+
     [SerializeField] private ChooseStrategyPanel_Game chooseStrategyPanel;
     [SerializeField] private ChooseChipPanel_Game chooseChipPanel;
+
+    [SerializeField] private LoadBuyPanel_Menu loadBuyStrategyPanel;
+    [SerializeField] private LoadBuyPanel_Menu loadBuyChipPanel;
+    [SerializeField] private ChipPresentationPanel_Menu chipPresentationPanel;
+    [SerializeField] private StrategyPresentationPanel_Menu strategyPresentationPanel;
 
     private ISoundProvider soundProvider;
 
@@ -37,6 +43,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         storeStrategyPanel.Initialize();
         chooseStrategyPanel.Initialize();
         chooseChipPanel.Initialize();
+
+        loadBuyChipPanel.Initialize();
+        loadBuyStrategyPanel.Initialize();
+        chipPresentationPanel.Initialize();
+        strategyPresentationPanel.Initialize();
     }
 
     public void Dispose()
@@ -51,6 +62,11 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         storeStrategyPanel.Dispose();
         chooseStrategyPanel.Dispose();
         chooseChipPanel.Dispose();
+
+        loadBuyChipPanel.Dispose();
+        loadBuyStrategyPanel.Dispose();
+        chipPresentationPanel.Dispose();
+        strategyPresentationPanel.Dispose();
     }
 
 
@@ -127,6 +143,59 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
 
 
+    public void OpenChipPresentationPanel()
+    {
+        OpenOtherPanel(chipPresentationPanel);
+    }
+
+    public void CloseChipPresentationPanel()
+    {
+        CloseOtherPanel(chipPresentationPanel);
+    }
+
+
+
+
+    public void OpenStrategyPresentationPanel()
+    {
+        OpenOtherPanel(strategyPresentationPanel);
+    }
+
+    public void CloseStrategyPresentationPanel()
+    {
+        CloseOtherPanel(strategyPresentationPanel);
+    }
+
+
+
+
+    public void OpenLoadBuyStrategyPanel()
+    {
+        OpenOtherPanel(loadBuyStrategyPanel);
+    }
+
+    public void CloseLoadBuyStrategyPanel()
+    {
+        CloseOtherPanel(loadBuyStrategyPanel);
+    }
+
+
+
+
+
+    public void OpenLoadBuyChipPanel()
+    {
+        OpenOtherPanel(loadBuyChipPanel);
+    }
+
+    public void CloseLoadBuyChipPanel()
+    {
+        CloseOtherPanel(loadBuyChipPanel);
+    }
+
+
+
+    #region Base
 
     public void Activate()
     {
@@ -136,9 +205,8 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     public void Deactivate()
     {
         if (currentPanel != null)
-           CloseOtherPanel(currentPanel);
+            CloseOtherPanel(currentPanel);
     }
-
 
 
     private void OpenPanel(Panel panel)
@@ -160,6 +228,8 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     {
         panel.DeactivatePanel();
     }
+
+    #endregion
 
     #region Input
 

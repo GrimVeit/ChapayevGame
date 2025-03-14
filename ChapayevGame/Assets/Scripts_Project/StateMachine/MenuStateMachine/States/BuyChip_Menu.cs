@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BuyChip_Menu : IState
 {
     private readonly UIMainMenuRoot sceneRoot;
@@ -23,7 +19,7 @@ public class BuyChip_Menu : IState
     public void EnterState()
     {
         sceneRoot.OnClickToBackFromBuyChip += ChangeStateToMain;
-        chipBuyPresenter.OnBuyChip += storeChipPresenter.OpenChip;
+        chipBuyPresenter.OnSelectRandom += ChangeStateToLoadBuyChip;
 
         sceneRoot.OpenStoreChipPanel();
     }
@@ -31,11 +27,16 @@ public class BuyChip_Menu : IState
     public void ExitState()
     {
         sceneRoot.OnClickToBackFromBuyChip -= ChangeStateToMain;
-        chipBuyPresenter.OnBuyChip -= storeChipPresenter.OpenChip;
+        chipBuyPresenter.OnSelectRandom -= ChangeStateToLoadBuyChip;
     }
 
     private void ChangeStateToMain()
     {
         stateMachine.SetState(stateMachine.GetState<MainState_Menu>());
+    }
+
+    private void ChangeStateToLoadBuyChip()
+    {
+        stateMachine.SetState(stateMachine.GetState<LoadBuyChip_Menu>());
     }
 }
