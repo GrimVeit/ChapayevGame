@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: ChooseStrategy
   description: Choose strategy
+  vectorFrom: {x: 0, y: 100, z: 0}
+  vectorTo: {x: 0, y: 0, z: 0}

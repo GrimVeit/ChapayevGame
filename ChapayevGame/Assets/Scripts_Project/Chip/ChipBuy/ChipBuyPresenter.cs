@@ -45,5 +45,11 @@ public class ChipBuyPresenter
         add => model.OnBuyChip += value;
         remove => model.OnBuyChip -= value;
     }
+
+    public bool CanBuy()
+    {
+        return model.CanBuy();
+    }
+
     #endregion
 }

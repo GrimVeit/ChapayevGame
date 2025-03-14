@@ -27,20 +27,36 @@ public class StrategyBuyPresenter
 
     private void ActivateEvents()
     {
-        view.OnClickToBuy += model.Buy;
+        view.OnClickToBuy += model.SelectRandomClose;
+
+        model.OnSelectRandom_Value += view.SetSelectStrategy;
     }
 
     private void DeactivatEvents()
     {
-        view.OnClickToBuy -= model.Buy;
+        view.OnClickToBuy -= model.SelectRandomClose;
+
+        model.OnSelectRandom_Value -= view.SetSelectStrategy;
     }
 
     #region Input
+
+    public event Action OnSelectRandom
+    {
+        add => model.OnSelectRandom += value;
+        remove => model.OnSelectRandom -= value;
+    }
 
     public event Action<int> OnBuyStrategy
     {
         add => model.OnBuyStrategy += value;
         remove => model.OnBuyStrategy -= value;
     }
+
+    public void Buy()
+    {
+        model.Buy();
+    }
+
     #endregion
 }

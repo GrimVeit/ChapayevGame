@@ -14,9 +14,12 @@ public class GameResultModel
 
     private bool isEndGame;
 
-    public GameResultModel(WinPrices winPrices)
+    public IMoneyProvider moneyProvider;
+
+    public GameResultModel(WinPrices winPrices, IMoneyProvider moneyProvider)
     {
         this.winPrices = winPrices;
+        this.moneyProvider = moneyProvider;
     }
 
     public void AddPlayerChip()
@@ -64,7 +67,9 @@ public class GameResultModel
         {
             if(countChipsPlayer >= 1)
             {
-                OnWin_Value?.Invoke(winPrices.GetWinPriceByChipCount(countChipsPlayer).Win);
+                int win = winPrices.GetWinPriceByChipCount(countChipsPlayer).Win;
+                moneyProvider.SendMoney(win);
+                OnWin_Value?.Invoke(win);
                 OnWin?.Invoke();
                 isEndGame = true;
                 Debug.Log("WIN GAME - " + countChipsPlayer);

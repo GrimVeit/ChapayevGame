@@ -20,7 +20,7 @@ public class ChipBuyModel
     {
         if (!storeChipData.IsAvailableChip()) return;
 
-        if (moneyProvider.CanAfford(500))
+        if (CanBuy())
         {
             var strategy = storeChipData.GetRandomCloseChip();
 
@@ -29,5 +29,10 @@ public class ChipBuyModel
             moneyProvider.SendMoney(-500);
             OnBuyChip?.Invoke(strategy.ID);
         }
+    }
+
+    public bool CanBuy()
+    {
+        return moneyProvider.CanAfford(500);
     }
 }

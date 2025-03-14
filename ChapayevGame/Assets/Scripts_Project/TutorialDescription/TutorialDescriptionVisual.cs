@@ -34,6 +34,8 @@ public class TutorialDescriptionVisual : MovePanel
     public void SetData(TutorialDescription description)
     {
         currentTutorialDescription = description;
+        from = description.GetVectorFrom();
+        to = description.GetVectorTo();
         textDescription.text = currentTutorialDescription.Description;
     }
 

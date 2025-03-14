@@ -24,7 +24,11 @@ public class MenuStateMachine : IGlobalStateMachine
         ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
+
         states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
+        states[typeof(LoadBuyStrategy_Menu)] = new LoadBuyStrategy_Menu(this, sceneRoot);
+        states[typeof(StrategyPresentation_Menu)] = new StrategyPresentation_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter);
+
         states[typeof(BuyChip_Menu)] = new BuyChip_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
 
         states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, tutorialDescriptionProvider);

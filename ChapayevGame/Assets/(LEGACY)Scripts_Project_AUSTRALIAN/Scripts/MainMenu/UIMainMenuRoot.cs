@@ -6,7 +6,8 @@ public class UIMainMenuRoot : MonoBehaviour
     [SerializeField] private MainPanel_Menu mainPanel;
     [SerializeField] private StoreChipPanel_Menu storeChipPanel;
     [SerializeField] private StoreStrategyPanel_Menu storeStrategyPanel;
-    [SerializeField] private LoadBuyPanel_Menu loadBuyPanel;
+    [SerializeField] private LoadBuyPanel_Menu loadBuyStrategyPanel;
+    [SerializeField] private LoadBuyPanel_Menu loadBuyChipPanel;
     [SerializeField] private ChipPresentationPanel_Menu chipPresentationPanel;
     [SerializeField] private StrategyPresentationPanel_Menu strategyPresentationPanel;
 
@@ -27,7 +28,7 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.Initialize();
         storeChipPanel.Initialize();
         storeStrategyPanel.Initialize();
-        loadBuyPanel.Initialize();
+        loadBuyStrategyPanel.Initialize();
         chipPresentationPanel.Initialize();
         strategyPresentationPanel.Initialize();
 
@@ -51,7 +52,7 @@ public class UIMainMenuRoot : MonoBehaviour
         mainPanel.Dispose();
         storeChipPanel.Dispose();
         storeStrategyPanel.Dispose();
-        loadBuyPanel.Dispose();
+        loadBuyStrategyPanel.Dispose();
         chipPresentationPanel.Dispose();
 
         chooseStrategyPanel.Dispose();
@@ -92,12 +93,12 @@ public class UIMainMenuRoot : MonoBehaviour
 
     public void OpenLoadBuyPanel()
     {
-        OpenOtherPanel(loadBuyPanel);
+        OpenOtherPanel(loadBuyStrategyPanel);
     }
 
     public void CloseLoadBuyPanel()
     {
-        CloseOtherPanel(loadBuyPanel);
+        CloseOtherPanel(loadBuyStrategyPanel);
     }
 
 
@@ -122,10 +123,39 @@ public class UIMainMenuRoot : MonoBehaviour
         OpenOtherPanel(strategyPresentationPanel);
     }
 
-    public void CloseStartegyPresentationPanel()
+    public void CloseStrategyPresentationPanel()
     {
         CloseOtherPanel(strategyPresentationPanel);
     }
+
+
+
+
+    public void OpenLoadBuyStrategyPanel()
+    {
+        OpenOtherPanel(loadBuyStrategyPanel);
+    }
+
+    public void CloseLoadBuyStrategyPanel()
+    {
+        CloseOtherPanel(loadBuyStrategyPanel);
+    }
+
+
+
+
+
+    public void OpenLoadBuyChipPanel()
+    {
+        OpenOtherPanel(loadBuyChipPanel);
+    }
+
+    public void CloseLoadBuyChipPanel()
+    {
+        CloseOtherPanel(loadBuyChipPanel);
+    }
+
+
 
 
 

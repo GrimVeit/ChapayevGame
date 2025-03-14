@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BuyStrategy_Menu : IState
 {
-    private UIMainMenuRoot sceneRoot;
-    private StrategyBuyPresenter strategyBuyPresenter;
-    private StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
-    private StoreStrategyPresenter storeStrategyPresenter;
+    private readonly UIMainMenuRoot sceneRoot;
+    private readonly StrategyBuyPresenter strategyBuyPresenter;
+    private readonly StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
+    private readonly StoreStrategyPresenter storeStrategyPresenter;
 
     private IGlobalStateMachine stateMachine;
 
@@ -23,7 +23,8 @@ public class BuyStrategy_Menu : IState
     public void EnterState()
     {
         sceneRoot.OnClickToBackFromBuyStrategy += ChangeStateToMain;
-        strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
+        strategyBuyPresenter.OnSelectRandom += ChangeStateToLoadBuyStrategy;
+        //strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
 
         sceneRoot.OpenStoreStrategyPanel();
     }
@@ -31,11 +32,17 @@ public class BuyStrategy_Menu : IState
     public void ExitState()
     {
         sceneRoot.OnClickToBackFromBuyStrategy -= ChangeStateToMain;
-        strategyBuyPresenter.OnBuyStrategy -= storeStrategyPresenter.OpenStrategy;
+        strategyBuyPresenter.OnSelectRandom -= ChangeStateToLoadBuyStrategy;
+        //strategyBuyPresenter.OnBuyStrategy -= storeStrategyPresenter.OpenStrategy;
     }
 
     private void ChangeStateToMain()
     {
         stateMachine.SetState(stateMachine.GetState<MainState_Menu>());
+    }
+
+    private void ChangeStateToLoadBuyStrategy()
+    {
+        stateMachine.SetState(stateMachine.GetState<LoadBuyStrategy_Menu>());
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class StrategyBuyView : View
 {
     [SerializeField] private Button buttonBuyStrategy;
+    [SerializeField] private Image imageStrategy;
 
     public void Initialize()
     {
@@ -14,6 +15,11 @@ public class StrategyBuyView : View
     public void Dispose()
     {
         buttonBuyStrategy.onClick.RemoveListener(() => OnClickToBuy?.Invoke());
+    }
+
+    public void SetSelectStrategy(Strategy strategy)
+    {
+        imageStrategy.sprite = strategy.Sprite;
     }
 
     #region Input

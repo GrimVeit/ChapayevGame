@@ -79,7 +79,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         fencePresenter = new FencePresenter(new FenceModel(), viewContainer.GetView<FenceView>());
 
-        gameResultPresenter = new GameResultPresenter(new GameResultModel(winPrices), viewContainer.GetView<GameResultView>());
+        gameResultPresenter = new GameResultPresenter(new GameResultModel(winPrices, bankPresenter), viewContainer.GetView<GameResultView>());
 
         stateMachine = new GameStateMachine(
             sceneRoot, 
