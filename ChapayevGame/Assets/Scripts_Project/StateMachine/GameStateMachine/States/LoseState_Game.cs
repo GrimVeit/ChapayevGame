@@ -38,6 +38,7 @@ public class LoseState_Game : IState
 
         storeStrategyPresenter.UnselectAllStrategies();
         storeChipPresenter.UnselectAllChips();
+        sceneRoot.CloseGameArrowPanel();
         sceneRoot.OpenLosePanel();
     }
 

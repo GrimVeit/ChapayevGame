@@ -9,6 +9,7 @@ public class ChipSelect : MonoBehaviour
     public int Id => currentChip.ID;
 
     [SerializeField] private Button buttonSelect;
+    [SerializeField] private GameObject newObject;
     [SerializeField] private Image imageChipSelect;
     [SerializeField] private GameObject objectSelect;
 
@@ -28,6 +29,16 @@ public class ChipSelect : MonoBehaviour
     {
         currentChip = chip;
         imageChipSelect.sprite = currentChip.Sprite;
+    }
+
+    public void OpenNew()
+    {
+        newObject.SetActive(true);
+    }
+
+    public void CloseNew()
+    {
+        newObject.SetActive(false);
     }
 
     public void Select()

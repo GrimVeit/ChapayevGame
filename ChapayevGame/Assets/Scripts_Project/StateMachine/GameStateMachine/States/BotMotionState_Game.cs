@@ -7,14 +7,16 @@ public class BotMotionState_Game : IState
     private readonly IGlobalStateMachine stateMachine;
     private GameResultPresenter gameResultPresenter;
     private ChipBotMovePresenter chipBotMovePresenter;
+    private GameArrowPresenter gameArrowPresenter;
 
     private IEnumerator enumeratorTimer;
 
-    public BotMotionState_Game(IGlobalStateMachine stateMachine, GameResultPresenter gameResultPresenter, ChipBotMovePresenter chipBotMovePresenter)
+    public BotMotionState_Game(IGlobalStateMachine stateMachine, GameResultPresenter gameResultPresenter, ChipBotMovePresenter chipBotMovePresenter, GameArrowPresenter gameArrowPresenter)
     {
         this.stateMachine = stateMachine;
         this.gameResultPresenter = gameResultPresenter;
         this.chipBotMovePresenter = chipBotMovePresenter;
+        this.gameArrowPresenter = gameArrowPresenter;
     }
 
     public void EnterState()
@@ -26,6 +28,7 @@ public class BotMotionState_Game : IState
         chipBotMovePresenter.OnDoMotion += ChangeStateToTransitionState;
 
         chipBotMovePresenter.ActivateMove();
+        gameArrowPresenter.RotateUp();
     }
 
     public void ExitState()

@@ -46,13 +46,13 @@ public class ChipSelectView : View
         switch (count)
         {
             case 1:
-                textChipCount.text = "Choose 1 chip";
+                textChipCount.text = "1 chip";
                 break;
             case 2:
-                textChipCount.text = "Choose 2 chips";
+                textChipCount.text = "2 chips";
                 break;
             case 3:
-                textChipCount.text = "Choose 3 chips";
+                textChipCount.text = "3 chips";
                 break;
         }
     }
@@ -70,6 +70,15 @@ public class ChipSelectView : View
 
             chipSelects.Add(chipSelect);
         }
+    }
+
+    public void SetOpenNewChip(Chip chip)
+    {
+        var chipSelect = chipSelects.FirstOrDefault(data => data.Id == chip.ID);
+
+        if (chipSelect == null) return;
+
+        chipSelect.OpenNew();
     }
 
     public void SelectChip(int id)

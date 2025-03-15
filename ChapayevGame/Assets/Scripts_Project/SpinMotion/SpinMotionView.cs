@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class SpinMotionView : View
@@ -59,7 +60,21 @@ public class SpinMotionView : View
             yield return null;
         }
 
+        yield return RotateToClosest_Coroutine(IsPlayer());
+
         OnEndSpin?.Invoke(IsPlayer());
+    }
+
+    private IEnumerator RotateToClosest_Coroutine(bool isPlayer)
+    {
+        var target = isPlayer == true ? transformPlayer : transformBot;
+
+        Vector3 directionToTarget = target.position - spinTransform.position;
+        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+
+        spinTransform.DORotate(new Vector3(0, 0, targetAngle + 90), 0.4f);
+
+        yield return new WaitForSeconds(0.8f);
     }
 
     private bool IsPlayer()

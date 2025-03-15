@@ -25,11 +25,18 @@ public class StoreChipPresenter : IStoreChipData
 
     #region Input
 
+    public event Action<Chip> OnOpenNewChip
+    {
+        add => model.OnOpenNewChip += value;
+        remove => model.OnOpenNewChip -= value;
+    }
+
     public event Action<Chip> OnOpenChip
     {
         add => model.OnOpenChip += value;
         remove => model.OnOpenChip -= value;
     }
+
     public event Action<Chip> OnCloseChip
     {
         add => model.OnCloseChip += value;

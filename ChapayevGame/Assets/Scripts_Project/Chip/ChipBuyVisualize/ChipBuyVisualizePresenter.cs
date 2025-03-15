@@ -30,13 +30,17 @@ public class ChipBuyVisualizePresenter
     private void ActivateEvents()
     {
         model.OnSetCloseChip += view.SetCloseChipBuyVisualize;
+
         model.OnSetOpenChip += view.SetOpenChipBuyVisualize;
+        model.OnSetNewOpenChip += view.SetNewOpenChipBuyVisualize;
     }
 
     private void DeactivateEvents()
     {
         model.OnSetCloseChip -= view.SetCloseChipBuyVisualize;
+
         model.OnSetOpenChip -= view.SetOpenChipBuyVisualize;
+        model.OnSetNewOpenChip -= view.SetNewOpenChipBuyVisualize;
     }
 
     #region Input
@@ -44,6 +48,11 @@ public class ChipBuyVisualizePresenter
     public void SetOpenChip(Chip chip)
     {
         model.SetOpenChip(chip);
+    }
+
+    public void SetNewOpenChip(Chip chip)
+    {
+        model.SetNewOpenChip(chip);
     }
 
     public void SetCloseChip(Chip chip)

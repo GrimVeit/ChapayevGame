@@ -21,16 +21,17 @@ public class MenuStateMachine : IGlobalStateMachine
         ChipBuyVisualizePresenter chipBuyVisualizePresenter,
         ChipSelectPresenter chipSelectPresenter,
         
-        ITutorialDescriptionProvider tutorialDescriptionProvider)
+        ITutorialDescriptionProvider tutorialDescriptionProvider,
+        IAnimationFrameProvider animationFrameProvider)
     {
-        states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
+        states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot, animationFrameProvider);
 
         states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
-        states[typeof(LoadBuyStrategy_Menu)] = new LoadBuyStrategy_Menu(this, sceneRoot);
+        states[typeof(LoadBuyStrategy_Menu)] = new LoadBuyStrategy_Menu(this, sceneRoot, animationFrameProvider);
         states[typeof(StrategyPresentation_Menu)] = new StrategyPresentation_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter);
 
         states[typeof(BuyChip_Menu)] = new BuyChip_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter);
-        states[typeof(LoadBuyChip_Menu)] = new LoadBuyChip_Menu(this, sceneRoot);
+        states[typeof(LoadBuyChip_Menu)] = new LoadBuyChip_Menu(this, sceneRoot, animationFrameProvider);
         states[typeof(ChipPresentation_Menu)] = new ChipPresentation_Menu(this, sceneRoot, chipBuyPresenter, storeChipPresenter);
 
         states[typeof(ChooseStrategy_Menu)] = new ChooseStrategy_Menu(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, tutorialDescriptionProvider);

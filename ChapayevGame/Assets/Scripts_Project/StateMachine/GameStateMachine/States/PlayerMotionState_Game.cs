@@ -7,14 +7,16 @@ public class PlayerMotionState_Game : IState
     private readonly IGlobalStateMachine stateMachine;
     private ChipMovePresenter chipMovePresenter;
     private GameResultPresenter gameResultPresenter;
+    private GameArrowPresenter gameArrowPresenter;
 
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
 
-    public PlayerMotionState_Game(IGlobalStateMachine stateMachine, ChipMovePresenter chipMovePresenter, GameResultPresenter gameResultPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
+    public PlayerMotionState_Game(IGlobalStateMachine stateMachine, ChipMovePresenter chipMovePresenter, GameResultPresenter gameResultPresenter, GameArrowPresenter gameArrowPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         this.stateMachine = stateMachine;
         this.chipMovePresenter = chipMovePresenter;
         this.gameResultPresenter = gameResultPresenter;
+        this.gameArrowPresenter = gameArrowPresenter;
         this.tutorialDescriptionProvider = tutorialDescriptionProvider;
     }
 
@@ -28,6 +30,7 @@ public class PlayerMotionState_Game : IState
 
         chipMovePresenter.ActivateChips();
         tutorialDescriptionProvider.ActivateTutorial("StartGrabChip");
+        gameArrowPresenter.RotateDown();
     }
 
     public void ExitState()

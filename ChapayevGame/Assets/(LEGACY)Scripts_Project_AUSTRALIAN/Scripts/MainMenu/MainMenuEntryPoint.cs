@@ -28,6 +28,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private TutorialDescriptionPresenter tutorialDescriptionPresenter;
 
+    private AnimationFramePresenter animationFramePresenter;
+
     private MenuStateMachine stateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -52,6 +54,7 @@ public class MainMenuEntryPoint : MonoBehaviour
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
+        animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
         tutorialDescriptionPresenter = new TutorialDescriptionPresenter(new TutorialDescriptionModel(tutorialDescriptionGroup), viewContainer.GetView<TutorialDescriptionView>());
 
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
@@ -74,13 +77,15 @@ public class MainMenuEntryPoint : MonoBehaviour
             chipBuyPresenter,
             chipBuyVisualizePresenter,
             chipSelectPresenter,
-            tutorialDescriptionPresenter);
+            tutorialDescriptionPresenter,
+            animationFramePresenter);
 
         storeStrategyPresenter.UnselectAllStrategies();
         storeChipPresenter.UnselectAllChips();
 
         ActivateEvents();
 
+        animationFramePresenter.Initialize();
         tutorialDescriptionPresenter.Initialize();
 
         soundPresenter.Initialize();
@@ -114,8 +119,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeStrategyPresenter.OnSelectStrategy += chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip += chipBuyVisualizePresenter.SetNewOpenChip;
         storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip += chipSelectPresenter.SetOpenNewChip;
         storeChipPresenter.OnSelectChip += chipSelectPresenter.SelectChip;
         storeChipPresenter.OnDeselectChip += chipSelectPresenter.DeselectChip;
     }
@@ -132,8 +139,10 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeStrategyPresenter.OnSelectStrategy -= chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip -= chipBuyVisualizePresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip -= chipBuyVisualizePresenter.SetNewOpenChip;
         storeChipPresenter.OnCloseChip -= chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip -= chipSelectPresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip -= chipSelectPresenter.SetOpenNewChip;
         storeChipPresenter.OnSelectChip -= chipSelectPresenter.SelectChip;
         storeChipPresenter.OnDeselectChip -= chipSelectPresenter.DeselectChip;
     }
@@ -158,6 +167,7 @@ public class MainMenuEntryPoint : MonoBehaviour
     {
         DeactivateEvents();
 
+        animationFramePresenter?.Dispose();
         tutorialDescriptionPresenter?.Dispose();
 
         soundPresenter?.Dispose();

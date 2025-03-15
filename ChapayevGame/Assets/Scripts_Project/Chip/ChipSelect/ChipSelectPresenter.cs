@@ -33,6 +33,7 @@ public class ChipSelectPresenter
         view.OnChooseChip += model.ChooseChip;
 
         model.OnSetOpenChip += view.SetOpenChip;
+        model.OnSetOpenNewChip += view.SetOpenNewChip;
         model.OnSelectChip += view.SelectChip;
         model.OnDeselectChip += view.DeselectChip;
         model.OnActivate += view.Activate;
@@ -45,6 +46,7 @@ public class ChipSelectPresenter
         view.OnChooseChip -= model.ChooseChip;
 
         model.OnSetOpenChip -= view.SetOpenChip;
+        model.OnSetOpenNewChip -= view.SetOpenNewChip;
         model.OnSelectChip -= view.SelectChip;
         model.OnDeselectChip -= view.DeselectChip;
         model.OnActivate -= view.Activate;
@@ -78,6 +80,11 @@ public class ChipSelectPresenter
     public void SetOpenChip(Chip chip)
     {
         model.SetOpenChip(chip);
+    }
+
+    public void SetOpenNewChip(Chip chip)
+    {
+        model.SetOpenNewChip(chip);
     }
 
     #endregion

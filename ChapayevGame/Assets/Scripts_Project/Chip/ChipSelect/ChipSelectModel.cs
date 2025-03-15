@@ -4,6 +4,7 @@ using UnityEngine;
 public class ChipSelectModel
 {
     public event Action<Chip> OnSetOpenChip;
+    public event Action<Chip> OnSetOpenNewChip;
     public event Action<int> OnSetChipCount;
     public event Action<int> OnSelectChip;
     public event Action<int> OnDeselectChip;
@@ -28,6 +29,11 @@ public class ChipSelectModel
     public void SetOpenChip(Chip chip)
     {
         OnSetOpenChip?.Invoke(chip);
+    }
+
+    public void SetOpenNewChip(Chip chip)
+    {
+        OnSetOpenNewChip?.Invoke(chip);
     }
 
     public void SelectChip(int id)

@@ -6,18 +6,21 @@ public class LoadBuyStrategy_Menu : IState
 {
     private readonly UIMainMenuRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
+    private readonly IAnimationFrameProvider animationFrameProvider;
 
     private IEnumerator coroutineTimer;
 
-    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot)
+    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
+        this.animationFrameProvider = animationFrameProvider;
     }
 
     public void EnterState()
     {
         sceneRoot.OpenLoadBuyStrategyPanel();
+        animationFrameProvider.ActivateAnimation("LoadBuyStrategy", -1);
 
         if(coroutineTimer != null )
             Coroutines.Stop(coroutineTimer);
@@ -30,6 +33,7 @@ public class LoadBuyStrategy_Menu : IState
     public void ExitState()
     {
         sceneRoot.CloseLoadBuyStrategyPanel();
+        animationFrameProvider.DeactivateAnimation("LoadBuyStrategy");
     }
 
     private IEnumerator Timer(float time)

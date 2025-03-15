@@ -35,6 +35,15 @@ public class ChipBuyVisualizeView : View
         chipBuyVisualize.Open();
     }
 
+    public void SetNewOpenChipBuyVisualize(Chip chip)
+    {
+        var chipBuyVisualize = chipBuyVisualizes.FirstOrDefault(data => data.Id == chip.ID);
+
+        if (chipBuyVisualize == null) return;
+
+        chipBuyVisualize.OpenNew();
+    }
+
     public void SetCloseChipBuyVisualize(Chip chip)
     {
         var chipBuyVisualize = chipBuyVisualizes.FirstOrDefault(data => data.Id == chip.ID);

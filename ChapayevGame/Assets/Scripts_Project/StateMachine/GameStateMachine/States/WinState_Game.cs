@@ -37,6 +37,7 @@ public class WinState_Game : IState
 
         storeChipPresenter.UnselectAllChips();
         storeStrategyPresenter.UnselectAllStrategies();
+        sceneRoot.CloseGameArrowPanel();
         sceneRoot.OpenWinPanel();
     }
 

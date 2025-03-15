@@ -10,6 +10,7 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     [SerializeField] private SpinPanel_Game spinPanel;
     [SerializeField] private LosePanel_Game losePanel;
     [SerializeField] private WinPanel_Game winPanel;
+    [SerializeField] private MovePanel gameArrowPanel;
 
     [SerializeField] private StoreChipPanel_Game storeChipPanel;
     [SerializeField] private StoreStrategyPanel_Game storeStrategyPanel;
@@ -38,6 +39,7 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         spinPanel.Initialize();
         losePanel.Initialize();
         winPanel.Initialize();
+        gameArrowPanel.Initialize();
 
         storeChipPanel.Initialize();
         storeStrategyPanel.Initialize();
@@ -57,6 +59,7 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         spinPanel.Dispose();
         losePanel.Dispose();
         winPanel.Dispose();
+        gameArrowPanel.Dispose();
 
         storeChipPanel.Dispose();
         storeStrategyPanel.Dispose();
@@ -110,6 +113,24 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     public void OpenChooseChipPanel()
     {
         OpenPanel(chooseChipPanel);
+    }
+
+
+
+
+
+    public void OpenGameArrowPanel()
+    {
+        if(gameArrowPanel.IsActive) return;
+
+        OpenOtherPanel(gameArrowPanel);
+    }
+
+    public void CloseGameArrowPanel()
+    {
+        if (!gameArrowPanel.IsActive) return;
+
+        CloseOtherPanel(gameArrowPanel);
     }
 
 

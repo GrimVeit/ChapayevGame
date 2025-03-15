@@ -7,11 +7,13 @@ public class MainState_Menu : IState
     private UIMainMenuRoot sceneRoot;
 
     private IGlobalStateMachine stateMachine;
+    private IAnimationFrameProvider animationProvider;
 
-    public MainState_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot)
+    public MainState_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
+        this.animationProvider = animationProvider;
     }
 
     public void EnterState()
@@ -21,6 +23,7 @@ public class MainState_Menu : IState
         sceneRoot.OnClickToOpenChooseStrategy += ChangeStateToChooseStrategy;
 
         sceneRoot.OpenMainPanel();
+        animationProvider.ActivateAnimation("MenuLoad", 1);
     }
 
     public void ExitState()
@@ -28,6 +31,8 @@ public class MainState_Menu : IState
         sceneRoot.OnClickToOpenBuyStrategy -= ChangeStateToBuyStrategy;
         sceneRoot.OnClickToOpenBuyChip -= ChangeStateToBuyChip;
         sceneRoot.OnClickToOpenChooseStrategy -= ChangeStateToChooseStrategy;
+
+        animationProvider.DeactivateAnimation("MenuLoad");
     }
 
     private void ChangeStateToBuyStrategy()

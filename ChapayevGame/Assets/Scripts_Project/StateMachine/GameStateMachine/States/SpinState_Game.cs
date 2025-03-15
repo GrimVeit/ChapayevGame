@@ -38,6 +38,7 @@ public class SpinState_Game : IState
         spinMotionPresenter.OnPlayerMotion -= ChangeStateToPlayerMotionState;
 
         sceneRoot.CloseSpinPanel();
+        sceneRoot.OpenGameArrowPanel();
         tutorialDescriptionPresenter.LockTutorial("SpinWheel");
     }
 

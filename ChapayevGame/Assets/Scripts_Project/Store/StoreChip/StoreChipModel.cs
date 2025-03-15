@@ -8,6 +8,7 @@ using UnityEngine;
 public class StoreChipModel
 {
     public event Action<Chip> OnOpenChip;
+    public event Action<Chip> OnOpenNewChip;
     public event Action<Chip> OnCloseChip;
 
     public event Action<Chip> OnDeselectChip;
@@ -132,6 +133,7 @@ public class StoreChipModel
         {
             chip.ChipData.IsOpen = true;
             OnOpenChip?.Invoke(chip);
+            OnOpenNewChip?.Invoke(chip);
         }
     }
 

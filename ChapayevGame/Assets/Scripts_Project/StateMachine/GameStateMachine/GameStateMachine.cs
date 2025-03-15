@@ -27,23 +27,26 @@ public class GameStateMachine : IGlobalStateMachine
         ChipSpawnerPresenter chipSpawnerPresenter_Player,
         ChipSpawnerPresenter chipSpawnerPresenter_Bot,
         
-        ITutorialDescriptionProvider tutorialDescriptionProvider)
+        ITutorialDescriptionProvider tutorialDescriptionProvider,
+        IAnimationFrameProvider animationFrameProvider,
+        
+        GameArrowPresenter gameArrowPresenter)
     {
         states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this, sceneRoot, chipMovePresenter);
         states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter, tutorialDescriptionProvider);
-        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter, tutorialDescriptionProvider);
+        states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter, gameArrowPresenter, tutorialDescriptionProvider);
         states[typeof(FromPlayerMotionToBotMotion_Game)] = new FromPlayerMotionToBotMotion_Game(this, gameResultPresenter, chipMovePresenter);
-        states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter);
+        states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter, gameArrowPresenter);
         states[typeof(FromBotMotionToPlayerMotion_Game)] = new FromBotMotionToPlayerMotion_Game(this, gameResultPresenter, chipBotMovePresenter);
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
 
         states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter, gameResultPresenter);
-        states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot);
+        states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot, animationFrameProvider);
         states[typeof(ChipPresentation_Game)] = new ChipPresentation_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter);
 
         states[typeof(BuyStrategy_Game)] = new BuyStrategy_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter, gameResultPresenter);
-        states[typeof(LoadBuyStrategy_Game)] = new LoadBuyStrategy_Game(this, sceneRoot);
+        states[typeof(LoadBuyStrategy_Game)] = new LoadBuyStrategy_Game(this, sceneRoot, animationFrameProvider);
         states[typeof(StrategyPresentation_Game)] = new StrategyPresentation_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter);
 
         states[typeof(ChooseChip_Game)] = new ChooseChip_Game(this, sceneRoot, storeChipPresenter, chipSelectPresenter);

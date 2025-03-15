@@ -39,6 +39,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private ChipPunchPresenter chipPunchPresenter;
 
     private TutorialDescriptionPresenter tutorialDescriptionPresenter;
+    private AnimationFramePresenter animationFramePresenter;
+    private GameArrowPresenter gameArrowPresenter;
 
     private GameStateMachine stateMachine;
 
@@ -55,6 +57,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        gameArrowPresenter = new GameArrowPresenter(new GameArrowModel(), viewContainer.GetView<GameArrowView>());
+        animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
         tutorialDescriptionPresenter = new TutorialDescriptionPresenter(new TutorialDescriptionModel(tutorialDescriptionGroup), viewContainer.GetView<TutorialDescriptionView>());
 
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
@@ -97,7 +101,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
             strategySelectPresenter,
             chipSpawnerPresenter_Player,
             chipSpawnerPresenter_Bot,
-            tutorialDescriptionPresenter);
+            tutorialDescriptionPresenter,
+            animationFramePresenter,
+            gameArrowPresenter);
 
         sceneRoot.Activate();
         sceneRoot.Initialize();
@@ -107,6 +113,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot.Activate();
         chipSpawnerPresenter_Player.Activate();
 
+        gameArrowPresenter.Initialize();
+        animationFramePresenter.Initialize();
         tutorialDescriptionPresenter.Initialize();
 
         chipPunchPresenter.Initialize();
