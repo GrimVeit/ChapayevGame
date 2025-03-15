@@ -522,7 +522,7 @@ MonoBehaviour:
   panel: {fileID: 39780501}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 39780504}
 --- !u!225 &39780504
 CanvasGroup:
@@ -2036,7 +2036,7 @@ MonoBehaviour:
   panel: {fileID: 217250820}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 217250823}
 --- !u!225 &217250823
 CanvasGroup:
@@ -8049,7 +8049,7 @@ MonoBehaviour:
   panel: {fileID: 1033707508}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1033707511}
 --- !u!225 &1033707511
 CanvasGroup:
@@ -11865,7 +11865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -79.2, y: 162.70001}
+  m_AnchoredPosition: {x: -79.20001, y: 162.70001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1458935778
@@ -12937,7 +12937,7 @@ MonoBehaviour:
   panel: {fileID: 1612297988}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1612297991}
 --- !u!225 &1612297991
 CanvasGroup:

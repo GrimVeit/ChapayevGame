@@ -1153,7 +1153,7 @@ MonoBehaviour:
   panel: {fileID: 229554997}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 229555000}
   buttonCancel: {fileID: 643737501}
   buttonContinue: {fileID: 2058897527}
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   panel: {fileID: 275547277}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 275547280}
 --- !u!225 &275547280
 CanvasGroup:
@@ -1536,7 +1536,7 @@ MonoBehaviour:
   panel: {fileID: 297430662}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 297430667}
   buttonCancel: {fileID: 178832891}
 --- !u!225 &297430667
@@ -3978,7 +3978,7 @@ MonoBehaviour:
   panel: {fileID: 912647547}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 912647552}
 --- !u!225 &912647552
 CanvasGroup:
@@ -4505,7 +4505,7 @@ MonoBehaviour:
   panel: {fileID: 1004399807}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1004399812}
   buttonCancel: {fileID: 593677870}
 --- !u!225 &1004399812
@@ -4703,7 +4703,7 @@ MonoBehaviour:
   panel: {fileID: 1039594417}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1039594420}
   buttonCancel: {fileID: 381114385}
   buttonPlay: {fileID: 2143634457}
@@ -5112,7 +5112,7 @@ MonoBehaviour:
   panel: {fileID: 1169666247}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1169666252}
 --- !u!225 &1169666252
 CanvasGroup:
@@ -5872,7 +5872,7 @@ MonoBehaviour:
   panel: {fileID: 1536448578}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1536448583}
 --- !u!225 &1536448583
 CanvasGroup:
@@ -7372,7 +7372,7 @@ MonoBehaviour:
   panel: {fileID: 1903222961}
   from: {x: 0, y: 0, z: 0}
   to: {x: 0, y: 0, z: 0}
-  time: 0.1
+  time: 0.2
   canvasGroup: {fileID: 1903222967}
   buttonBattle: {fileID: 1989750075}
   buttonStrategy: {fileID: 800985217}
