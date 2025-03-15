@@ -30,12 +30,16 @@ public class StrategyBuyVisualizePresenter
     private void ActivateEvents()
     {
         model.OnSetOpenStrategy += view.SetOpenStrategyBuyVisualize;
+        model.OnSetOpenNewStrategy += view.SetOpenNewStrategyBuyVisualize;
+
         model.OnSetCloseStrategy += view.SetCloseStrategyBuyVisualize;
     }
 
     private void DeactivateEvents()
     {
         model.OnSetOpenStrategy -= view.SetOpenStrategyBuyVisualize;
+        model.OnSetOpenNewStrategy -= view.SetOpenNewStrategyBuyVisualize;
+
         model.OnSetCloseStrategy -= view.SetCloseStrategyBuyVisualize;
     }
 
@@ -44,6 +48,11 @@ public class StrategyBuyVisualizePresenter
     public void SetOpenStrategy(Strategy strategy)
     {
         model.SetOpenStrategy(strategy);
+    }
+
+    public void SetOpenNewStrategy(Strategy strategy)
+    {
+        model.SetOpenNewStrategy(strategy);
     }
 
     public void SetCloseStrategy(Strategy strategy)

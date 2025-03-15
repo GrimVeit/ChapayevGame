@@ -3,6 +3,7 @@ using System;
 public class StrategySelectModel
 {
     public event Action<Strategy> OnSetOpenStrategy;
+    public event Action<Strategy> OnSetOpenNewStrategy;
     public event Action<int> OnSelectStrategy;
     public event Action<int> OnDeselectStrategy;
 
@@ -18,6 +19,11 @@ public class StrategySelectModel
     public void SetOpenStrategy(Strategy strategy)
     {
         OnSetOpenStrategy?.Invoke(strategy);
+    }
+
+    public void SetOpenNewStrategy(Strategy strategy)
+    {
+        OnSetOpenNewStrategy?.Invoke(strategy);
     }
 
     public void SelectStrategy(int id)

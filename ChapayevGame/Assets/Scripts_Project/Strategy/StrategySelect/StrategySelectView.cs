@@ -43,6 +43,15 @@ public class StrategySelectView : View
         }
     }
 
+    public void SetOpenNewStrategy(Strategy strategy)
+    {
+        var strategySelect = strategySelects.FirstOrDefault(data => data.Id == strategy.ID);
+
+        if (strategySelect == null) return;
+
+        strategySelect.OpenNew();
+    }
+
     public void SelectStrategy(int id)
     {
         var strategy = strategySelects.FirstOrDefault(s => s.Id == id);

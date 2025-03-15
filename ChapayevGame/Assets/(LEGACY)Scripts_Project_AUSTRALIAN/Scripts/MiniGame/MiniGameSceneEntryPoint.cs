@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MiniGameSceneEntryPoint : MonoBehaviour
@@ -41,6 +42,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private TutorialDescriptionPresenter tutorialDescriptionPresenter;
     private AnimationFramePresenter animationFramePresenter;
     private GameArrowPresenter gameArrowPresenter;
+
+    private ChipCounterPresenter chipCounterPresenter_Player;
+    private ChipCounterPresenter chipCounterPresenter_Bot;
 
     private GameStateMachine stateMachine;
 
@@ -85,6 +89,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         gameResultPresenter = new GameResultPresenter(new GameResultModel(winPrices, bankPresenter), viewContainer.GetView<GameResultView>());
 
+        chipCounterPresenter_Player = new ChipCounterPresenter(new ChipCounterModel(), viewContainer.GetView<ChipCounterView>("Player"));
+        chipCounterPresenter_Bot = new ChipCounterPresenter(new ChipCounterModel(), viewContainer.GetView<ChipCounterView>("Bot"));
+
         stateMachine = new GameStateMachine(
             sceneRoot, 
             spinMotionPresenter, 
@@ -109,6 +116,9 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         sceneRoot.Initialize();
 
         ActivateEvents();
+
+        chipCounterPresenter_Player.Initialize();
+        chipCounterPresenter_Bot.Initialize();
 
         chipSpawnerPresenter_Bot.Activate();
         chipSpawnerPresenter_Player.Activate();
@@ -165,16 +175,25 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot.OnDestroyChip += gameResultPresenter.RemoveBotChip;
         chipSpawnerPresenter_Player.OnDestroyChip += gameResultPresenter.RemovePlayerChip;
 
+        chipSpawnerPresenter_Bot.OnSpawnChip += chipCounterPresenter_Bot.AddChip;
+        chipSpawnerPresenter_Player.OnSpawnChip += chipCounterPresenter_Player.AddChip;
+        chipSpawnerPresenter_Bot.OnDestroyChip += chipCounterPresenter_Bot.RemoveChip;
+        chipSpawnerPresenter_Player.OnDestroyChip += chipCounterPresenter_Player.RemoveChip;
+
         storeStrategyPresenter.OnOpenStrategy += strategyBuyVisualizePresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy += strategyBuyVisualizePresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnCloseStrategy += strategyBuyVisualizePresenter.SetCloseStrategy;
         storeStrategyPresenter.OnOpenStrategy += strategySelectPresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy += strategySelectPresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnSelectStrategy += strategySelectPresenter.SelectStrategy;
         storeStrategyPresenter.OnDeselectStrategy += strategySelectPresenter.DeselectStrategy;
 
         storeStrategyPresenter.OnSelectStrategy += chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip += chipBuyVisualizePresenter.SetOpenNewChip;
         storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
+        storeChipPresenter.OnOpenNewChip += chipSelectPresenter.SetOpenNewChip;
         storeChipPresenter.OnSelectChip += chipSelectPresenter.SelectChip;
         storeChipPresenter.OnDeselectChip += chipSelectPresenter.DeselectChip;
 
@@ -199,6 +218,11 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Player.OnSpawnChip -= gameResultPresenter.AddPlayerChip;
         chipSpawnerPresenter_Bot.OnDestroyChip -= gameResultPresenter.RemoveBotChip;
         chipSpawnerPresenter_Player.OnDestroyChip -= gameResultPresenter.RemovePlayerChip;
+
+        chipSpawnerPresenter_Bot.OnSpawnChip -= chipCounterPresenter_Bot.AddChip;
+        chipSpawnerPresenter_Player.OnSpawnChip -= chipCounterPresenter_Player.AddChip;
+        chipSpawnerPresenter_Bot.OnDestroyChip -= chipCounterPresenter_Bot.RemoveChip;
+        chipSpawnerPresenter_Player.OnDestroyChip -= chipCounterPresenter_Player.RemoveChip;
 
         storeStrategyPresenter.OnOpenStrategy -= strategyBuyVisualizePresenter.SetOpenStrategy;
         storeStrategyPresenter.OnCloseStrategy -= strategyBuyVisualizePresenter.SetCloseStrategy;

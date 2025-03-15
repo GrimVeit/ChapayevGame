@@ -25,11 +25,18 @@ public class StoreStrategyPresenter : IStoreStrategyData
 
     #region Input
 
+    public event Action<Strategy> OnOpenNewStrategy
+    {
+        add => model.OnOpenNewStrategy += value;
+        remove => model.OnOpenNewStrategy -= value;
+    }
+
     public event Action<Strategy> OnOpenStrategy
     {
         add => model.OnOpenStrategy += value;
         remove => model.OnOpenStrategy -= value;
     }
+
     public event Action<Strategy> OnCloseStrategy
     {
         add => model.OnCloseStrategy += value;

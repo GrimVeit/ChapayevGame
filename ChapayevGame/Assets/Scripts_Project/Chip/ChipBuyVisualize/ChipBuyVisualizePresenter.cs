@@ -50,7 +50,7 @@ public class ChipBuyVisualizePresenter
         model.SetOpenChip(chip);
     }
 
-    public void SetNewOpenChip(Chip chip)
+    public void SetOpenNewChip(Chip chip)
     {
         model.SetNewOpenChip(chip);
     }

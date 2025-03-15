@@ -35,6 +35,15 @@ public class StrategyBuyVisualizeView : View
         strategyBuyVisualize.Open();
     }
 
+    public void SetOpenNewStrategyBuyVisualize(Strategy strategy)
+    {
+        var strategyBuyVisualize = strategyBuyVisualizes.FirstOrDefault(data => data.Id == strategy.ID);
+
+        if (strategyBuyVisualize == null) return;
+
+        strategyBuyVisualize.OpenNew();
+    }
+
     public void SetCloseStrategyBuyVisualize(Strategy strategy)
     {
         var strategyBuyVisualize = strategyBuyVisualizes.FirstOrDefault(data => data.Id == strategy.ID);

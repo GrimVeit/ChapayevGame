@@ -112,14 +112,16 @@ public class MainMenuEntryPoint : MonoBehaviour
         ActivateTransitionsSceneEvents();
 
         storeStrategyPresenter.OnOpenStrategy += strategyBuyVisualizePresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy += strategyBuyVisualizePresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnCloseStrategy += strategyBuyVisualizePresenter.SetCloseStrategy;
         storeStrategyPresenter.OnOpenStrategy += strategySelectPresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy += strategySelectPresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnSelectStrategy += strategySelectPresenter.SelectStrategy;
         storeStrategyPresenter.OnDeselectStrategy += strategySelectPresenter.DeselectStrategy;
 
         storeStrategyPresenter.OnSelectStrategy += chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip += chipBuyVisualizePresenter.SetOpenChip;
-        storeChipPresenter.OnOpenNewChip += chipBuyVisualizePresenter.SetNewOpenChip;
+        storeChipPresenter.OnOpenNewChip += chipBuyVisualizePresenter.SetOpenNewChip;
         storeChipPresenter.OnCloseChip += chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip += chipSelectPresenter.SetOpenChip;
         storeChipPresenter.OnOpenNewChip += chipSelectPresenter.SetOpenNewChip;
@@ -132,14 +134,16 @@ public class MainMenuEntryPoint : MonoBehaviour
         DeactivateTransitionsSceneEvents();
 
         storeStrategyPresenter.OnOpenStrategy -= strategyBuyVisualizePresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy -= strategyBuyVisualizePresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnCloseStrategy -= strategyBuyVisualizePresenter.SetCloseStrategy;
         storeStrategyPresenter.OnOpenStrategy -= strategySelectPresenter.SetOpenStrategy;
+        storeStrategyPresenter.OnOpenNewStrategy -= strategySelectPresenter.SetOpenNewStrategy;
         storeStrategyPresenter.OnSelectStrategy -= strategySelectPresenter.SelectStrategy;
         storeStrategyPresenter.OnDeselectStrategy -= strategySelectPresenter.DeselectStrategy;
 
         storeStrategyPresenter.OnSelectStrategy -= chipSelectPresenter.SetStrategy;
         storeChipPresenter.OnOpenChip -= chipBuyVisualizePresenter.SetOpenChip;
-        storeChipPresenter.OnOpenNewChip -= chipBuyVisualizePresenter.SetNewOpenChip;
+        storeChipPresenter.OnOpenNewChip -= chipBuyVisualizePresenter.SetOpenNewChip;
         storeChipPresenter.OnCloseChip -= chipBuyVisualizePresenter.SetCloseChip;
         storeChipPresenter.OnOpenChip -= chipSelectPresenter.SetOpenChip;
         storeChipPresenter.OnOpenNewChip -= chipSelectPresenter.SetOpenNewChip;

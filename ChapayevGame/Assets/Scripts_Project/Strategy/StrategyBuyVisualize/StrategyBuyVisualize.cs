@@ -8,6 +8,7 @@ public class StrategyBuyVisualize : MonoBehaviour
     public int Id => currentStrategy.ID;
 
     [SerializeField] private Image imageStrategyBuyVisualize;
+    [SerializeField] private GameObject newObject;
     [SerializeField] private Color colorClose;
 
     private Strategy currentStrategy;
@@ -15,6 +16,16 @@ public class StrategyBuyVisualize : MonoBehaviour
     public void SetData(Strategy strategy)
     {
         currentStrategy = strategy;
+    }
+
+    public void OpenNew()
+    {
+        newObject.SetActive(true);
+    }
+
+    public void CloseNew()
+    {
+        newObject.SetActive(false);
     }
 
     public void Open()

@@ -11,6 +11,7 @@ public class ChipMove : MonoBehaviour
 
     public int ID => currentChipData.ID;
     public RectTransform RectTransform;
+    public Chip Chip => currentChipData;
 
     [SerializeField] private protected Transform transformAim;
     [SerializeField] private protected Image imageChip;

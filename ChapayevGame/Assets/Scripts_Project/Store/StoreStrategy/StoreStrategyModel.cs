@@ -8,6 +8,7 @@ using UnityEngine;
 public class StoreStrategyModel
 {
     public event Action<Strategy> OnOpenStrategy;
+    public event Action<Strategy> OnOpenNewStrategy;
     public event Action<Strategy> OnCloseStrategy;
 
     public event Action<Strategy> OnDeselectStrategy;
@@ -150,7 +151,8 @@ public class StoreStrategyModel
         {
             chip.StrategyData.IsOpen = true;
             OnOpenStrategy?.Invoke(chip);
-        }
+            OnOpenNewStrategy?.Invoke(chip);
+}
     }
 
     public bool IsAvailableStrategy()

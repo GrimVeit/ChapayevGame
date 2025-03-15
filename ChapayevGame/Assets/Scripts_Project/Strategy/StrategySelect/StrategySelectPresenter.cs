@@ -30,6 +30,7 @@ public class StrategySelectPresenter
         view.OnChooseStrategy += model.ChooseStrategy;
 
         model.OnSetOpenStrategy += view.SetOpenStrategy;
+        model.OnSetOpenNewStrategy += view.SetOpenNewStrategy;
         model.OnSelectStrategy += view.SelectStrategy;
         model.OnDeselectStrategy += view.DeselectStrategy;
     }
@@ -39,6 +40,7 @@ public class StrategySelectPresenter
         view.OnChooseStrategy -= model.ChooseStrategy;
 
         model.OnSetOpenStrategy -= view.SetOpenStrategy;
+        model.OnSetOpenNewStrategy -= view.SetOpenNewStrategy;
         model.OnSelectStrategy -= view.SelectStrategy;
         model.OnDeselectStrategy -= view.DeselectStrategy;
     }
@@ -64,6 +66,11 @@ public class StrategySelectPresenter
     public void SetOpenStrategy(Strategy strategy)
     {
         model.SetOpenStrategy(strategy);
+    }
+
+    public void SetOpenNewStrategy(Strategy strategy)
+    {
+        model.SetOpenNewStrategy(strategy);
     }
 
     #endregion

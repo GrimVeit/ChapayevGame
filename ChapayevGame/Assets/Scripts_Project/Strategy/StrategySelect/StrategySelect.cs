@@ -9,6 +9,7 @@ public class StrategySelect : MonoBehaviour
     public int Id => currentStrategy.ID;
 
     [SerializeField] private Button buttonSelect;
+    [SerializeField] private GameObject newObject;
     [SerializeField] private Image imageStrategyBuyVisualize;
     [SerializeField] private GameObject objectSelect;
 
@@ -28,6 +29,16 @@ public class StrategySelect : MonoBehaviour
     {
         currentStrategy = strategy;
         imageStrategyBuyVisualize.sprite = currentStrategy.Sprite;
+    }
+
+    public void OpenNew()
+    {
+        newObject.SetActive(true);
+    }
+
+    public void CloseNew()
+    {
+        newObject?.SetActive(false);
     }
 
     public void Select()
