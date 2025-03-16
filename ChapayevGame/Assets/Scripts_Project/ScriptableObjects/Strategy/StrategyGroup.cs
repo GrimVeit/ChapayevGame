@@ -13,6 +13,15 @@ public class StrategyGroup : ScriptableObject
         return Strategies.FirstOrDefault(data => data.ID == id);
     }
 
+    public Strategy GetStrategyByChipCount(int count)
+    {
+        var list = Strategies.Where(data => data.ChipCount == count).ToList();
+
+        return list[Random.Range(0, list.Count())];
+
+
+    }
+
     public bool IsAvailableStrategy()
     {
         return Strategies.FirstOrDefault(data => data.StrategyData.IsOpen == false) != null;

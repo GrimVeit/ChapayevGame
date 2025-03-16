@@ -16,12 +16,13 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private BankPresenter bankPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
 
-
+    private BotStoreStrategyPresenter botStoreStrategyPresenter;
     private StoreStrategyPresenter storeStrategyPresenter;
     private StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
     private StrategyBuyPresenter strategyBuyPresenter;
     private StrategySelectPresenter strategySelectPresenter;
 
+    private BotStoreChipPresenter botStoreChipPresenter;
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyVisualizePresenter chipBuyVisualizePresenter;
     private ChipBuyPresenter chipBuyPresenter;
@@ -67,11 +68,13 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
         tutorialDescriptionPresenter = new TutorialDescriptionPresenter(new TutorialDescriptionModel(tutorialDescriptionGroup), viewContainer.GetView<TutorialDescriptionView>());
 
+        botStoreStrategyPresenter = new BotStoreStrategyPresenter(new BotStoreStrategyModel(strategyGroup));
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
         strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter), viewContainer.GetView<StrategySelectView>());
 
+        botStoreChipPresenter = new BotStoreChipPresenter(new BotStoreChipModel(chipGroup));
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
@@ -135,7 +138,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         fencePresenter.Initialize();
         gameResultPresenter.Initialize();
 
-        storeStrategyPresenter.Initialize();
+        botStoreStrategyPresenter.Initialize();
 
         chipBotMovePresenter.Initialize();
         chipMovePresenter.Initialize();
@@ -146,11 +149,13 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         strategyBuyVisualizePresenter.Initialize();
         strategyBuyPresenter.Initialize();
         storeStrategyPresenter.Initialize();
+        botStoreStrategyPresenter.Initialize();
 
         chipSelectPresenter.Initialize();
         chipBuyVisualizePresenter.Initialize();
         chipBuyPresenter.Initialize();
         storeChipPresenter.Initialize();
+        botStoreChipPresenter.Initialize();
 
         bankPresenter.Initialize();
         particleEffectPresenter.Initialize();
@@ -168,8 +173,15 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeStrategyPresenter.OnSelectStrategy += chipSpawnerPresenter_Player.SetStrategy;
         storeChipPresenter.OnSelectChip += chipSpawnerPresenter_Player.SetChip;
 
-        storeStrategyPresenter.OnSelectStrategy += chipSpawnerPresenter_Bot.SetStrategy;
-        storeChipPresenter.OnSelectChip += chipSpawnerPresenter_Bot.SetChip;
+        storeStrategyPresenter.OnSelectStrategy += botStoreStrategyPresenter.SelectRandomStrategy;
+        botStoreStrategyPresenter.OnSelectRandomStrategy += chipSpawnerPresenter_Bot.SetStrategy;
+
+        storeChipPresenter.OnSelectChip += botStoreChipPresenter.SelectRandomChip;
+        botStoreChipPresenter.OnSelectRandomChip += chipSpawnerPresenter_Bot.SetChip;
+
+
+
+
 
         chipSpawnerPresenter_Player.OnSpawnChip += chipMovePresenter.AddChip;
         chipSpawnerPresenter_Player.OnDestroyChip += chipMovePresenter.RemoveChip;
@@ -212,8 +224,14 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeStrategyPresenter.OnSelectStrategy -= chipSpawnerPresenter_Player.SetStrategy;
         storeChipPresenter.OnSelectChip -= chipSpawnerPresenter_Player.SetChip;
 
-        storeStrategyPresenter.OnSelectStrategy -= chipSpawnerPresenter_Bot.SetStrategy;
-        storeChipPresenter.OnSelectChip -= chipSpawnerPresenter_Bot.SetChip;
+        storeStrategyPresenter.OnSelectStrategy -= botStoreStrategyPresenter.SelectRandomStrategy;
+        botStoreStrategyPresenter.OnSelectRandomStrategy -= chipSpawnerPresenter_Bot.SetStrategy;
+
+        storeChipPresenter.OnSelectChip -= botStoreChipPresenter.SelectRandomChip;
+        botStoreChipPresenter.OnSelectRandomChip -= chipSpawnerPresenter_Bot.SetChip;
+
+
+
 
         chipSpawnerPresenter_Player.OnSpawnChip -= chipMovePresenter.AddChip;
         chipSpawnerPresenter_Player.OnDestroyChip -= chipMovePresenter.RemoveChip;
@@ -273,6 +291,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Player?.Dispose();
         chipSpawnerPresenter_Bot?.Dispose();
         storeChipPresenter.Dispose();
+        botStoreChipPresenter?.Dispose();
 
         stateMachine?.Dispose();
     }
