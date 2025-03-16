@@ -14,6 +14,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private UIMiniGameSceneRoot sceneRoot;
     private ViewContainer viewContainer;
     private BankPresenter bankPresenter;
+    private ParticleEffectPresenter particleEffectPresenter;
 
 
     private StoreStrategyPresenter storeStrategyPresenter;
@@ -60,6 +61,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         viewContainer.Initialize();
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+        particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
 
         gameArrowPresenter = new GameArrowPresenter(new GameArrowModel(), viewContainer.GetView<GameArrowView>());
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
@@ -110,6 +112,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
             chipSpawnerPresenter_Bot,
             tutorialDescriptionPresenter,
             animationFramePresenter,
+            particleEffectPresenter,
             gameArrowPresenter);
 
         sceneRoot.Activate();
@@ -150,6 +153,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeChipPresenter.Initialize();
 
         bankPresenter.Initialize();
+        particleEffectPresenter.Initialize();
 
         stateMachine.Initialize();
 

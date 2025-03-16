@@ -29,6 +29,7 @@ public class GameStateMachine : IGlobalStateMachine
         
         ITutorialDescriptionProvider tutorialDescriptionProvider,
         IAnimationFrameProvider animationFrameProvider,
+        IParticleEffectProvider particleEffectProvider,
         
         GameArrowPresenter gameArrowPresenter)
     {
@@ -43,11 +44,11 @@ public class GameStateMachine : IGlobalStateMachine
 
         states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter, gameResultPresenter);
         states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot, animationFrameProvider);
-        states[typeof(ChipPresentation_Game)] = new ChipPresentation_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter);
+        states[typeof(ChipPresentation_Game)] = new ChipPresentation_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, particleEffectProvider);
 
         states[typeof(BuyStrategy_Game)] = new BuyStrategy_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter, gameResultPresenter);
         states[typeof(LoadBuyStrategy_Game)] = new LoadBuyStrategy_Game(this, sceneRoot, animationFrameProvider);
-        states[typeof(StrategyPresentation_Game)] = new StrategyPresentation_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter);
+        states[typeof(StrategyPresentation_Game)] = new StrategyPresentation_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, particleEffectProvider);
 
         states[typeof(ChooseChip_Game)] = new ChooseChip_Game(this, sceneRoot, storeChipPresenter, chipSelectPresenter);
         states[typeof(ChooseStrategy_Game)] = new ChooseStrategy_Game(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, gameResultPresenter);

@@ -3240,6 +3240,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1137584191}
+  - {fileID: 2143828675}
   m_Father: {fileID: 912647548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8246,6 +8247,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5638006274292645024}
   - {fileID: 1614601407}
   m_Father: {fileID: 1536448579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9559,20 +9561,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143634455}
   m_CullTransparentMesh: 1
---- !u!114 &58327798184997815
+--- !u!1 &2143828674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143828675}
+  - component: {fileID: 2143828676}
+  m_Layer: 5
+  m_Name: PositionNewChip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2143828675
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143828674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -300}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 700060947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2143828676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6295973123354511375}
+  m_GameObject: {fileID: 2143828674}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24f22b695431ad64a96a5f3f102f1a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isVisible: 0
-  point: {fileID: 1526253275107775946}
+  point: {fileID: 2143828675}
   size: 10
   color: {r: 1, g: 0, b: 0, a: 1}
   drawType: 0
@@ -9587,7 +9625,7 @@ GameObject:
   - component: {fileID: 5638006274292645024}
   - component: {fileID: 1547510606926139832}
   m_Layer: 5
-  m_Name: PositionNewPack
+  m_Name: PositionNewStrategy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9716,25 +9754,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!224 &1526253275107775946
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6295973123354511375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -300}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3114518766868183947}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.000019, y: -30.499962}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1547510606926139832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9796,9 +9815,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3114518766868183947}
-  - {fileID: 5374724480190481437}
+  m_Children: []
   m_Father: {fileID: 7268127844772316494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9821,26 +9838,6 @@ MonoBehaviour:
   bankDisplayViews:
   - {fileID: 630617732}
   - {fileID: 2036721459}
---- !u!224 &3114518766868183947
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5579608979332370669}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1526253275107775946}
-  m_Father: {fileID: 2381372586135850194}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3241749473482128761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9921,25 +9918,25 @@ MonoBehaviour:
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 738188599035995039, guid: a25be6f40ed774940bac97ed7b9c9c4e, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 99787056525953632, guid: e02d5e4ea4992ab49b762e8a3d43810a, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 5104224704216456133, guid: 6e30104f3d56bda4e95ad15be841ae35, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 422561418405784673, guid: 8728b585685f7a74f90b6d917757215a, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
@@ -9947,25 +9944,25 @@ MonoBehaviour:
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 1579786906546301669, guid: f0ef796e0f332884fa75836fcf909b28, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 138177619530107609, guid: e48ce5cdfd7cf4143bd72ebaaf9a4528, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 3320254681639293036, guid: d363bba4fd62e5c42950ddfd2d406675, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 6420158484808219830, guid: 8a68578a3539ca949915b443dea44b11, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
@@ -9973,25 +9970,25 @@ MonoBehaviour:
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 674771751045806664, guid: 0779f54d514b2264b854da6614d9e816, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 4968566034976670996, guid: b2b1dcc16935da8478bcfff1e1ca1d02, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 7478360463338892095, guid: 86d544a9ca7f48e48b576f2ca2657c96, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 223529725487084884, guid: e920f6a12a772c344b9780bff0b93bd2, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
@@ -9999,25 +9996,25 @@ MonoBehaviour:
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 8531730244177957477, guid: 9639d87fb1bbbe649a2ddb7967c8ceea, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 644922845946178205, guid: 9895eb37d3cbf164386a107cdf52f7f8, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 5183932553639469990, guid: e6ea799f4bc0c37428287ac02cd37180, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 3854178486040081119, guid: fa530acdd80dba64180b7704a05baadc, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
@@ -10025,29 +10022,29 @@ MonoBehaviour:
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 4701667152705009326, guid: 66e20687c20f01341a10e6f1aa571b66, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 7076601041125221817, guid: 82508cf109346ed48ae347f824609504, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 8622733508074730342, guid: 17ef9684d61ad4d498c3e110a129f9c1, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 4504760729196721867, guid: 7849a65739167d44b9632932db1065b5, type: 3}
-      particleTransform: {fileID: 1526253275107775946}
+      particleTransform: {fileID: 0}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
-  - ID: NewPack
+  - ID: NewStrategy
     particles:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 2389487169119749415, guid: 7e01ac1a1ef9a7548928fa8b7b807f2d, type: 3}
@@ -10079,6 +10076,38 @@ MonoBehaviour:
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
+  - ID: NewChip
+    particles:
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 2389487169119749415, guid: 7e01ac1a1ef9a7548928fa8b7b807f2d, type: 3}
+      particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 6097711977027087219, guid: d94cfd945a568dc46837aa22099cb697, type: 3}
+      particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 7995317036892792410, guid: 9bb12f8349e65e641b4ab30266b6ece9, type: 3}
+      particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 5450665744544487912, guid: fffab7578a2439f4294d47918a12ec58, type: 3}
+      particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 3921795165019144207, guid: 787be44234b61c549ab89d6fc50bfa04, type: 3}
+      particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
 --- !u!222 &5104971942917834576
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10087,42 +10116,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8814299507974332344}
   m_CullTransparentMesh: 1
---- !u!224 &5374724480190481437
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7588632571011747899}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5638006274292645024}
-  m_Father: {fileID: 2381372586135850194}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &5579608979332370669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3114518766868183947}
-  m_Layer: 5
-  m_Name: OpenCard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &5582424929244784645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10163,11 +10156,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5374724480190481437}
+  m_Father: {fileID: 2019679181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -323.00003}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6024740328106278061
@@ -10183,23 +10176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffects: {fileID: 4446646171866499796}
---- !u!1 &6295973123354511375
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1526253275107775946}
-  - component: {fileID: 58327798184997815}
-  m_Layer: 5
-  m_Name: PositionOpenCard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &7079816752900620199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10242,22 +10218,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &7588632571011747899
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5374724480190481437}
-  m_Layer: 5
-  m_Name: NewPack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &7740716709243069828
 GameObject:
   m_ObjectHideFlags: 0

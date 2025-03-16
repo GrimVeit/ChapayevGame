@@ -78,7 +78,8 @@ public class MainMenuEntryPoint : MonoBehaviour
             chipBuyVisualizePresenter,
             chipSelectPresenter,
             tutorialDescriptionPresenter,
-            animationFramePresenter);
+            animationFramePresenter,
+            particleEffectPresenter);
 
         storeStrategyPresenter.UnselectAllStrategies();
         storeChipPresenter.UnselectAllChips();

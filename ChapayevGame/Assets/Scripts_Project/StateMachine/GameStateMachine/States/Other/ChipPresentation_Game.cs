@@ -8,15 +8,17 @@ public class ChipPresentation_Game : IState
     private UIMiniGameSceneRoot sceneRoot;
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyPresenter chipBuyPresenter;
+    private IParticleEffectProvider particleEffectProvider;
 
     private IEnumerator coroutineTimer;
 
-    public ChipPresentation_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter)
+    public ChipPresentation_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter, IParticleEffectProvider particleEffectProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.chipBuyPresenter = strategyBuyPresenter;
         this.storeChipPresenter = storeChipPresenter;
+        this.particleEffectProvider = particleEffectProvider;
     }
 
     public void EnterState()
@@ -24,11 +26,12 @@ public class ChipPresentation_Game : IState
         chipBuyPresenter.OnBuyChip += storeChipPresenter.OpenChip;
 
         sceneRoot.OpenChipPresentationPanel();
+        particleEffectProvider.Play("NewChip");
 
         if (coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);
 
-        coroutineTimer = Timer(3);
+        coroutineTimer = Timer(1f);
         Coroutines.Start(coroutineTimer);
     }
 
@@ -42,7 +45,7 @@ public class ChipPresentation_Game : IState
 
     private IEnumerator Timer(float time)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
 
         chipBuyPresenter.Buy();
 

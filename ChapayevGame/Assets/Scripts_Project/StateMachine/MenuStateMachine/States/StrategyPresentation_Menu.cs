@@ -8,15 +8,17 @@ public class StrategyPresentation_Menu : IState
     private UIMainMenuRoot sceneRoot;
     private StoreStrategyPresenter storeStrategyPresenter;
     private StrategyBuyPresenter strategyBuyPresenter;
+    private IParticleEffectProvider particleEffectProvider;
 
     private IEnumerator coroutineTimer;
 
-    public StrategyPresentation_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter)
+    public StrategyPresentation_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, IParticleEffectProvider particleEffectProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.strategyBuyPresenter = strategyBuyPresenter;
         this.storeStrategyPresenter = storeStrategyPresenter;
+        this.particleEffectProvider = particleEffectProvider;
     }
 
     public void EnterState()
@@ -24,11 +26,12 @@ public class StrategyPresentation_Menu : IState
         strategyBuyPresenter.OnBuyStrategy += storeStrategyPresenter.OpenStrategy;
 
         sceneRoot.OpenStrategyPresentationPanel();
+        particleEffectProvider.Play("NewStrategy");
 
         if (coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);
 
-        coroutineTimer = Timer(3);
+        coroutineTimer = Timer(1);
         Coroutines.Start(coroutineTimer);
     }
 
@@ -42,7 +45,7 @@ public class StrategyPresentation_Menu : IState
 
     private IEnumerator Timer(float time)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
 
         strategyBuyPresenter.Buy();
 
