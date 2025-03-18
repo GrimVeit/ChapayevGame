@@ -14,6 +14,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private UIMiniGameSceneRoot sceneRoot;
     private ViewContainer viewContainer;
     private BankPresenter bankPresenter;
+    private SoundPresenter soundPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
 
     private BotStoreStrategyPresenter botStoreStrategyPresenter;
@@ -61,6 +62,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
+        soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS), viewContainer.GetView<SoundView>());
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
 
@@ -84,7 +86,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
 
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipMoveView>());
-        chipBotMovePresenter = new ChipBotMovePresenter(new ChipBotMoveModel(chipSpawnerPresenter_Bot, chipSpawnerPresenter_Player));
+        chipBotMovePresenter = new ChipBotMovePresenter(new ChipBotMoveModel(chipSpawnerPresenter_Bot, chipSpawnerPresenter_Player, soundPresenter));
 
         chipPunchPresenter = new ChipPunchPresenter(new ChipPunchModel(), viewContainer.GetView<ChipPunchView>());
 
@@ -116,6 +118,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
             tutorialDescriptionPresenter,
             animationFramePresenter,
             particleEffectPresenter,
+            soundPresenter,
             gameArrowPresenter);
 
         sceneRoot.Activate();
@@ -158,6 +161,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         botStoreChipPresenter.Initialize();
 
         bankPresenter.Initialize();
+        soundPresenter.Initialize();
         particleEffectPresenter.Initialize();
 
         stateMachine.Initialize();
@@ -275,25 +279,49 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
     public void Dispose()
     {
+        sceneRoot.Deactivate();
+        sceneRoot.Dispose();
+
         DeactivateEvents();
 
-        sceneRoot?.Dispose();
+        chipCounterPresenter_Player.Dispose();
+        chipCounterPresenter_Bot.Dispose();
 
+        chipSpawnerPresenter_Bot.Deactivate();
+        chipSpawnerPresenter_Player.Deactivate();
+
+        gameArrowPresenter.Dispose();
+        animationFramePresenter.Dispose();
         tutorialDescriptionPresenter.Dispose();
 
+        chipPunchPresenter.Dispose();
+        spinMotionPresenter.Dispose();
+        fencePresenter.Dispose();
+        gameResultPresenter.Dispose();
+
+        botStoreStrategyPresenter.Dispose();
+
+        chipBotMovePresenter.Dispose();
+        chipMovePresenter.Dispose();
+        chipSpawnerPresenter_Player.Dispose();
+        chipSpawnerPresenter_Bot.Dispose();
+
+        strategySelectPresenter.Dispose();
+        strategyBuyVisualizePresenter.Dispose();
+        strategyBuyPresenter.Dispose();
         storeStrategyPresenter.Dispose();
+        botStoreStrategyPresenter.Dispose();
 
-        spinMotionPresenter?.Dispose();
-        fencePresenter?.Dispose();
-
-        chipBotMovePresenter?.Dispose();
-        chipMovePresenter?.Dispose();
-        chipSpawnerPresenter_Player?.Dispose();
-        chipSpawnerPresenter_Bot?.Dispose();
+        chipSelectPresenter.Dispose();
+        chipBuyVisualizePresenter.Dispose();
+        chipBuyPresenter.Dispose();
         storeChipPresenter.Dispose();
-        botStoreChipPresenter?.Dispose();
+        botStoreChipPresenter.Dispose();
 
-        stateMachine?.Dispose();
+        bankPresenter.Dispose();
+        particleEffectPresenter.Dispose();
+
+        stateMachine.Dispose();
     }
 
     private void OnDestroy()
@@ -308,6 +336,7 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
     private void HandleGoToGame()
     {
         sceneRoot.Deactivate();
+        soundPresenter.Dispose();
         OnGoToGame?.Invoke();
     }
 

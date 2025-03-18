@@ -7,14 +7,16 @@ public class LoadBuyStrategy_Menu : IState
     private readonly UIMainMenuRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private readonly IAnimationFrameProvider animationFrameProvider;
+    private readonly ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
 
-    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider)
+    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.animationFrameProvider = animationFrameProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void EnterState()
@@ -36,9 +38,14 @@ public class LoadBuyStrategy_Menu : IState
         animationFrameProvider.DeactivateAnimation("LoadBuyStrategy");
     }
 
-    private IEnumerator Timer(float time)
+    private IEnumerator Timer(float cycleCount)
     {
-        yield return new WaitForSeconds(time);
+        for(int i = 0; i < cycleCount; i++)
+        {
+            soundProvider.PlayOneShot("Swoosh");
+
+            yield return new WaitForSeconds(0.75f);
+        }
 
         ChangeStateToStrategyPresentation();
     }

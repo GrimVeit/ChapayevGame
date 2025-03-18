@@ -30,6 +30,7 @@ public class GameStateMachine : IGlobalStateMachine
         ITutorialDescriptionProvider tutorialDescriptionProvider,
         IAnimationFrameProvider animationFrameProvider,
         IParticleEffectProvider particleEffectProvider,
+        ISoundProvider soundProvider,
         
         GameArrowPresenter gameArrowPresenter)
     {
@@ -39,16 +40,20 @@ public class GameStateMachine : IGlobalStateMachine
         states[typeof(FromPlayerMotionToBotMotion_Game)] = new FromPlayerMotionToBotMotion_Game(this, gameResultPresenter, chipMovePresenter);
         states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter, gameArrowPresenter);
         states[typeof(FromBotMotionToPlayerMotion_Game)] = new FromBotMotionToPlayerMotion_Game(this, gameResultPresenter, chipBotMovePresenter);
+
+        states[typeof(StartWinState_Game)] = new StartWinState_Game(this, sceneRoot, soundProvider);
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
+
+        states[typeof(StartLoseState_Game)] = new StartLoseState_Game(this, sceneRoot, soundProvider);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
 
         states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter, gameResultPresenter);
-        states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot, animationFrameProvider);
-        states[typeof(ChipPresentation_Game)] = new ChipPresentation_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, particleEffectProvider);
+        states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot, animationFrameProvider, soundProvider);
+        states[typeof(ChipPresentation_Game)] = new ChipPresentation_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, particleEffectProvider, soundProvider);
 
         states[typeof(BuyStrategy_Game)] = new BuyStrategy_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter, gameResultPresenter);
-        states[typeof(LoadBuyStrategy_Game)] = new LoadBuyStrategy_Game(this, sceneRoot, animationFrameProvider);
-        states[typeof(StrategyPresentation_Game)] = new StrategyPresentation_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, particleEffectProvider);
+        states[typeof(LoadBuyStrategy_Game)] = new LoadBuyStrategy_Game(this, sceneRoot, animationFrameProvider, soundProvider);
+        states[typeof(StrategyPresentation_Game)] = new StrategyPresentation_Game(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, particleEffectProvider, soundProvider);
 
         states[typeof(ChooseChip_Game)] = new ChooseChip_Game(this, sceneRoot, storeChipPresenter, chipSelectPresenter);
         states[typeof(ChooseStrategy_Game)] = new ChooseStrategy_Game(this, sceneRoot, storeStrategyPresenter, strategySelectPresenter, storeChipPresenter, gameResultPresenter);

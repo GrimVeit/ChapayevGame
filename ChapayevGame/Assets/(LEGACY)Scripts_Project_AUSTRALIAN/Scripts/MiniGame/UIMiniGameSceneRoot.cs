@@ -23,6 +23,9 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     [SerializeField] private ChipPresentationPanel_Menu chipPresentationPanel;
     [SerializeField] private StrategyPresentationPanel_Menu strategyPresentationPanel;
 
+    [SerializeField] private MovePanel chipUpCountPanel;
+    [SerializeField] private MovePanel chipDownCountPanel;
+
     private ISoundProvider soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -50,6 +53,9 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         loadBuyStrategyPanel.Initialize();
         chipPresentationPanel.Initialize();
         strategyPresentationPanel.Initialize();
+
+        chipUpCountPanel.Initialize();
+        chipDownCountPanel.Initialize();
     }
 
     public void Dispose()
@@ -70,6 +76,9 @@ public class UIMiniGameSceneRoot : MonoBehaviour
         loadBuyStrategyPanel.Dispose();
         chipPresentationPanel.Dispose();
         strategyPresentationPanel.Dispose();
+
+        chipUpCountPanel.Dispose();
+        chipDownCountPanel.Dispose();
     }
 
 
@@ -212,6 +221,34 @@ public class UIMiniGameSceneRoot : MonoBehaviour
     public void CloseLoadBuyChipPanel()
     {
         CloseOtherPanel(loadBuyChipPanel);
+    }
+
+
+
+
+
+    public void OpenChipDownCountPanel()
+    {
+        OpenOtherPanel(chipDownCountPanel);
+    }
+
+    public void CloseChipDownCountPanel()
+    {
+        CloseOtherPanel(chipDownCountPanel);
+    }
+
+
+
+
+
+    public void OpenChipUpCountPanel()
+    {
+        OpenOtherPanel(chipUpCountPanel);
+    }
+
+    public void CloseChipUpCountPanel()
+    {
+        CloseOtherPanel(chipUpCountPanel);
     }
 
 

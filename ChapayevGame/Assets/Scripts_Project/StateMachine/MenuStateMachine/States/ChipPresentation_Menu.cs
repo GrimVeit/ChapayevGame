@@ -9,16 +9,18 @@ public class ChipPresentation_Menu : IState
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyPresenter chipBuyPresenter;
     private IParticleEffectProvider particleEffectProvider;
+    private ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
     
-    public ChipPresentation_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter, IParticleEffectProvider particleEffectProvider)
+    public ChipPresentation_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter, IParticleEffectProvider particleEffectProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.chipBuyPresenter = strategyBuyPresenter;
         this.storeChipPresenter = storeChipPresenter;
         this.particleEffectProvider = particleEffectProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void EnterState()
@@ -27,6 +29,7 @@ public class ChipPresentation_Menu : IState
 
         sceneRoot.OpenChipPresentationPanel();
         particleEffectProvider.Play("NewChip");
+        soundProvider.PlayOneShot("NewItem");
 
         if (coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);

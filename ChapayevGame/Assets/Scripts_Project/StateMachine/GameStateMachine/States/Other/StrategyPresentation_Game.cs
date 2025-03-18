@@ -9,16 +9,18 @@ public class StrategyPresentation_Game : IState
     private StoreStrategyPresenter storeStrategyPresenter;
     private StrategyBuyPresenter strategyBuyPresenter;
     private IParticleEffectProvider particleEffectProvider;
+    private ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
 
-    public StrategyPresentation_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, IParticleEffectProvider particleEffectProvider)
+    public StrategyPresentation_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, IParticleEffectProvider particleEffectProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.strategyBuyPresenter = strategyBuyPresenter;
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.particleEffectProvider = particleEffectProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void EnterState()
@@ -27,6 +29,7 @@ public class StrategyPresentation_Game : IState
 
         sceneRoot.OpenStrategyPresentationPanel();
         particleEffectProvider.Play("NewStrategy");
+        soundProvider.PlayOneShot("NewItem");
 
         if (coroutineTimer != null)
             Coroutines.Stop(coroutineTimer);

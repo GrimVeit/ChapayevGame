@@ -24,8 +24,8 @@ public class PlayerMotionState_Game : IState
     {
         Debug.Log("ACTIVATE STATE - PLAYER MOTION");
 
-        gameResultPresenter.OnWin += ChangeStateToWin;
-        gameResultPresenter.OnLose += ChangeStateToLose;
+        gameResultPresenter.OnWin += ChangeStateToStartWin;
+        gameResultPresenter.OnLose += ChangeStateToStartLose;
         chipMovePresenter.OnDoMotion += ChangeStateToTransitionState;
 
         chipMovePresenter.ActivateChips();
@@ -37,8 +37,8 @@ public class PlayerMotionState_Game : IState
     {
         Debug.Log("DEACTIVATE STATE - PLAYER MOTION");
 
-        gameResultPresenter.OnWin -= ChangeStateToWin;
-        gameResultPresenter.OnLose -= ChangeStateToLose;
+        gameResultPresenter.OnWin -= ChangeStateToStartWin;
+        gameResultPresenter.OnLose -= ChangeStateToStartLose;
         chipMovePresenter.OnDoMotion -= ChangeStateToTransitionState;
 
         chipMovePresenter.DeactivateChips();
@@ -49,13 +49,13 @@ public class PlayerMotionState_Game : IState
         stateMachine.SetState(stateMachine.GetState<FromPlayerMotionToBotMotion_Game>());
     }
 
-    public void ChangeStateToWin()
+    public void ChangeStateToStartWin()
     {
-        stateMachine.SetState(stateMachine.GetState<WinState_Game>());
+        stateMachine.SetState(stateMachine.GetState<StartWinState_Game>());
     }
 
-    public void ChangeStateToLose()
+    public void ChangeStateToStartLose()
     {
-        stateMachine.SetState(stateMachine.GetState<LoseState_Game>());
+        stateMachine.SetState(stateMachine.GetState<StartLoseState_Game>());
     }
 }

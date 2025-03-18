@@ -39,6 +39,10 @@ public class SpinState_Game : IState
 
         sceneRoot.CloseSpinPanel();
         sceneRoot.OpenGameArrowPanel();
+        
+        sceneRoot.OpenChipDownCountPanel();
+        sceneRoot.OpenChipUpCountPanel();
+
         tutorialDescriptionPresenter.LockTutorial("SpinWheel");
     }
 

@@ -37,7 +37,10 @@ public class Sound : ISound
         SetVolume(0, normalVolume);
 
         if (isPlayAwake)
+        {
             audioSource.Play();
+            SetVolume(0, volume, 0.2f);
+        }
     }
 
     public void MainMute()

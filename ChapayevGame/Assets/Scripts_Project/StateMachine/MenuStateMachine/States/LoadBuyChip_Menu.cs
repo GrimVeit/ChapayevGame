@@ -7,14 +7,16 @@ public class LoadBuyChip_Menu : IState
     private readonly UIMainMenuRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private readonly IAnimationFrameProvider animationFrameProvider;
+    private readonly ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
 
-    public LoadBuyChip_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider)
+    public LoadBuyChip_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.animationFrameProvider = animationFrameProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void EnterState()
@@ -36,9 +38,14 @@ public class LoadBuyChip_Menu : IState
         animationFrameProvider.DeactivateAnimation("LoadBuyChip");
     }
 
-    private IEnumerator Timer(float time)
+    private IEnumerator Timer(int cycleCount)
     {
-        yield return new WaitForSeconds(time);
+        for (int i = 0; i < cycleCount; i++)
+        {
+            soundProvider.PlayOneShot("Swoosh");
+
+            yield return new WaitForSeconds(0.75f);
+        }
 
         ChangeStateToChipPresentation();
     }

@@ -21,10 +21,13 @@ public class ChipBotMoveModel
 
     private IEnumerator coroutineAimShoot;
 
-    public ChipBotMoveModel(IChipBank chipBankBot, IChipBank chipBankPlayer)
+    private ISoundProvider soundProvider;
+
+    public ChipBotMoveModel(IChipBank chipBankBot, IChipBank chipBankPlayer, ISoundProvider soundProvider)
     {
         this.chipBankBot = chipBankBot;
         this.chipBankPlayer = chipBankPlayer;
+        this.soundProvider = soundProvider;
     }
 
     public void ActivateMove()
@@ -55,6 +58,7 @@ public class ChipBotMoveModel
         transformPlayer = GetClosestTransformPlayer(currentChip.transform);
 
         currentChip.ActivateAim();
+        soundProvider.PlayOneShot("Chip_Aim");
 
         Vector2 startPosition = currentChip.transform.position;
         Vector2 targetPosition = transformPlayer.position;
@@ -65,7 +69,7 @@ public class ChipBotMoveModel
 
         Vector2 direction = (targetPosition - startPosition).normalized;
 
-        while (elapsedTime < aimDuration)
+        while (elapsedTime < aimDuration - 0.3f)
         {
             elapsedTime += Time.deltaTime;
             float progress = elapsedTime / aimDuration;
@@ -81,6 +85,7 @@ public class ChipBotMoveModel
 
         float force = Random.Range(minForce, maxForce);
 
+        soundProvider.PlayOneShot("Chip_Fire");
         currentChip.AddForce(direction * force);
         currentChip.DeactivateAim();
 
