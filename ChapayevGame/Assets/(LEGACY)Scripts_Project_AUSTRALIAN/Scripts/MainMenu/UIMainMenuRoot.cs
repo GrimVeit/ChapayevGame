@@ -25,6 +25,12 @@ public class UIMainMenuRoot : MonoBehaviour
 
     public void Initialize()
     {
+        mainPanel.SetSoundProvider(soundProvider);
+        storeChipPanel.SetSoundProvider(soundProvider);
+        storeStrategyPanel.SetSoundProvider(soundProvider);
+        chooseStrategyPanel.SetSoundProvider(soundProvider);
+        chooseChipPanel.SetSoundProvider(soundProvider);
+
         mainPanel.Initialize();
         storeChipPanel.Initialize();
         storeStrategyPanel.Initialize();

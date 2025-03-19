@@ -10,10 +10,12 @@ public class StrategySelectModel
     public event Action<int> OnChooseStrategy;
 
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
+    private ISoundProvider soundProvider;
 
-    public StrategySelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    public StrategySelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider, ISoundProvider soundProvider)
     {
         this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void SetOpenStrategy(Strategy strategy)
@@ -41,6 +43,7 @@ public class StrategySelectModel
     public void ChooseStrategy(int id)
     {
         tutorialDescriptionProvider.LockTutorial("ChooseStrategy");
+        soundProvider.PlayOneShot("Select");
 
         OnChooseStrategy?.Invoke(id);
     }

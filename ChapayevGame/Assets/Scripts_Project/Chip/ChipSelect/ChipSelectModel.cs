@@ -20,10 +20,12 @@ public class ChipSelectModel
     private bool isActivate = false;
 
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
+    private ISoundProvider soundProvider;
 
-    public ChipSelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    public ChipSelectModel(ITutorialDescriptionProvider tutorialDescriptionProvider, ISoundProvider soundProvider)
     {
         this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void SetOpenChip(Chip chip)
@@ -68,6 +70,8 @@ public class ChipSelectModel
 
     public void ChooseChip(int id)
     {
+        soundProvider.PlayOneShot("Select");
+
         OnChooseChip?.Invoke(id);
     }
 

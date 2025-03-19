@@ -10,22 +10,29 @@ public class WinPanel_Game : MovePanel
     [SerializeField] private Button buttonStrategyStore;
     [SerializeField] private Button buttonChooseStrategy;
 
+    private ISoundProvider soundProvider;
+
+    public void SetSoundProvider(ISoundProvider soundProvider)
+    {
+        this.soundProvider = soundProvider;
+    }
+
     public override void Initialize()
     {
         base.Initialize();
 
-        buttonChipStore.onClick.AddListener(() => OnClickToOpenChipStore?.Invoke());
-        buttonStrategyStore.onClick.AddListener(() => OnClickToOpenStrategyStore?.Invoke());
-        buttonChooseStrategy.onClick.AddListener(() => OnClickToChooseStrategy?.Invoke());
+        buttonChipStore.onClick.AddListener(HandleClickToChipStore);
+        buttonStrategyStore.onClick.AddListener(HandleClickToStrategyStore);
+        buttonChooseStrategy.onClick.AddListener(HandleClickToChooseStrategy);
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        buttonChipStore.onClick.RemoveListener(() => OnClickToOpenChipStore?.Invoke());
-        buttonStrategyStore.onClick.RemoveListener(() => OnClickToOpenStrategyStore?.Invoke());
-        buttonChooseStrategy.onClick.RemoveListener(() => OnClickToChooseStrategy?.Invoke());
+        buttonChipStore.onClick.RemoveListener(HandleClickToChipStore);
+        buttonStrategyStore.onClick.RemoveListener(HandleClickToStrategyStore);
+        buttonChooseStrategy.onClick.RemoveListener(HandleClickToChooseStrategy);
     }
 
     #region Input
@@ -33,6 +40,27 @@ public class WinPanel_Game : MovePanel
     public event Action OnClickToOpenChipStore;
     public event Action OnClickToOpenStrategyStore;
     public event Action OnClickToChooseStrategy;
+
+    private void HandleClickToChipStore()
+    {
+        soundProvider.PlayOneShot("Click");
+
+        OnClickToOpenChipStore?.Invoke();
+    }
+
+    private void HandleClickToStrategyStore()
+    {
+        soundProvider.PlayOneShot("Click");
+
+        OnClickToOpenStrategyStore?.Invoke();
+    }
+
+    private void HandleClickToChooseStrategy()
+    {
+        soundProvider.PlayOneShot("Click");
+
+        OnClickToChooseStrategy.Invoke();
+    }
 
     #endregion
 }

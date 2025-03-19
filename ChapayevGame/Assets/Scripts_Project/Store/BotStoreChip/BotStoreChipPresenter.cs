@@ -36,5 +36,15 @@ public class BotStoreChipPresenter
         model.SelectRandomChip();
     }
 
+    public void Activate()
+    {
+        model.Activate();
+    }
+
+    public void Deactivate()
+    {
+        model.Deactivate();
+    }
+
     #endregion
 }

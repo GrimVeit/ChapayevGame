@@ -19,7 +19,6 @@ public class SoundModel
         for (int i = 0; i < sounds.Count; i++)
         {
             this.sounds[sounds[i].ID] = sounds[i];
-            this.sounds[sounds[i].ID].Initialize();
         }
     }
 

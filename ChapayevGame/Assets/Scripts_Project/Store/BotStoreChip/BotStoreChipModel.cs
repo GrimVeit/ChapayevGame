@@ -10,6 +10,8 @@ public class BotStoreChipModel
 
     private List<Chip> chips = new List<Chip>();
 
+    private bool isActive;
+
     public BotStoreChipModel(ChipGroup chipGroup)
     {
         for (int i = 0; i < chipGroup.Chips.Count; i++)
@@ -30,8 +32,20 @@ public class BotStoreChipModel
         
     }
 
+    public void Activate()
+    {
+        isActive = true;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+    }
+
     public void SelectRandomChip()
     {
+        if(!isActive) return;
+
         var chip = chips[0];
         chips.Remove(chip);
 

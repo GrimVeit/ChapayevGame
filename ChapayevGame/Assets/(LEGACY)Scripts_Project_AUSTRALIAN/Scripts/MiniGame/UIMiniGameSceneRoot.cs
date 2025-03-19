@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIMiniGameSceneRoot : MonoBehaviour
@@ -37,6 +35,14 @@ public class UIMiniGameSceneRoot : MonoBehaviour
 
     public void Initialize()
     {
+        winPanel.SetSoundProvider(soundProvider);
+        losePanel.SetSoundProvider(soundProvider);
+
+        storeChipPanel.SetSoundProvider(soundProvider);
+        storeStrategyPanel.SetSoundProvider(soundProvider);
+        chooseStrategyPanel.SetSoundProvider(soundProvider);
+        chooseChipPanel.SetSoundProvider(soundProvider);
+
         mainPanel.Initialize();
         spinStartPanel.Initialize();
         spinPanel.Initialize();

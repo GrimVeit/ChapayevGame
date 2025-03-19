@@ -13,9 +13,11 @@ public class ChipMoveModel
     public event Action OnStoppedChip;
 
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
-    public ChipMoveModel(ITutorialDescriptionProvider tutorialDescriptionProvider)
+    private ISoundProvider soundProvider;
+    public ChipMoveModel(ITutorialDescriptionProvider tutorialDescriptionProvider, ISoundProvider soundProvider)
     {
         this.tutorialDescriptionProvider = tutorialDescriptionProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void AddChip(ChipMove_Player chipMove)
@@ -43,11 +45,13 @@ public class ChipMoveModel
         tutorialDescriptionProvider.LockTutorial("StartGrabChip");
 
         tutorialDescriptionProvider.ActivateTutorial("DragAndDropChip");
+
+        soundProvider.PlayOneShot("Chip_Aim");
     }
 
     public void EndDrag()
     {
-
+        soundProvider.PlayOneShot("Chip_Fire");
     }
 
     public void DoMotion()

@@ -60,12 +60,12 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
-        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter), viewContainer.GetView<StrategySelectView>());
+        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<StrategySelectView>());
 
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
-        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipSelectView>());
+        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<ChipSelectView>());
 
         stateMachine = new MenuStateMachine(
             sceneRoot, 

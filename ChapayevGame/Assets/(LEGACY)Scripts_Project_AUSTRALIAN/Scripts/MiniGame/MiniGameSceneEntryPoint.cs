@@ -57,14 +57,15 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
 
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
-        sceneRoot.Activate();
-
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
         soundPresenter = new SoundPresenter(new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS), viewContainer.GetView<SoundView>());
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
         particleEffectPresenter = new ParticleEffectPresenter(new ParticleEffectModel(), viewContainer.GetView<ParticleEffectView>());
+
+        sceneRoot.SetSoundProvider(soundPresenter);
+        sceneRoot.Activate();
 
         gameArrowPresenter = new GameArrowPresenter(new GameArrowModel(), viewContainer.GetView<GameArrowView>());
         animationFramePresenter = new AnimationFramePresenter(new AnimationFrameModel(), viewContainer.GetView<AnimationFrameView>());
@@ -74,18 +75,18 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         storeStrategyPresenter = new StoreStrategyPresenter(new StoreStrategyModel(strategyGroup));
         strategyBuyPresenter = new StrategyBuyPresenter(new StrategyBuyModel(bankPresenter, storeStrategyPresenter), viewContainer.GetView<StrategyBuyView>());
         strategyBuyVisualizePresenter = new StrategyBuyVisualizePresenter(new StrategyBuyVisualizeModel(), viewContainer.GetView<StrategyBuyVisualizeView>());
-        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter), viewContainer.GetView<StrategySelectView>());
+        strategySelectPresenter = new StrategySelectPresenter(new StrategySelectModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<StrategySelectView>());
 
         botStoreChipPresenter = new BotStoreChipPresenter(new BotStoreChipModel(chipGroup));
         storeChipPresenter = new StoreChipPresenter(new StoreChipModel(chipGroup));
         chipBuyPresenter = new ChipBuyPresenter(new ChipBuyModel(bankPresenter, storeChipPresenter), viewContainer.GetView<ChipBuyView>());
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
-        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipSelectView>());
+        chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<ChipSelectView>());
 
         chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
         chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
 
-        chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(tutorialDescriptionPresenter), viewContainer.GetView<ChipMoveView>());
+        chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<ChipMoveView>());
         chipBotMovePresenter = new ChipBotMovePresenter(new ChipBotMoveModel(chipSpawnerPresenter_Bot, chipSpawnerPresenter_Player, soundPresenter));
 
         chipPunchPresenter = new ChipPunchPresenter(new ChipPunchModel(), viewContainer.GetView<ChipPunchView>());
@@ -119,15 +120,17 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
             animationFramePresenter,
             particleEffectPresenter,
             soundPresenter,
-            gameArrowPresenter);
-
-        sceneRoot.Activate();
-        sceneRoot.Initialize();
+            gameArrowPresenter,
+            botStoreChipPresenter);
 
         ActivateEvents();
 
+        sceneRoot.Initialize();
+
         chipCounterPresenter_Player.Initialize();
         chipCounterPresenter_Bot.Initialize();
+
+        botStoreChipPresenter.Activate();
 
         chipSpawnerPresenter_Bot.Activate();
         chipSpawnerPresenter_Player.Activate();

@@ -11,10 +11,11 @@ public class WinState_Game : IState
 
     private StoreChipPresenter storeChipPresenter;
     private StoreStrategyPresenter storeStrategyPresenter;
+    private BotStoreChipPresenter botStoreChipPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public WinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreChipPresenter storeChipPresenter, StoreStrategyPresenter storeStrategyPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot)
+    public WinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreChipPresenter storeChipPresenter, StoreStrategyPresenter storeStrategyPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot, BotStoreChipPresenter botStoreChipPresenter)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
@@ -22,6 +23,7 @@ public class WinState_Game : IState
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.chipSpawnerPresenter_Player = chipSpawnerPresenter_Player;
         this.chipSpawnerPresenter_Bot = chipSpawnerPresenter_Bot;
+        this.botStoreChipPresenter = botStoreChipPresenter;
     }
 
     public void EnterState()
@@ -34,6 +36,7 @@ public class WinState_Game : IState
 
         chipSpawnerPresenter_Bot.Deactivate();
         chipSpawnerPresenter_Player.Deactivate();
+        botStoreChipPresenter.Deactivate();
 
         storeChipPresenter.UnselectAllChips();
         storeStrategyPresenter.UnselectAllStrategies();

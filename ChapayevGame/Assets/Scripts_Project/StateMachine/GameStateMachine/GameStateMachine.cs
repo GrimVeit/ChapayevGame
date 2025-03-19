@@ -32,7 +32,8 @@ public class GameStateMachine : IGlobalStateMachine
         IParticleEffectProvider particleEffectProvider,
         ISoundProvider soundProvider,
         
-        GameArrowPresenter gameArrowPresenter)
+        GameArrowPresenter gameArrowPresenter,
+        BotStoreChipPresenter botStoreChipPresenter)
     {
         states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this, sceneRoot, chipMovePresenter);
         states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter, tutorialDescriptionProvider);
@@ -42,10 +43,10 @@ public class GameStateMachine : IGlobalStateMachine
         states[typeof(FromBotMotionToPlayerMotion_Game)] = new FromBotMotionToPlayerMotion_Game(this, gameResultPresenter, chipBotMovePresenter);
 
         states[typeof(StartWinState_Game)] = new StartWinState_Game(this, sceneRoot, soundProvider);
-        states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
+        states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, storeChipPresenter, storeStrategyPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot, botStoreChipPresenter);
 
         states[typeof(StartLoseState_Game)] = new StartLoseState_Game(this, sceneRoot, soundProvider);
-        states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot);
+        states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, storeStrategyPresenter, storeChipPresenter, chipSpawnerPresenter_Player, chipSpawnerPresenter_Bot, botStoreChipPresenter);
 
         states[typeof(BuyChip_Game)] = new BuyChip_Game(this, sceneRoot, chipBuyPresenter, storeChipPresenter, chipBuyVisualizePresenter, gameResultPresenter);
         states[typeof(LoadBuyChip_Game)] = new LoadBuyChip_Game(this, sceneRoot, animationFrameProvider, soundProvider);

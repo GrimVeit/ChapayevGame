@@ -11,10 +11,11 @@ public class LoseState_Game : IState
 
     private StoreChipPresenter storeChipPresenter;
     private StoreStrategyPresenter storeStrategyPresenter;
+    private BotStoreChipPresenter botStoreChipPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public LoseState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StoreChipPresenter storeChipPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot)
+    public LoseState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StoreChipPresenter storeChipPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot, BotStoreChipPresenter botStoreChipPresenter)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
@@ -23,6 +24,7 @@ public class LoseState_Game : IState
         this.storeStrategyPresenter = storeStrategyPresenter;
         this.chipSpawnerPresenter_Player = chipSpawnerPresenter_Player;
         this.chipSpawnerPresenter_Bot = chipSpawnerPresenter_Bot;
+        this.botStoreChipPresenter = botStoreChipPresenter;
     }
 
     public void EnterState()
@@ -35,6 +37,7 @@ public class LoseState_Game : IState
 
         chipSpawnerPresenter_Bot.Deactivate();
         chipSpawnerPresenter_Player.Deactivate();
+        botStoreChipPresenter.Deactivate();
 
         storeStrategyPresenter.UnselectAllStrategies();
         storeChipPresenter.UnselectAllChips();

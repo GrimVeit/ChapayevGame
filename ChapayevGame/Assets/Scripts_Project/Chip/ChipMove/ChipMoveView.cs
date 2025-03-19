@@ -204,7 +204,7 @@ public class ChipMoveView : View
 
     private void HandleDestroyedCurrent(ChipMove chipMove)
     {
-        OnStoppedCurrentChip?.Invoke();
+        OnDestroyedCurrentChip?.Invoke();
 
         Debug.Log("STOPPED CHIP!!!");
     }

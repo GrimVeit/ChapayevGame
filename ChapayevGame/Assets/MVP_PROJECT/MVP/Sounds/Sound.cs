@@ -101,17 +101,25 @@ public class Sound : ISound
 
     public void Dispose()
     {
-        SetVolume(normalVolume, 0);
+        SetVolume(normalVolume, 0, ()=> Coroutines.Stop(setVolume_Coroutine));
     }
 
     public void SetVolume(float startVolume, float endVolume, Action action = null)
     {
-        Coroutines.Start(ChangeVolume_Coroutine(startVolume, endVolume, durationChangeVolume, action));
+        if (setVolume_Coroutine != null)
+            Coroutines.Stop(setVolume_Coroutine);
+
+        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, durationChangeVolume, action);
+        Coroutines.Start(setVolume_Coroutine);
     }
 
     public void SetVolume(float startVolume, float endVolume, float time, Action action = null)
     {
-        Coroutines.Start(ChangeVolume_Coroutine(startVolume, endVolume, time, action));
+        if (setVolume_Coroutine != null)
+            Coroutines.Stop(setVolume_Coroutine);
+
+        setVolume_Coroutine = ChangeVolume_Coroutine(startVolume, endVolume, time, action);
+        Coroutines.Start(setVolume_Coroutine);
     }
 
     private IEnumerator ChangeVolume_Coroutine(float startVolume, float endVolume, float time, Action actionOnend)
