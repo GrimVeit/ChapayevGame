@@ -26,11 +26,15 @@ public class ChipSpawnerPresenter : IChipBank
 
     private void ActivateEvents()
     {
+        view.OnDestroyChip += model.DestroyChip;
+
         model.OnChipSpawner += view.SetChip;
     }
 
     private void DeactivateEvents()
     {
+        view.OnDestroyChip -= model.DestroyChip;
+
         model.OnChipSpawner -= view.SetChip;
     }
 
@@ -44,8 +48,8 @@ public class ChipSpawnerPresenter : IChipBank
 
     public event Action<ChipMove> OnDestroyChip
     {
-        add => view.OnDestroyChip += value;
-        remove => view.OnDestroyChip -= value;
+        add => model.OnDestroyChip += value;
+        remove => model.OnDestroyChip -= value;
     }
 
     public event Action<Transform, Transform, Vector2, float> OnPunch

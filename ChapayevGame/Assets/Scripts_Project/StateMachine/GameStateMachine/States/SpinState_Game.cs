@@ -8,20 +8,24 @@ public class SpinState_Game : IState
 
     private readonly IGlobalStateMachine stateMachine;
     private SpinMotionPresenter spinMotionPresenter;
+    private ISoundProvider soundProvider;
 
     private ITutorialDescriptionProvider tutorialDescriptionPresenter;
 
-    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter, ITutorialDescriptionProvider descriptionProvider)
+    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter, ITutorialDescriptionProvider descriptionProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
         this.spinMotionPresenter = motionPresenter;
         this.tutorialDescriptionPresenter = descriptionProvider;
+        this.soundProvider = soundProvider;
     }
 
     public void EnterState()
     {
         Debug.Log("ACTIVATE STATE - SPIN");
+
+        soundProvider.PlayOneShot("Wheel");
 
         spinMotionPresenter.OnBotMotion += ChangeStateToBotMotionState;
         spinMotionPresenter.OnPlayerMotion += ChangeStateToPlayerMotionState;

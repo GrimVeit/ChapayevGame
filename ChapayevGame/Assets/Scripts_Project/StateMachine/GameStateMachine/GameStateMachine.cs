@@ -36,7 +36,7 @@ public class GameStateMachine : IGlobalStateMachine
         BotStoreChipPresenter botStoreChipPresenter)
     {
         states[typeof(SpinStartState_Game)] = new SpinStartState_Game(this, sceneRoot, chipMovePresenter);
-        states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter, tutorialDescriptionProvider);
+        states[typeof(SpinState_Game)] = new SpinState_Game(this, sceneRoot, spinMotionPresenter, tutorialDescriptionProvider, soundProvider);
         states[typeof(PlayerMotionState_Game)] = new PlayerMotionState_Game(this, chipMovePresenter, gameResultPresenter, gameArrowPresenter, tutorialDescriptionProvider);
         states[typeof(FromPlayerMotionToBotMotion_Game)] = new FromPlayerMotionToBotMotion_Game(this, gameResultPresenter, chipMovePresenter);
         states[typeof(BotMotionState_Game)] = new BotMotionState_Game(this, gameResultPresenter, chipBotMovePresenter, gameArrowPresenter);

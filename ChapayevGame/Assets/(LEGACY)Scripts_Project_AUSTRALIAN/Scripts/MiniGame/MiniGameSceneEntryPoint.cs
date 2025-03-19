@@ -83,8 +83,8 @@ public class MiniGameSceneEntryPoint : MonoBehaviour
         chipBuyVisualizePresenter = new ChipBuyVisualizePresenter(new ChipBuyVisualizeModel(), viewContainer.GetView<ChipBuyVisualizeView>());
         chipSelectPresenter = new ChipSelectPresenter(new ChipSelectModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<ChipSelectView>());
 
-        chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Player"));
-        chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(), viewContainer.GetView<ChipSpawnerView>("Bot"));
+        chipSpawnerPresenter_Player = new ChipSpawnerPresenter(new ChipSpawnerModel(soundPresenter), viewContainer.GetView<ChipSpawnerView>("Player"));
+        chipSpawnerPresenter_Bot = new ChipSpawnerPresenter(new ChipSpawnerModel(soundPresenter), viewContainer.GetView<ChipSpawnerView>("Bot"));
 
         chipMovePresenter = new ChipMovePresenter(new ChipMoveModel(tutorialDescriptionPresenter, soundPresenter), viewContainer.GetView<ChipMoveView>());
         chipBotMovePresenter = new ChipBotMovePresenter(new ChipBotMoveModel(chipSpawnerPresenter_Bot, chipSpawnerPresenter_Player, soundPresenter));
