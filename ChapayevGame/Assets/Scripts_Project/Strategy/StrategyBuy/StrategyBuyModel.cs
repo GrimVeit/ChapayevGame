@@ -5,7 +5,7 @@ public class StrategyBuyModel
     public event Action<Strategy> OnSelectRandom_Value;
 
     public event Action<int> OnBuyStrategy;
-    public event Action OnClickToBuy;
+    //public event Action OnClickToBuy;
 
     private readonly IMoneyProvider moneyProvider;
     private readonly IStoreStrategyData storeStrategyData;

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ChooseChip_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
     private StoreChipPresenter storeChipPresentergyPresenter;
     private ChipSelectPresenter chipSelectPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public ChooseChip_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreChipPresenter storeChipPresenter, ChipSelectPresenter chipSelectPresenter)
+    public ChooseChip_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, StoreChipPresenter storeChipPresenter, ChipSelectPresenter chipSelectPresenter)
     {
         this.sceneRoot = sceneRoot;
         this.storeChipPresentergyPresenter = storeChipPresenter;

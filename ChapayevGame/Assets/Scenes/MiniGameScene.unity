@@ -501,7 +501,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23224169}
   m_Enabled: 1
-  m_Alpha: 0.02
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1874,7 +1874,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217250820}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6164,6 +6164,38 @@ MonoBehaviour:
       minSize: 1
       maxSize: 1
       isPlayAwake: 0
+  - ID: NewStrategy
+    particles:
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 2389487169119749415, guid: 7e01ac1a1ef9a7548928fa8b7b807f2d, type: 3}
+      particleTransform: {fileID: 1453571088}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 6097711977027087219, guid: d94cfd945a568dc46837aa22099cb697, type: 3}
+      particleTransform: {fileID: 1453571088}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 7995317036892792410, guid: 9bb12f8349e65e641b4ab30266b6ece9, type: 3}
+      particleTransform: {fileID: 1453571088}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 5450665744544487912, guid: fffab7578a2439f4294d47918a12ec58, type: 3}
+      particleTransform: {fileID: 1453571088}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 3921795165019144207, guid: 787be44234b61c549ab89d6fc50bfa04, type: 3}
+      particleTransform: {fileID: 1453571088}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
 --- !u!1 &802598045
 GameObject:
   m_ObjectHideFlags: 0
@@ -6561,7 +6593,7 @@ MonoBehaviour:
   chipGroup: {fileID: 11400000, guid: dad2bd51d9965c340b4cc4f05eec97e7, type: 2}
   winPrices: {fileID: 11400000, guid: 779dcc0ccc99b0c4691ccc9613effe41, type: 2}
   tutorialDescriptionGroup: {fileID: 11400000, guid: 1ce1fc6400b427d47873c1d8c2995bf2, type: 2}
-  sceneRootPrefab: {fileID: 4880077067056087525}
+  sceneRootPrefab: {fileID: 5759112182369476050}
 --- !u!1 &829285354
 GameObject:
   m_ObjectHideFlags: 0
@@ -8563,7 +8595,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033707508}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -16552,8 +16584,8 @@ GameObject:
   - component: {fileID: 4044249246013160970}
   - component: {fileID: 5759112182369476049}
   - component: {fileID: 427254656165970283}
-  - component: {fileID: 4880077067056087525}
   - component: {fileID: 499732968661432889}
+  - component: {fileID: 5759112182369476050}
   m_Layer: 5
   m_Name: UIMiniGameSceneRoot
   m_TagString: Untagged
@@ -16728,34 +16760,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4880077067056087525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247346364031265939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c59fdd33b541784c8df8f33c772f3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPanel: {fileID: 1319376964}
-  spinStartPanel: {fileID: 1317583620}
-  spinPanel: {fileID: 23224173}
-  losePanel: {fileID: 286925708}
-  winPanel: {fileID: 871370369}
-  gameArrowPanel: {fileID: 2057494221}
-  storeChipPanel: {fileID: 1983366812}
-  storeStrategyPanel: {fileID: 1713844119}
-  chooseStrategyPanel: {fileID: 2028602115}
-  chooseChipPanel: {fileID: 1369689409}
-  loadBuyStrategyPanel: {fileID: 1612297990}
-  loadBuyChipPanel: {fileID: 1033707510}
-  chipPresentationPanel: {fileID: 217250822}
-  strategyPresentationPanel: {fileID: 39780503}
-  chipUpCountPanel: {fileID: 527146685}
-  chipDownCountPanel: {fileID: 1785274208}
 --- !u!114 &4997780278797794298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16812,6 +16816,34 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &5759112182369476050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247346364031265939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98e6bb2c8699b448875204632031355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainPanel: {fileID: 1319376964}
+  spinStartPanel: {fileID: 1317583620}
+  spinPanel: {fileID: 23224173}
+  losePanel: {fileID: 286925708}
+  winPanel: {fileID: 871370369}
+  gameArrowPanel: {fileID: 2057494221}
+  storeChipPanel: {fileID: 1983366812}
+  storeStrategyPanel: {fileID: 1713844119}
+  chooseStrategyPanel: {fileID: 2028602115}
+  chooseChipPanel: {fileID: 1369689409}
+  loadBuyStrategyPanel: {fileID: 1612297990}
+  loadBuyChipPanel: {fileID: 1033707510}
+  chipPresentationPanel: {fileID: 217250822}
+  strategyPresentationPanel: {fileID: 39780503}
+  chipUpCountPanel: {fileID: 527146685}
+  chipDownCountPanel: {fileID: 1785274208}
 --- !u!224 &6186702370134061893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16876,7 +16908,7 @@ GameObject:
   - component: {fileID: 1124882114599888113}
   - component: {fileID: 2736670670922191990}
   m_Layer: 5
-  m_Name: SoundView
+  m_Name: AudioView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

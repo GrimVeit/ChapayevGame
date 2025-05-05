@@ -65,7 +65,7 @@ public class TutorialDescriptionView : View
         tutorialDescriptionVisual.DeactivatePanel();
     }
 
-    private void DestroyTutorial(MovePanel movePanel)
+    private void DestroyTutorial(MovablePanel movePanel)
     {
         movePanel.OnDeactivatePanel -= DestroyTutorial;
         movePanel.Dispose();

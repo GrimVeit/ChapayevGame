@@ -8,7 +8,7 @@ public class GameStateMachine : IGlobalStateMachine
     private IState currentState;
 
     public GameStateMachine(
-        UIMiniGameSceneRoot sceneRoot, 
+        UIGameRoot sceneRoot, 
         SpinMotionPresenter spinMotionPresenter, 
         ChipBotMovePresenter chipBotMovePresenter,
         ChipMovePresenter chipMovePresenter, 

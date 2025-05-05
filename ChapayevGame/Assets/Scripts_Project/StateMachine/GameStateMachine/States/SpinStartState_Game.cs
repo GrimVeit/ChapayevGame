@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpinStartState_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private ChipMovePresenter chipMovePresenter;
     private IEnumerator coroutineTimer;
 
-    public SpinStartState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipMovePresenter chipMovePresenter)
+    public SpinStartState_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, ChipMovePresenter chipMovePresenter)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

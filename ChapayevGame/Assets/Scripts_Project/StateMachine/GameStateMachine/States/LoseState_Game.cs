@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoseState_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
 
     private ChipSpawnerPresenter chipSpawnerPresenter_Bot;
     private ChipSpawnerPresenter chipSpawnerPresenter_Player;
@@ -15,7 +15,7 @@ public class LoseState_Game : IState
 
     private IGlobalStateMachine stateMachine;
 
-    public LoseState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StoreChipPresenter storeChipPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot, BotStoreChipPresenter botStoreChipPresenter)
+    public LoseState_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StoreChipPresenter storeChipPresenter, ChipSpawnerPresenter chipSpawnerPresenter_Player, ChipSpawnerPresenter chipSpawnerPresenter_Bot, BotStoreChipPresenter botStoreChipPresenter)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

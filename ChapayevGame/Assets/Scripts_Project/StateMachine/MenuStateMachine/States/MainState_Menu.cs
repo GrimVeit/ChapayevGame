@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MainState_Menu : IState
 {
-    private UIMainMenuRoot sceneRoot;
+    private UIMenuRoot sceneRoot;
 
     private IGlobalStateMachine stateMachine;
     private IAnimationFrameProvider animationProvider;
 
-    public MainState_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationProvider)
+    public MainState_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, IAnimationFrameProvider animationProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

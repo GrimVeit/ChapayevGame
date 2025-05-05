@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartLoseState_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
     private IGlobalStateMachine stateMachine;
     private ISoundProvider soundProvider;
 
@@ -13,7 +13,7 @@ public class StartLoseState_Game : IState
     private ISound soundBackground;
     private ISound soundLose;
 
-    public StartLoseState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ISoundProvider soundProvider)
+    public StartLoseState_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, ISoundProvider soundProvider)
     {
         this.sceneRoot = sceneRoot;
         this.stateMachine = stateMachine;

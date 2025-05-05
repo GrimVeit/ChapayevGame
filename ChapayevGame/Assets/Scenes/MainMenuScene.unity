@@ -3409,7 +3409,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912647547}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6783,8 +6783,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5638006274292645024}
   - {fileID: 1614601407}
+  - {fileID: 5638006274292645024}
   m_Father: {fileID: 1536448579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8351,6 +8351,38 @@ MonoBehaviour:
     - timeToInterval: 0
       particleSystemPrefab: {fileID: 3921795165019144207, guid: 787be44234b61c549ab89d6fc50bfa04, type: 3}
       particleTransform: {fileID: 2143828675}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+  - ID: NewStrategy
+    particles:
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 2389487169119749415, guid: 7e01ac1a1ef9a7548928fa8b7b807f2d, type: 3}
+      particleTransform: {fileID: 5638006274292645024}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 6097711977027087219, guid: d94cfd945a568dc46837aa22099cb697, type: 3}
+      particleTransform: {fileID: 5638006274292645024}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 7995317036892792410, guid: 9bb12f8349e65e641b4ab30266b6ece9, type: 3}
+      particleTransform: {fileID: 5638006274292645024}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 5450665744544487912, guid: fffab7578a2439f4294d47918a12ec58, type: 3}
+      particleTransform: {fileID: 5638006274292645024}
+      minSize: 1
+      maxSize: 1
+      isPlayAwake: 0
+    - timeToInterval: 0
+      particleSystemPrefab: {fileID: 3921795165019144207, guid: 787be44234b61c549ab89d6fc50bfa04, type: 3}
+      particleTransform: {fileID: 5638006274292645024}
       minSize: 1
       maxSize: 1
       isPlayAwake: 0

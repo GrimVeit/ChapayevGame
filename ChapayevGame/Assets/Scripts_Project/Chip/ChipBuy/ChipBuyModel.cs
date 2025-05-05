@@ -9,7 +9,7 @@ public class ChipBuyModel
     public event Action<Chip> OnSelectRandom_Value;
 
     public event Action<int> OnBuyChip;
-    public event Action OnClickToBuy;
+    //public event Action OnClickToBuy;
 
     private readonly IMoneyProvider moneyProvider;
     private readonly IStoreChipData storeChipData;

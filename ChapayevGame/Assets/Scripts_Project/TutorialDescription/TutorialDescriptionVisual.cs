@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialDescriptionVisual : MovePanel
+public class TutorialDescriptionVisual : MovablePanel
 {
     public string ID => currentTutorialDescription.GetID();
 
@@ -50,6 +50,7 @@ public class TutorialDescriptionVisual : MovePanel
     {
         if (coroutineClose != null)
             Coroutines.Stop(coroutineClose);
+
     }
 
     public void OnDestroy()
@@ -66,7 +67,7 @@ public class TutorialDescriptionVisual : MovePanel
 
     #region Input
 
-    public event Action<TutorialDescription> OnClickToDestroy;
+    //public event Action<TutorialDescription> OnClickToDestroy;
     public event Action<TutorialDescription> OnTimerCloseEnd;
 
     private void HandleClickToDestroy()

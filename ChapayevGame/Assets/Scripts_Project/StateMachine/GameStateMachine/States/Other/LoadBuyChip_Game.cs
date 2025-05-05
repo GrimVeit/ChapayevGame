@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class LoadBuyChip_Game : IState
 {
-    private readonly UIMiniGameSceneRoot sceneRoot;
+    private readonly UIGameRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private readonly IAnimationFrameProvider animationFrameProvider;
     private readonly ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
 
-    public LoadBuyChip_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
+    public LoadBuyChip_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

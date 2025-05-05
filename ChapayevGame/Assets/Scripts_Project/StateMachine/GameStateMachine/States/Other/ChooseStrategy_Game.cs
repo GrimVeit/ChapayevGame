@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChooseStrategy_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
     private StoreStrategyPresenter storeStrategyPresenter;
     private StoreChipPresenter storeChipPresenter;
     private StrategySelectPresenter strategySelectPresenter;
@@ -12,7 +12,7 @@ public class ChooseStrategy_Game : IState
 
     private IGlobalStateMachine stateMachine;
 
-    public ChooseStrategy_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter, GameResultPresenter gameResultPresenter)
+    public ChooseStrategy_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter, GameResultPresenter gameResultPresenter)
     {
         this.sceneRoot = sceneRoot;
         this.storeStrategyPresenter = storeStrategyPresenter;

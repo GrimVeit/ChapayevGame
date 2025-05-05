@@ -1,13 +1,13 @@
 public class BuyChip_Menu : IState
 {
-    private readonly UIMainMenuRoot sceneRoot;
+    private readonly UIMenuRoot sceneRoot;
     private readonly ChipBuyPresenter chipBuyPresenter;
     private readonly ChipBuyVisualizePresenter chipBuyVisualizePresenter;
     private readonly StoreChipPresenter storeChipPresenter;
 
     private readonly IGlobalStateMachine stateMachine;
 
-    public BuyChip_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, ChipBuyPresenter chipBuyPresenter, StoreChipPresenter storeChipPresenter, ChipBuyVisualizePresenter chipBuyVisualizePresenter)
+    public BuyChip_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, ChipBuyPresenter chipBuyPresenter, StoreChipPresenter storeChipPresenter, ChipBuyVisualizePresenter chipBuyVisualizePresenter)
     {
         this.sceneRoot = sceneRoot;
         this.chipBuyPresenter = chipBuyPresenter;

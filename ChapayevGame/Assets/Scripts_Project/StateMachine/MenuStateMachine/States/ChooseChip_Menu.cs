@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ChooseChip_Menu : IState
 {
-    private UIMainMenuRoot sceneRoot;
+    private UIMenuRoot sceneRoot;
     private StoreChipPresenter storeChipPresentergyPresenter;
     private ChipSelectPresenter chipSelectPresenter;
 
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
     private IGlobalStateMachine stateMachine;
 
-    public ChooseChip_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreChipPresenter storeChipPresenter, ChipSelectPresenter chipSelectPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
+    public ChooseChip_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, StoreChipPresenter storeChipPresenter, ChipSelectPresenter chipSelectPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         this.sceneRoot = sceneRoot;
         this.storeChipPresentergyPresenter = storeChipPresenter;

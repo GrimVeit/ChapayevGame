@@ -10,7 +10,7 @@ public class MenuStateMachine : IGlobalStateMachine
     private IState currentState;
 
     public MenuStateMachine(
-        UIMainMenuRoot sceneRoot,
+        UIMenuRoot sceneRoot,
         StoreStrategyPresenter storeStrategyPresenter,
         StrategyBuyPresenter strategyBuyPresenter,
         StrategyBuyVisualizePresenter strategyBuyVisualizePresenter,

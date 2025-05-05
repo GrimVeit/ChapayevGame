@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartWinState_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
     private IGlobalStateMachine stateMachine;
     private ISoundProvider soundProvider;
 
@@ -14,7 +14,7 @@ public class StartWinState_Game : IState
     private ISound soundBackground_2;
     private ISound soundWin;
     
-    public StartWinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ISoundProvider soundProvider)
+    public StartWinState_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, ISoundProvider soundProvider)
     {
         this.sceneRoot = sceneRoot;
         this.stateMachine = stateMachine;

@@ -1,6 +1,6 @@
 public class BuyChip_Game : IState
 {
-    private readonly UIMiniGameSceneRoot sceneRoot;
+    private readonly UIGameRoot sceneRoot;
     private readonly ChipBuyPresenter chipBuyPresenter;
     private readonly ChipBuyVisualizePresenter chipBuyVisualizePresenter;
     private readonly StoreChipPresenter storeChipPresenter;
@@ -8,7 +8,7 @@ public class BuyChip_Game : IState
 
     private readonly IGlobalStateMachine stateMachine;
 
-    public BuyChip_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, ChipBuyPresenter chipBuyPresenter, StoreChipPresenter storeChipPresenter, ChipBuyVisualizePresenter chipBuyVisualizePresenter, GameResultPresenter gameResultPresenter)
+    public BuyChip_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, ChipBuyPresenter chipBuyPresenter, StoreChipPresenter storeChipPresenter, ChipBuyVisualizePresenter chipBuyVisualizePresenter, GameResultPresenter gameResultPresenter)
     {
         this.sceneRoot = sceneRoot;
         this.chipBuyPresenter = chipBuyPresenter;

@@ -1,13 +1,13 @@
 public class BuyStrategy_Menu : IState
 {
-    private readonly UIMainMenuRoot sceneRoot;
+    private readonly UIMenuRoot sceneRoot;
     private readonly StrategyBuyPresenter strategyBuyPresenter;
     private readonly StrategyBuyVisualizePresenter strategyBuyVisualizePresenter;
     private readonly StoreStrategyPresenter storeStrategyPresenter;
 
     private IGlobalStateMachine stateMachine;
 
-    public BuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, StrategyBuyVisualizePresenter strategyBuyVisualizePresenter)
+    public BuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, StrategyBuyPresenter strategyBuyPresenter, StoreStrategyPresenter storeStrategyPresenter, StrategyBuyVisualizePresenter strategyBuyVisualizePresenter)
     {
         this.sceneRoot = sceneRoot;
         this.strategyBuyPresenter = strategyBuyPresenter;

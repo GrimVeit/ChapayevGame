@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChipPresentation_Menu : IState
 {
     private IGlobalStateMachine stateMachine;
-    private UIMainMenuRoot sceneRoot;
+    private UIMenuRoot sceneRoot;
     private StoreChipPresenter storeChipPresenter;
     private ChipBuyPresenter chipBuyPresenter;
     private IParticleEffectProvider particleEffectProvider;
@@ -13,7 +13,7 @@ public class ChipPresentation_Menu : IState
 
     private IEnumerator coroutineTimer;
     
-    public ChipPresentation_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter, IParticleEffectProvider particleEffectProvider, ISoundProvider soundProvider)
+    public ChipPresentation_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, ChipBuyPresenter strategyBuyPresenter, StoreChipPresenter storeChipPresenter, IParticleEffectProvider particleEffectProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpinState_Game : IState
 {
-    private UIMiniGameSceneRoot sceneRoot;
+    private UIGameRoot sceneRoot;
 
     private readonly IGlobalStateMachine stateMachine;
     private SpinMotionPresenter spinMotionPresenter;
@@ -12,7 +12,7 @@ public class SpinState_Game : IState
 
     private ITutorialDescriptionProvider tutorialDescriptionPresenter;
 
-    public SpinState_Game(IGlobalStateMachine stateMachine, UIMiniGameSceneRoot sceneRoot, SpinMotionPresenter motionPresenter, ITutorialDescriptionProvider descriptionProvider, ISoundProvider soundProvider)
+    public SpinState_Game(IGlobalStateMachine stateMachine, UIGameRoot sceneRoot, SpinMotionPresenter motionPresenter, ITutorialDescriptionProvider descriptionProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;

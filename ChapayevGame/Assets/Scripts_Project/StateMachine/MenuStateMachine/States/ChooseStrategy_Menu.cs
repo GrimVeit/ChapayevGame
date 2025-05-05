@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChooseStrategy_Menu : IState
 {
-    private UIMainMenuRoot sceneRoot;
+    private UIMenuRoot sceneRoot;
     private StoreStrategyPresenter storeStrategyPresenter;
     private StoreChipPresenter storeChipPresenter;
     private StrategySelectPresenter strategySelectPresenter;
@@ -12,7 +12,7 @@ public class ChooseStrategy_Menu : IState
     private ITutorialDescriptionProvider tutorialDescriptionProvider;
     private IGlobalStateMachine stateMachine;
 
-    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
+    public ChooseStrategy_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, StoreStrategyPresenter storeStrategyPresenter, StrategySelectPresenter strategySelectPresenter, StoreChipPresenter storeChipPresenter, ITutorialDescriptionProvider tutorialDescriptionProvider)
     {
         this.sceneRoot = sceneRoot;
         this.storeStrategyPresenter = storeStrategyPresenter;

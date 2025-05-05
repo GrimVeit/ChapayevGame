@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class LoadBuyStrategy_Menu : IState
 {
-    private readonly UIMainMenuRoot sceneRoot;
+    private readonly UIMenuRoot sceneRoot;
     private readonly IGlobalStateMachine stateMachine;
     private readonly IAnimationFrameProvider animationFrameProvider;
     private readonly ISoundProvider soundProvider;
 
     private IEnumerator coroutineTimer;
 
-    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMainMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
+    public LoadBuyStrategy_Menu(IGlobalStateMachine stateMachine, UIMenuRoot sceneRoot, IAnimationFrameProvider animationFrameProvider, ISoundProvider soundProvider)
     {
         this.stateMachine = stateMachine;
         this.sceneRoot = sceneRoot;
