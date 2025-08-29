@@ -1,0 +1,37 @@
+{
+  "project_info": {
+    "project_number": "194379556590",
+    "firebase_url": "https://yatzygame-edab1-default-rtdb.firebaseio.com",
+    "project_id": "yatzygame-edab1",
+    "storage_bucket": "yatzygame-edab1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194379556590:ios:7b4a7f2639ab0a768635ff",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Chapayev-Game"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjz_fJ_5fSeF0-sjwl4b-Id-5GtXCnI5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194379556590-9luqfvb136e1dc7s4rgd4c2t81dj2ssv.apps.googleusercontent.com"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
