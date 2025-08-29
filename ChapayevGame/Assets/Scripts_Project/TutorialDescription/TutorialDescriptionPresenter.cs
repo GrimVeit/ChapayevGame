@@ -60,11 +60,18 @@ public class TutorialDescriptionPresenter : ITutorialDescriptionProvider
         model.LockTutorial(id);
     }
 
+    public bool IsActiveTutorial(string id)
+    {
+        return model.IsActiveTutorial(id);
+    }
+
     #endregion
 }
 
 public interface ITutorialDescriptionProvider
 {
+    public bool IsActiveTutorial(string id);
+
     public void ActivateTutorial(string id);
 
     public void DeactivateTutorial(string id);

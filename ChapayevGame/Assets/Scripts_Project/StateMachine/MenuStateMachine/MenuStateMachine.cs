@@ -26,6 +26,9 @@ public class MenuStateMachine : IGlobalStateMachine
         IParticleEffectProvider particleEffectProvider,
         ISoundProvider soundProvider)
     {
+        states[typeof(CheckHello_Menu)] = new CheckHello_Menu(this, tutorialDescriptionProvider);
+        states[typeof(Hello_Menu)] = new Hello_Menu(this, sceneRoot);
+
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot, animationFrameProvider);
 
         states[typeof(BuyStrategy_Menu)] = new BuyStrategy_Menu(this, sceneRoot, strategyBuyPresenter, storeStrategyPresenter, strategyBuyVisualizePresenter);
@@ -42,7 +45,7 @@ public class MenuStateMachine : IGlobalStateMachine
 
     public void Initialize()
     {
-        SetState(GetState<MainState_Menu>());
+        SetState(GetState<CheckHello_Menu>());
     }
 
     public void Dispose()

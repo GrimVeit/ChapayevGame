@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UIMenuRoot : MonoBehaviour
 {
+    [SerializeField] private HelloPanel_Menu helloPanel;
     [SerializeField] private MainPanel_Menu mainPanel;
     [SerializeField] private StoreChipPanel_Menu storeChipPanel;
     [SerializeField] private StoreStrategyPanel_Menu storeStrategyPanel;
@@ -31,6 +32,7 @@ public class UIMenuRoot : MonoBehaviour
         chooseStrategyPanel.SetSoundProvider(soundProvider);
         chooseChipPanel.SetSoundProvider(soundProvider);
 
+        helloPanel.Initialize();
         mainPanel.Initialize();
         storeChipPanel.Initialize();
         storeStrategyPanel.Initialize();
@@ -55,6 +57,7 @@ public class UIMenuRoot : MonoBehaviour
 
     public void Dispose()
     {
+        helloPanel.Dispose();
         mainPanel.Dispose();
         storeChipPanel.Dispose();
         storeStrategyPanel.Dispose();
@@ -68,6 +71,10 @@ public class UIMenuRoot : MonoBehaviour
 
 
 
+    public void OpenHelloPanel()
+    {
+        OpenPanel(helloPanel);
+    }
 
     public void OpenMainPanel()
     {

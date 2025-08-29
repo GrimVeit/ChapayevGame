@@ -45,6 +45,8 @@ public class ProjectGameEntryPoint
 
         yield return rootView.ShowLoadingScreen();
 
+        yield return new WaitForSeconds(0.3f);
+
         yield return LoadScene(Scenes.BOOT);
         yield return LoadScene(Scenes.MAIN_MENU);
 

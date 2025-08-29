@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: ...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 330c8c5f383721943b0203bf65db1b38, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e6c1433fc2b4fff43add18061a885a60, type: 2}
   m_sharedMaterial: {fileID: 3950083541916020360, guid: 330c8c5f383721943b0203bf65db1b38, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 65
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1132074924700953508
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 5617311920225897219}
   - component: {fileID: 2385623613425385124}
   m_Layer: 5
-  m_Name: TutorialDescription
+  m_Name: TutorialDescription_Mini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -109,6 +109,19 @@ public class TutorialDescriptionModel
 
         tutorial.Data.IsActive = false;
     }
+
+    public bool IsActiveTutorial(string id)
+    {
+        var tutorial = tutorialDescriptionGroup.GetTutorialById(id);
+
+        if (tutorial == null)
+        {
+            Debug.LogError($"Not found tutorial by id - {id}");
+            return false;
+        }
+
+        return tutorial.Data.IsActive;
+    }
 }
 
 [Serializable]
